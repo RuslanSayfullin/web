@@ -1,5 +1,5 @@
 Задача: спроектировать и разработать API для системы опросов пользователей.
-##### _разработка Sayfullin RR
+##### разработка Sayfullin RR
 
 ### _Документация API_ (автодокументирование на swagger (drf-yasg) доступно по адресу http://127.0.0.1:8000/swagger/ )
 
@@ -21,7 +21,7 @@
   * Django 3.2.7
   * djangorestframework
 
-Склонируйте исходный код приложения из github
+Скопируйте исходный код приложения из github
 
 https://github.com/RuslanSayfullin/api_for_poll_service
 
