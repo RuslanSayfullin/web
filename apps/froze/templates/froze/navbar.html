@@ -1,0 +1,38 @@
+{% load cache %}
+
+<header>
+<div class="container">
+  <div class="col-md-12">
+    {% if user.is_authenticated %}
+    <nav class="navbar navbar-expand-lg bg-success p-2 text-dark bg-opacity-25">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'index' %}">Реформа</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+            <li class="nav-item btn btn-outline-success">
+              <a class="nav-link active" aria-current="page" href="#">Договоры</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item btn btn-outline-success">
+              <a align="right" class="nav-link active" aria-current="page" href="#">Поиск</a>
+            </li>
+            <li class="nav-item btn btn-outline-success">
+              <a align="left" class="nav-link active" aria-current="page" href="#">{{ user.get_full_name }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% endif %}
+  </div>
+</div>
+</header>
+
+
+
+
+

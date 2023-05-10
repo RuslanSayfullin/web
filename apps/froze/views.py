@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+from apps.froze.models import Froze
+
+
+def index(request):
+    return render(request, 'froze/index.html')

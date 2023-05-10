@@ -1,0 +1,29 @@
+{% load static %}
+
+{% for reckoning in reckoning_items %}
+    <div class="panel panel-default reckoningunit">
+        <div class="panel-body">
+            {% include "appmain/include/client_detail.html" %}
+        </div>
+        <a class="btn btn-info go_to_offer" href="{% url 'presentation:offer_pages' reckoning.uuid %}">Перейти к КП</a>&nbsp;
+        <a class="btn btn-secondary" href="{% url 'presentation:total_chek' reckoning.uuid %}">Итоговая таблица</a>
+        <br>
+        <span class="text-muted pull-right hidden-xs hidden-sm hidden-md">№ заявки: {{ reckoning.id }}, 1C-код: {{ reckoning.uuid }}&nbsp</span>
+        <br>
+    </div>
+{% endfor %}
+<nav aria-label="Пример навигации по страницам">
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+            </li>
+        {% endif %}
+        &nbsp;<li class="page-item"><span class="page-link">{{ page_obj.number }} из {{ paginator.num_pages }}</span></li>&nbsp;
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>

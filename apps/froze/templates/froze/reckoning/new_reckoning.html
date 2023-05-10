@@ -1,0 +1,80 @@
+{% extends "appmain/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+                <br>
+                <div class="container">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <h3 class="text-muted">Данные клиента</h3>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+
+                <form role="form" id="form_new_offer" class="form-horizontal" method="post" enctype="multipart/form-data" action="{% url 'new_reckoning_url' %}" onkeypress="if(event.keyCode == 13) return false;">
+                    {% csrf_token %}
+                    <div class="form-group {% if form.designer.errors %}has-error{% endif %}">
+                        <label for="designer" class="col-md-4 control-label">Дизайнер</label>
+                        <div class="col-md-10">
+                            {{ form.designer }}
+                        </div>
+                    </div>
+
+                    <div class="form-group {% if form.client_data.errors %}has-error{% endif %}">
+                        <label for="client_data" class="col-md-3 control-label">Юр.название /Имя клиента</label>
+
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" id="client_data" name="client_data" value="{{ form.client_data.value }}" autofocus/>
+                        </div>
+                    </div>
+
+                    <div class="form-group {% if form.phone.errors %}has-error{% endif %}">
+                        <label for="phone" class="col-md-3 control-label">Телефон клиента</label>
+
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" id="phone" name="phone"
+                                   {% if form.phone.value %}
+                                   data-inputmask="'mask': '+9(999) 9999-999'"
+                                   {% else %}
+                                   data-inputmask="'mask': '+7(999) 9999-999'"
+                                   {% endif %}
+                                   value="{{ form.phone.value }}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group {% if form.date.errors %}has-error{% endif %}">
+                        <label for="date" class="col-md-3 control-label">Дата создания КП</label>
+
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                                <input type="text" class="form-control" id="date" name="date"    placeholder="Укажите дату в формате дд.мм.гггг" value="{{ form.date.value }}"/>
+                            </div>
+                            {% for error in form.date.errors %}<span class="text-danger">{{ error|escape }}</span>{% endfor %}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group text-right">
+                        <div class="col-md-3 col-md-offset-2">
+                            <input type="submit" class="btn btn-primary" value="Сохранить"/>
+                        </div>
+                    </div>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                </form>
+                <script>
+                $(function(){
+                    $("#date").datepicker();
+                });
+                </script>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+{% endblock content %}
+

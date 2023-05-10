@@ -1,5 +1,12 @@
+import string
+
 from django.db import models
 from django.contrib.auth.models import User
+
+
+def clean_number_phone(phone):
+    phone = [n for n in phone if n in string.digits]
+    return "".join(phone)
 
 
 FROZE_TYPE_PAY = (
@@ -22,7 +29,7 @@ class Froze(models.Model):
         (FROZE_PAY, u'Оплатились'),
     )
 
-    uuid = models.CharField(editable=False, unique=True, max_length=40, db_index=True)
+    uuid = models.CharField(unique=True, max_length=40, db_index=True, verbose_name="Идентификатор")
 
     name = models.CharField(max_length=100, verbose_name="ФИО/Название клиента")
     address = models.CharField(max_length=200, verbose_name="Адрес клиента")
@@ -35,11 +42,16 @@ class Froze(models.Model):
     type_pay = models.CharField(max_length=30, choices=FROZE_TYPE_PAY, null=True, blank=True, verbose_name="Способ оплаты")
     total_amount = models.DecimalField(decimal_places=2, max_digits=11, null=True, blank=True, verbose_name="Сумма за мебель")
     total_white_goods = models.DecimalField(decimal_places=2, max_digits=11, null=True, blank=True, verbose_name="Сумма за технику")
-    status = models.CharField(max_length=50, choices=FROZE_STATUS_CHOICES, verbose_name="Статус")
+    status = models.CharField(max_length=50, choices=FROZE_STATUS_CHOICES, verbose_name="Статус", default='new')
 
     class Meta:
         verbose_name = 'Заявка'
         verbose_name_plural = 'Заявки'
+
+    def save(self, *args, **kwargs):
+        self.phone = clean_number_phone(self.phone)
+        super(Froze, self).save(*args, **kwargs)
+
 
 
 
