@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from portal.psw import secret_key
+from portal.psw import secret_key, client_id, client_secret  # импорт секретного ключа
 from .settings_db import DATABASES      # импорт данных для "базы данных"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'apps',
     'apps.api',
     'apps.froze',
+    'apps.oauth2mailru',
 
 ]
 
@@ -45,6 +46,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'portal.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'portal.urls'
@@ -108,6 +110,21 @@ STATICFILES_DIRS = [
 # Абсолютный путь в файловой системе, с каталогом, где файлы, загруженные пользователями.
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Для авторизаций и аутентификаций
+LOGIN_URL = 'auth:login'
+LOGIN_REDIRECT_URL = 'auth:logout'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'apps.oauth2mailru.backends.MailRuBackend',
+)
+
+OAUTH_MAIL_RU_CLIENT_ID = client_id
+OAUTH_MAIL_RU_CLIENT_SECRET = client_secret
+OAUTH_MAIL_RU_REDIRECT_URI = 'http://chiffre.tech/auth/mailru/'
+
+LOGO_NAME = "Ре-Форма"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

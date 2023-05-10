@@ -1,0 +1,17 @@
+{% load oauth_url from oauth2mailru %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            {% if error %}
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span
+                            aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                    <strong>{{ error|safe }}</strong>
+                </div>
+            {% endif %}
+            <br>
+            <a href="{% oauth_url %}" class="btn btn-primary btn-lg">Войти через <strong>@re-forma.ru</strong></a>
+        </div>
+    </div>
+</div>
