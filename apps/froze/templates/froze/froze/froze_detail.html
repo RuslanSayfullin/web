@@ -1,14 +1,12 @@
 {% load static %}
 
-{% for reckoning in reckoning_items %}
-    <div class="panel panel-default reckoningunit">
+{% for froze in froze_items %}
+    <div class="panel panel-default frozesallunit">
         <div class="panel-body">
-            {% include "appmain/include/client_detail.html" %}
+            {% include "froze/froze/client_detail.html" %}
         </div>
-        <a class="btn btn-info go_to_offer" href="{% url 'presentation:offer_pages' reckoning.uuid %}">Перейти к КП</a>&nbsp;
-        <a class="btn btn-secondary" href="{% url 'presentation:total_chek' reckoning.uuid %}">Итоговая таблица</a>
         <br>
-        <span class="text-muted pull-right hidden-xs hidden-sm hidden-md">№ заявки: {{ reckoning.id }}, 1C-код: {{ reckoning.uuid }}&nbsp</span>
+        <span class="text-muted pull-right hidden-xs hidden-sm hidden-md">№ заявки: {{ froze.id }}, битрикс-код: {{ froze.uuid }}&nbsp</span>
         <br>
     </div>
 {% endfor %}

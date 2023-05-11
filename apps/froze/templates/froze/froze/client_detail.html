@@ -1,0 +1,19 @@
+<dl class="dl-horizontal">
+  <dt>Клиент:</dt>
+  <dd>
+    <span class="inline-edit-form-value">{{ froze.name }}</span>
+  </dd>
+  <dt>Телефон клиента:</dt>
+  <dd>
+    <a class="inline-edit-form-value">{{ froze.phone }}</a>
+  </dd>
+  <dt>Адрес клиента:</dt>
+  <dd>
+    <a class="inline-edit-form-value">{{ froze.address }}</a>
+  </dd>
+  <dt>Создатель заявки:</dt>
+  <dd>
+    <a class="inline-edit-form-value">{{ froze.owner.get_full_name }}</a>
+  </dd>
+
+</dl>

@@ -64,3 +64,14 @@ $ python3 manage.py runserver
 
 
 Django-приложение будет доступно по адресу: http://127.0.0.1:8000/
+
+JSON:
+
+{
+  "uuid": "1B",
+  "name": "ООО Энергия",
+  "address": "fdrshrshsr",
+  "phone": "+7(987) 2405-525",
+  "owner": 1,
+  "type_production": "Кухонный гарнитур"
+}
