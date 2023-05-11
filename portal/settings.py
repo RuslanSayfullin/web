@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'apps.api',
     'apps.froze',
     'apps.oauth2mailru',
+    'apps.search',
 
 ]
 

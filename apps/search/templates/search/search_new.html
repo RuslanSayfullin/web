@@ -1,0 +1,57 @@
+{% extends "froze/base.html" %}
+
+{% load pretty_number_phone from froze %}
+
+{% load static %}
+
+{% block content %}
+<br>
+<div class="container">
+		<div class="row">
+				<div class="col-md-8 offset-md-2">
+						<div class="form-group">
+								<input id="po_telefonu" onkeyup="the_new_search();" placeholder="Ввести номер телефона клиента для поиска..." type="text" class="form-control" size="40">
+						</div>
+						<div class="form-group">
+								<input id="po_adresu" onkeyup="the_new_search();" placeholder="Ввести адрес клиента для поиска..." type="text" class="form-control" size="40">
+						</div>
+						<div class="form-group">
+								<input id="po_imeni" onkeyup="the_new_search();" placeholder="Ввести ФИО клиента для поиска..." type="text" class="form-control" size="40">
+						</div>
+						
+				</div>
+		</div>
+		<br>
+		<div id="loading_image" style="display:none;" class="text-center"><img src="{% static 'search/loading.gif' %}"></div>
+		
+		<div class="row" id="search_results">
+		{% for client in client_items %}
+		  {% with froze=client.froze_set.all.first %}
+		    {% if froze.uuid %}
+		      <div class="col-md-6">
+		        <div class="panel panel-default">
+		          <div class="panel-body">
+		            <ul class="list-unstyled">
+		              <li><strong>{{ client.name }}</strong></li>
+		              {% if froze.dogovor.nomer_dogovora %}<li class="text-info">Номер договора: {{ froze.dogovor.nomer_dogovora }}</li>{% endif %}
+		              <li>{{ client.phone|pretty_number_phone }}&nbsp;&nbsp;&nbsp;&nbsp;{% if client.phone_two %}
+		                {{ client.phone_two|pretty_number_phone }}{% endif %}</li>
+		              <li>{{ client.address }}, кв. {{ client.room }}</li>
+				            <li>Тип изделия: {{ froze.type_production }}</li>
+		            </ul>
+		          </div>
+		          <div class="panel-footer">
+		            {% if perms.froze.vozm_prosmatrivat_zayavki_no_ne_redaktirovat_zayavki or perms.froze.vozm_prosmatrivat_lyubye_zayavki_no_ne_redaktirovat_zayavki %}
+		              <a target="_blank" href="{% url "froze_uuid" froze.designer froze.uuid %}" class="btn btn-default">Подробнее</a>
+		            {% endif %}
+		            <p class="pull-right"><b>Дизайнер</b>: {{ froze.designer.get_full_name }}</p>
+		          </div>
+		        </div>
+		      </div>
+		    {% endif %}
+		  {% endwith %}
+		{% endfor %}
+		</div>
+		
+</div>
+{% endblock content %}

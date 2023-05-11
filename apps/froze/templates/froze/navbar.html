@@ -18,7 +18,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="nav-item btn btn-outline-success">
-              <a align="right" class="nav-link active" aria-current="page" href="#">Поиск</a>
+              <a align="right" class="nav-link active" aria-current="page" href="{% url 'search:search_new' %}">Поиск</a>
             </li>
             <li class="nav-item btn btn-outline-success">
               <a align="left" class="nav-link active" aria-current="page" href="#">{{ user.get_full_name }}</a>
