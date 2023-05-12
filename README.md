@@ -75,3 +75,11 @@ JSON:
   "owner": 1,
   "type_production": "Кухонный гарнитур"
 }
+
+Прочее
+------------------------------------------------------------------------------------------------------------------------
+$ python3 -m pip freeze > requirements.txt
+$ python3 -m pip install -r requirements.txt
+$ scp /home/rusl4n/Documents/projects/web/portal/psw.py cryptolis@80.78.244.196:/home/cryptolis/web/portal
+
+http://80.78.244.196:8000

@@ -14,6 +14,7 @@ pillow = "^9.5.0"
 pytest = "^7.3.1"
 psycopg2-binary = "^2.9.6"
 requests = "^2.30.0"
+gunicorn = "^20.1.0"
 
 
 [build-system]
