@@ -30,9 +30,9 @@ dbase_psw = 'ваш ключ к БД'         # Пароль для подклю
 
 Создание БД
 ========================================================================================================================
-$ sudo su - postgres
-Теперь запускаем командную оболочку PostgreSQL:
-$ psql 
+Войдите в интерактивный сеанс Postgres, набрав:
+$ sudo -u postgres psql
+
 
 =# CREATE DATABASE contracts;
 =# CREATE USER portaluser WITH PASSWORD 'myPassword';

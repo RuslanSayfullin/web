@@ -1,0 +1,17 @@
+asgiref==3.6.0
+certifi==2023.5.7
+charset-normalizer==3.1.0
+Django==4.2.1
+django-debug-toolbar==4.0.0
+djangorestframework==3.14.0
+idna==3.4
+iniconfig==2.0.0
+packaging==23.1
+Pillow==9.5.0
+pluggy==1.0.0
+psycopg2-binary==2.9.6
+pytest==7.3.1
+pytz==2023.3
+requests==2.30.0
+sqlparse==0.4.4
+urllib3==2.0.2
