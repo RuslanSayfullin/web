@@ -104,9 +104,7 @@ USE_TZ = True
 
 # "Поисковики" статики. Ищет статику в STATICFILES_DIRS.
 STATIC_URL = '/static/'    # URL для шаблонов
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Абсолютный путь в файловой системе, с каталогом, где файлы, загруженные пользователями.
 MEDIA_URL = '/media/'

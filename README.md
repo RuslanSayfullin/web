@@ -83,3 +83,7 @@ $ python3 -m pip install -r requirements.txt
 $ scp /home/rusl4n/Documents/projects/web/portal/psw.py cryptolis@80.78.244.196:/home/cryptolis/web/portal
 
 http://80.78.244.196:8000
+http://80.78.244.196:8000/admin/
+gunicorn --bind 0.0.0.0:8000 portal.wsgi
+
+80-78-244-196
