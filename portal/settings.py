@@ -105,6 +105,7 @@ USE_TZ = True
 # "Поисковики" статики. Ищет статику в STATICFILES_DIRS.
 STATIC_URL = '/static/'    # URL для шаблонов
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# STATIC_ROOT = "/home/cryptolis/web/static/"
 
 # Абсолютный путь в файловой системе, с каталогом, где файлы, загруженные пользователями.
 MEDIA_URL = '/media/'
@@ -129,3 +130,5 @@ LOGO_NAME = "Ре-Форма"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
