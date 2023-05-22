@@ -1,0 +1,259 @@
+{% extends "dogovora/view_dogovor_base.html" %}
+{% load static %}
+
+{% block content_dogovor %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="col-sm-12 input-group">
+				<input id="poisk_dogovorov" onkeyup="poisk_dogovorov('{{ csrf_token }}');" placeholder="Ввести ФИО для поиска договоров для копирования..." type="text" class="form-control">
+			</div>
+			<div id="poisk_dogovorov_div"></div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	{% if froze.status == 'pay' %}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="alert alert-danger">Внесение правок в договор не доступно, т.к. выставлен статус &laquo;Оплачен&raquo;<br /></div>
+		</div>
+	</div>
+	{% endif %}
+	{% if froze.dogovor.kakoy_tip_dogovora == 'izgotovlenie_mebeli' %}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="alert alert-warning">Выбран тип договора на изготовление мебели СТАРОГО ВАРИАНТА (использовался по конец ноября 2019)!<br /></div>
+		</div>
+	</div>
+	{% endif %}
+	{% if form.errors %}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="alert alert-danger" role="alert">
+				Пожалуйста, исправьте ошибки по выделенным <b>красным</b> цветом полям ввода:
+				<ul>
+					{% for field in form %}
+						{% if field.errors %}
+							<li><a href="#id_{{ field.name }}" class="error">{{ field.label }}</a>
+								<ul>
+									{% for error in field.errors %}
+										<li>{{ error|escape }}</li>
+									{% endfor %}
+								</ul>
+							</li>
+						{% endif %}
+					{% endfor %}
+				</ul>
+				{% if form.non_field_errors %}
+					{{ form.non_field_errors }}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	{% endif %}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<h3 class="text-muted">Договор</h3><br>
+					<form role="form" class="form-horizontal dogovora" method="post" enctype="multipart/form-data" allowed="{% if froze.status == 'pay' %}disallowed{% else %}allowed{% endif %}">
+						{% csrf_token %}
+						{% for field in form %}
+							{% if field.auto_id == 'id_oplata_predoplata_rub' %}
+								<div class="form-group oplata_predoplata_procent_form_group">
+									<label class="col-sm-3 control-label">Сумма предоплаты в процентах</label>
+									<div class="col-sm-3 input-group">
+										<input class="form-control" id="id_oplata_predoplata_procent" placeholder="70" value="" type="text" title="Считается автоматически после заполнения &laquo;Всего к оплате в рублях&raquo; и &laquo;Сумма предоплаты в рублях&raquo;" disabled>
+										<div class="input-group-addon">%</div>
+									</div>
+									<p class="text-muted">При печати будет округлено до целого числа</p>
+								</div>
+							{% endif %}
+
+							{# <the_CYCLE!> #}
+							<div class="form-group{% if field.errors %} has-error{% endif %}">
+								<label for="{{ field.auto_id }}" class="col-sm-3 control-label">{{ field.label }}</label>
+								{% if field.auto_id == 'id_vsego_k_oplate' or field.auto_id == 'id_oplata_predoplata_rub' or field.auto_id == 'id_summa_za_soputstv_uslugi' %}
+									<div class="col-sm-3 input-group">
+										{{ field }}
+										<div class="input-group-addon">.00 руб.</div>
+									</div>
+								{% elif field.auto_id == 'id_srok_ispolneniya_rabot' %}
+									<div class="col-sm-3 input-group">
+										{{ field }}
+										<div class="input-group-addon">дней</div>
+									</div>
+								{% elif field.auto_id == 'id_installment_plan' %}
+									<div class="col-sm-3 input-group">
+										{{ field }}
+											{% if froze.type_pay == 'internal_installment' and dogovor.installment_plan == 0 %}
+												<p class="js_link text-danger">Срок рассрочки не должен быть больше 6 месяцев и не меньше 1</p>
+											{% endif %}
+										<div class="input-group-addon">месяцев</div>
+									</div>
+								{% elif field.auto_id == 'id_adres_propiski' or field.auto_id == 'id_adres_ustanovki' or field.auto_id == 'id_passport_familiya' or field.auto_id == 'id_passport_imya' or field.auto_id == 'id_passport_otchestvo' %}
+									<div class="col-sm-9 input-group">
+										{{ field }}
+										<p>
+											{% if field.auto_id == 'id_adres_propiski' or field.auto_id == 'id_adres_ustanovki' %}
+												<a onclick="use_froze_data_for_dogovor('{{ field.auto_id }}', '{{ froze.client.address }}{% if froze.client.room and froze.client.room != '-' %}, кв {{ froze.client.room }}{% endif %}');" class="js_link text-danger">Использовать</a> адрес клиента из заявки: <span class="text-success">{{ froze.client.address }}{% if froze.client.room and froze.client.room != '-' %}, кв {{ froze.client.room }}{% endif %}</span>.
+											{% else %}
+												<a onclick="use_froze_data_for_dogovor('{{ field.auto_id }}', '{{ froze.client.name }}');" class="js_link text-danger">Использовать</a> название/ФИО клиента из заявки: <span class="text-success">{{ froze.client.name }}</span>.
+											{% endif %}
+										</p>
+									</div>
+								{% elif field.auto_id == 'id_akciya' %}
+									<div class="input-group col-sm-9">
+										{{ field }}
+										<p>В списке выбора показываются только активные акции.<br />{% if froze.dogovor.akciya %}Сохраненная, по договору, акция: <b>{{ froze.dogovor.akciya }}</b>{% else %}<b>Сейчас ни одной акции по договору не сохранено.</b>{% endif %}</p>
+									</div>
+								{% elif field.auto_id == 'id_nomer_dogovora' %}
+									<div class="input-group col-sm-9">
+										{{ field }}
+										{% if create_or_update == 'create' %}
+											 Номер договора можно будет указать после сохранения.
+										{% elif froze.status == 'pay' %}
+											 Номер договора изменить нельзя, т.к. выставлен статус «Оплачен»
+										{% else %}
+											 <div id="nomer_dogovora_info">
+											 {% if froze.dogovor.tip_dogovora is not None and froze.dogovor.tip_dogovora != '0' and froze.dogovor.tip_dogovora != 'tekstil_ip_sadykov_fiz' and froze.dogovor.tip_dogovora != 'tekstil_ip_usmanov_fiz' and froze.dogovor.tip_dogovora != 'm_textile' and froze.dogovor.tip_dogovora != 'msk_textile_ip_sadykov' and froze.dogovor.tip_dogovora != 'msk_textile_ip_usmanov' and froze.dogovor.tip_dogovora != 'entity_textile' and froze.dogovor.tip_dogovora != 'juridical_moscow_ooo-refabrik_textile' and froze.dogovor.tip_dogovora != 'entity_ufa_textile' and froze.dogovor.tip_dogovora != 'entity_ufa_ooo-refabrik_textile' %}
+												 {% if dogovora_s_takimi_zhe_fio == 0 %}
+													Других договоров, с таким же ФИО клиента и заполненным номером, не найдено.<br>
+													<a onclick="nomer_dogovora('{{ csrf_token }}', '{{ self_id }}');" class="text-danger">Присвоить этому договору новый номер, например, <b>{{ novy_nomer_dogovora }}</b></a>?
+												 {% elif dogovora_s_takimi_zhe_fio == 1 %}
+													С таким же ФИО клиента найден <a href="{% url 'dogovora:create_update' drugie_dogovora.0.froze.uuid %}" target="_blank">другой договор</a>.<br>
+													<a onclick="nomer_dogovora('{{ csrf_token }}', '{{ self_id }}', '{{ drugie_dogovora.0.id }}');" class="text-warning">Использовать № договора {{ drugie_dogovora.0 }}</a> из найденного?<br>
+													Или <a onclick="nomer_dogovora('{{ csrf_token }}', '{{ self_id }}');" class="text-warning">присвоить этому договору новый №, например, <b>{{ novy_nomer_dogovora }}</b></a>?
+												 {% elif dogovora_s_takimi_zhe_fio >= 2 %}
+													С таким же ФИО клиента найдено <b>несколько</b> других договоров:<br>
+													<ul>
+													{% for drugoy_dogovor in drugie_dogovora %}
+														<li><a onclick="nomer_dogovora('{{ csrf_token }}', '{{ self_id }}', '{{ drugoy_dogovor.id }}');" class="text-warning">Использовать № договора {{ drugoy_dogovor }}</a> из <a href="{% url 'dogovora:create_update' drugoy_dogovor.froze.uuid %}" target="_blank">найденного</a>?</li>
+													{% endfor %}
+													</ul>
+													Или <a onclick="nomer_dogovora('{{ csrf_token }}', '{{ self_id }}');" class="text-warning">присвоить этому договору новый №, например, <b>{{ novy_nomer_dogovora }}</b></a>?
+												 {% else %}
+													 Номер к договору присвоен, изменить нельзя.
+												 {% endif %}
+											 {% else %}
+													Номер к договору можно будет присвоить после выбора типа договора и нажатия "Сохранить данные по договору" внизу страницы.
+											 {% endif %}
+											</div>
+										{% endif %}
+									</div>
+								{% elif field.auto_id == 'id_drugoy_dogovor' %}
+									<div class="input-group col-sm-9">
+										{{ field }}
+										{% if dogovora_na_izgotovlenie_mebeli and dogovor.kakoy_tip_dogovora in "technic_2021_04,matrasy_2021_06,carpets_and_rugs_ip,carpets_and_rugs_ooo-refabrik,mattresses_ooo-refabrik,m_householdtec,m_mattresses,entity_householdtec,juridical_moscow_ooo-refabrik_householdtec,entity_mattresses,juridical_ooo-refabrik_mattresses,entity_ufa_householdtec,entity_ufa_ooo-refabrik_householdtec,entity_ufa_mattresses,entity_ufa_carpets_and_rugs,entity_ufa_ooo-refabrik_mattresses" %}
+											<div>С таким же ФИО клиента найдено несколько договоров на изготовление мебели:</div>
+											<ul id="dogovora_na_izgotovlenie_mebeli">
+											{% for drugoy_dogovor in dogovora_na_izgotovlenie_mebeli %}
+												<li><a onclick="drugoy_dogovor('{{ csrf_token }}', '{{ self_id }}', '{{ drugoy_dogovor.id }}');" class="text-danger">Связать с договором </a> <a href="{% url 'dogovora:create_update' drugoy_dogovor.froze.uuid %}" target="_blank">{{ drugoy_dogovor }}</a>?</li>
+											{% endfor %}
+											</ul>
+										{% elif dogovor.kakoy_tip_dogovora in "technic_2021_04,matrasy_2021_06,carpets_and_rugs_ip,carpets_and_rugs_ooo-refabrik,m_mattresses,mattresses_ooo-refabrik,m_householdtec,entity_householdtec,juridical_moscow_ooo-refabrik_householdtec,entity_mattresses,juridical_ooo-refabrik_mattresses,entity_ufa_householdtec,entity_ufa_ooo-refabrik_householdtec,entity_ufa_mattresses,entity_ufa_carpets_and_rugs,entity_ufa_ooo-refabrik_mattresses" %}
+											<div>С таким же ФИО не найдено договоров на изготовление мебели.</div>
+										{% else %}
+											<div>Связать текущий договор с договором на изготовление мебели возможно только для типов "Техника" и "Матрасы". Выберите тип и сохраните нажатием кнопки внизу.</div>
+										{% endif %}
+									</div>
+								{% elif field.auto_id == 'id_data_podpisaniya' %}
+									<div class="input-group col-sm-4">
+										<!--Проверка, дата подписания, не может быть раньше текущей даты-->
+										{{ field }}
+											{% if froze.status != 'pay' and dogovor.data_podpisaniya is not None %}
+												{% now "d-m-y" as todays_date %}
+												{% if todays_date > dogovor.data_podpisaniya|date:"d-m-y" %}
+													<p class="js_link text-danger">В прошлом заключить договор нельзя!</p>
+												{% endif %}
+											{% endif %}
+									</div>
+								{% elif field.auto_id == 'id_general_director' %}
+									<div class="col-sm-9 input-group">
+										{{ field }}
+									</div>
+								{% elif field.auto_id == 'id_job_title' %}
+									<div class="col-sm-9 input-group">
+										{{ field }}
+									</div>
+								{% elif field.auto_id == 'id_letter_of_attorney' %}
+									<div class="col-sm-9 input-group">
+										{{ field }}
+									</div>
+								{% elif field.auto_id == 'id_tax_identification_number' %}
+									<div class="col-sm-9 input-group">
+										{{ field }}
+									</div>
+								{% elif field.auto_id == 'id_registration_reason_code' %}
+									<div class="col-sm-9 input-group">
+										{{ field }}
+									</div>
+								{% elif field.auto_id == 'id_registration_number' %}
+									<div class="col-sm-9 input-group">
+										{{ field }}
+									</div>
+								{% elif field.auto_id == 'id_checking_account' %}
+									<div class="col-sm-9 input-group">
+										{{ field }}
+									</div>
+								{% elif field.auto_id == 'id_account_bank' %}
+									<div class="col-sm-9 input-group">
+										{{ field }}
+									</div>
+								{% elif field.auto_id == 'id_correspondent_account' %}
+									<div class="col-sm-9 input-group">
+										{{ field }}
+									</div>
+								{% elif field.auto_id == 'id_bank_identification_code' %}
+									<div class="col-sm-9 input-group">
+										{{ field }}
+									</div>
+								{% else %}
+									<div class="input-group col-sm-{% if field.auto_id == 'id_passport_birthday_date' or field.auto_id == 'id_passport_kogda_vydan' %}3{% else %}9{% endif %}">
+										{{ field }}
+									</div>
+								{% endif %}
+							</div>
+							{# </the_CYCLE!> #}
+
+							{% if field.auto_id == 'id_oplata_predoplata_rub' %}
+								<div class="form-group oplata_ostatok_procent_form_group">
+									<label class="col-sm-3 control-label">Сумма, остаток в процентах</label>
+									<div class="col-sm-3 input-group">
+										<input class="form-control" id="id_oplata_ostatok_procent" placeholder="30" value="" type="text" title="Считается автоматически после заполнения &laquo;Всего к оплате в рублях&raquo; и &laquo;Сумма предоплаты в рублях&raquo;" disabled>
+										<div class="input-group-addon">%</div>
+									</div>
+									<p class="text-muted">При печати будет округлено до целого числа</p>
+								</div>
+								<div class="form-group oplata_ostatok_rub_form_group">
+									<label class="col-sm-3 control-label">Сумма, остаток в рублях</label>
+									<div class="col-sm-3 input-group">
+										<input class="form-control" id="id_oplata_ostatok_rub" placeholder="30000" value="" type="text" title="Считается автоматически после заполнения &laquo;Всего к оплате в рублях&raquo; и &laquo;Сумма предоплаты в рублях&raquo;" disabled>
+										<div class="input-group-addon">.00 руб.</div>
+									</div>
+								</div>
+							{% endif %}
+						{% endfor %}
+						<div class="form-group text-right">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-success"{% if froze.status == 'pay' %} disabled{% endif %}>Сохранить данные по договору</button>
+							</div>
+						</div>
+					</form>
+					<div class="text-muted">{{ self_id }}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{ form.media }}
+<script src="{% static 'dogovora/jquery.inputmask.bundle.js' %}"></script>
+<script>
+$(document).ready(function() {
+	$(":input[data-inputmask-mask]").inputmask();
+	$(":input[data-inputmask-alias]").inputmask();
+});
+</script>
+{% endblock content_dogovor %}
