@@ -10,8 +10,9 @@ from apps.froze.models import Froze
 class DogovorIndi(models.Model):
     """Модель для договоров с физ. лицами"""
 
+    TIPY_DOGOVOROV = TIPY_DOGOVOROV
+
     froze = models.OneToOneField(Froze, db_index=True, on_delete=models.CASCADE, verbose_name="Заявка")
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор")
     published = models.DateTimeField(default=timezone.now, verbose_name="Дата Создания")
 
     passport_familiya = models.CharField(max_length=200, default='', db_index=True, blank=True)
@@ -86,8 +87,8 @@ class DogovorIndi(models.Model):
     def kakoy_tip_dogovora(self):
         if self.tip_dogovora is None:
             return ''
-        if 'izgotovlenie_2023_06_mebeli' in self.tip_dogovora:
-            return 'izgotovlenie_2023_06_mebeli'
+        if 'izgotovlenie_2021_02_mebeli' in self.tip_dogovora:
+            return 'izgotovlenie_2021_02_mebeli'
 
     def kakoy_tip_dogovora_na_kirillice(self):
         if self.tip_dogovora is None:

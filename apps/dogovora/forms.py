@@ -115,29 +115,70 @@ class DogovorIndiForm(forms.Form):
         required=False, max_length=500, label='Телефоны доверенных лиц',
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Телефоны доверенных лиц (через запятую)'}))
 
-
     def clean(self):
         def vsego_k_oplate_and_oplata_predoplata_rub_odnovremenno():
-            if (self.cleaned_data.get('oplata_predoplata_rub') is not None and self.cleaned_data.get('vsego_k_oplate') is None) \
-                    or (self.cleaned_data.get('oplata_predoplata_rub') is None and self.cleaned_data.get('vsego_k_oplate') is not None) :
+            if (self.cleaned_data.get('oplata_predoplata_rub') is not None and self.cleaned_data.get(
+                    'vsego_k_oplate') is None) or (self.cleaned_data.get('oplata_predoplata_rub') is None and self.cleaned_data.get('vsego_k_oplate') is not None):
                 msg = 'Поля "Всего к оплате в рублях" и "Сумма предоплаты в рублях" должны' \
                       ' заполняться одновременно'
                 self.add_error('vsego_k_oplate', msg)
                 self.add_error('oplata_predoplata_rub', msg)
 
+        # По договору на оказание транспортных услуг предоплата должна быть равна 50% от суммы к оплате
+        if self.cleaned_data.get('tip_dogovora') is not None and \
+                self.cleaned_data.get('tip_dogovora') == 'delivery_ip_bagautdinov' or \
+                self.cleaned_data.get('tip_dogovora') == 'delivery_ip_frolov' or \
+                self.cleaned_data.get('tip_dogovora') == 'delivery_ip_sadykov' or \
+                self.cleaned_data.get('tip_dogovora') == 'delivery_ip_hafizov' or \
+                self.cleaned_data.get('tip_dogovora') == 'm_transport_ip_frolov' or \
+                self.cleaned_data.get('tip_dogovora') == 'm_transport_ip_bagautdinov' or \
+                self.cleaned_data.get('tip_dogovora') == 'm_transport_ip_sadykov' or \
+                self.cleaned_data.get('tip_dogovora') == 'm_transport_ip_hafizov' or \
+                self.cleaned_data.get('tip_dogovora') == 'm_transport_ip_usmanov' or \
+                self.cleaned_data.get('tip_dogovora') == 'entity_transport_reforma_plus_ooo' or \
+                self.cleaned_data.get('tip_dogovora') == 'juridical_transport_reforma_fabrika_mebeli_reforma' or \
+                self.cleaned_data.get('tip_dogovora') == 'entity_ufa_transport_fabrika_mebeli_reforma':
+            vsego_k_oplate_and_oplata_predoplata_rub_odnovremenno()
+
+        # По договору на изготовление предоплата должна быть равна 50% от суммы к оплате
+        if self.cleaned_data.get('tip_dogovora') is not None and \
+                self.cleaned_data.get('tip_dogovora') == 'izgotovlenie_2021_02_mebeli_ip_bagautdinov' or \
+                self.cleaned_data.get('tip_dogovora') == 'izgotovlenie_2021_02_mebeli_ip_sadykov' or \
+                self.cleaned_data.get('tip_dogovora') == 'izgotovlenie_2021_02_mebeli_ip_hafizov' or \
+                self.cleaned_data.get('tip_dogovora') == 'izgotovlenie_2021_02_mebeli_ip_chuchelenko':
+            vsego_k_oplate_and_oplata_predoplata_rub_odnovremenno()
+
+        if self.cleaned_data.get('tip_dogovora') is not None and self.cleaned_data.get('tip_dogovora') in \
+                ('technic_2021_04_ip_frolov',
+                 'technic_2021_04_ip_bagautdinov',
+                 'technic_2021_04_ip_sadykov',
+                 'technic_2021_04_ip_hafizov',
+                 'm_householdtec_ip_frolov',
+                 'm_householdtec_ip_bagautdinov',
+                 'm_householdtec_ip_sadykov',
+                 'm_householdtec_ip_hafizov',
+                 'm_householdtec_ip_usmanov',
+                 'entity_householdtec_reforma_plus_ooo',
+                 'juridical_moscow_ooo-refabrik_householdtec',
+                 'juridical_householdtec_fabrika_mebeli_reforma',
+                 'entity_ufa_householdtec_fabrika_mebeli_reforma',
+                 'entity_ufa_ooo-refabrik_householdtec') and \
+                bool(self.cleaned_data.get('technics_sroki_dostavki_tehniki')) is False:
+            self.add_error('technics_sroki_dostavki_tehniki', 'Нужно выбрать сроки доставки техники')
+
+        return self.cleaned_data
+
     class Media:
         css = {
             'all': (
                 'datetimepicker/jquery.datetimepicker.css',
+                'datetimepicker/suggestions.min.css',
 
-                'froze/suggestions-4.10.css',
-                'froze/google_autocomplete/google_map_api_v3.css',
             )
         }
         js = (
-            'jquery/dist/jquery.min.js',
+            'jquery/jquery-3.6.1.min.js',
             'datetimepicker/jquery.datetimepicker.js',
-
-            'froze/jquery.suggestions-4.10.min.js',
+            'datetimepicker/jquery.suggestions.min.js',
             'dogovora/suggestions_dogovora.js',
         )

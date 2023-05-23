@@ -8,9 +8,8 @@
         <br>
         <div>
             <p class="text-left">
-                &nbsp;&nbsp;<a class="btn btn-secondary" href="{% url 'dogovora:create_update' froze.uuid %}"> ФЗ Перейти к договору</a>
+                &nbsp;&nbsp;<a class="btn btn-secondary" href="{% url 'dogovora:create_update_indi' froze.uuid %}"> ФЗ Перейти к договору</a>
                 &nbsp;&nbsp;<a class="btn btn-secondary" href="#"> ЮЛ Перейти к договору</a>
-                &nbsp;&nbsp;<a class="btn btn-secondary" href="#"> ИП Перейти к договору</a>
             </p>
         </div>
         <span class="text-muted pull-right hidden-xs hidden-sm hidden-md">№ заявки: {{ froze.id }}, битрикс-код: {{ froze.uuid }}&nbsp</span>

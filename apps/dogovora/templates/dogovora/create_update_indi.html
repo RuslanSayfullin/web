@@ -3,28 +3,10 @@
 
 {% block content_dogovor %}
 <div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="col-sm-12 input-group">
-				<input id="poisk_dogovorov" onkeyup="poisk_dogovorov('{{ csrf_token }}');" placeholder="Ввести ФИО для поиска договоров для копирования..." type="text" class="form-control">
-			</div>
-			<div id="poisk_dogovorov_div"></div>
-		</div>
-	</div>
-</div>
-
-<div class="container">
 	{% if froze.status == 'pay' %}
 	<div class="row">
 		<div class="col-md-12">
 			<div class="alert alert-danger">Внесение правок в договор не доступно, т.к. выставлен статус &laquo;Оплачен&raquo;<br /></div>
-		</div>
-	</div>
-	{% endif %}
-	{% if froze.dogovor.kakoy_tip_dogovora == 'izgotovlenie_mebeli' %}
-	<div class="row">
-		<div class="col-md-12">
-			<div class="alert alert-warning">Выбран тип договора на изготовление мебели СТАРОГО ВАРИАНТА (использовался по конец ноября 2019)!<br /></div>
 		</div>
 	</div>
 	{% endif %}
@@ -104,11 +86,6 @@
 											{% endif %}
 										</p>
 									</div>
-								{% elif field.auto_id == 'id_akciya' %}
-									<div class="input-group col-sm-9">
-										{{ field }}
-										<p>В списке выбора показываются только активные акции.<br />{% if froze.dogovor.akciya %}Сохраненная, по договору, акция: <b>{{ froze.dogovor.akciya }}</b>{% else %}<b>Сейчас ни одной акции по договору не сохранено.</b>{% endif %}</p>
-									</div>
 								{% elif field.auto_id == 'id_nomer_dogovora' %}
 									<div class="input-group col-sm-9">
 										{{ field }}
@@ -170,46 +147,6 @@
 												{% endif %}
 											{% endif %}
 									</div>
-								{% elif field.auto_id == 'id_general_director' %}
-									<div class="col-sm-9 input-group">
-										{{ field }}
-									</div>
-								{% elif field.auto_id == 'id_job_title' %}
-									<div class="col-sm-9 input-group">
-										{{ field }}
-									</div>
-								{% elif field.auto_id == 'id_letter_of_attorney' %}
-									<div class="col-sm-9 input-group">
-										{{ field }}
-									</div>
-								{% elif field.auto_id == 'id_tax_identification_number' %}
-									<div class="col-sm-9 input-group">
-										{{ field }}
-									</div>
-								{% elif field.auto_id == 'id_registration_reason_code' %}
-									<div class="col-sm-9 input-group">
-										{{ field }}
-									</div>
-								{% elif field.auto_id == 'id_registration_number' %}
-									<div class="col-sm-9 input-group">
-										{{ field }}
-									</div>
-								{% elif field.auto_id == 'id_checking_account' %}
-									<div class="col-sm-9 input-group">
-										{{ field }}
-									</div>
-								{% elif field.auto_id == 'id_account_bank' %}
-									<div class="col-sm-9 input-group">
-										{{ field }}
-									</div>
-								{% elif field.auto_id == 'id_correspondent_account' %}
-									<div class="col-sm-9 input-group">
-										{{ field }}
-									</div>
-								{% elif field.auto_id == 'id_bank_identification_code' %}
-									<div class="col-sm-9 input-group">
-										{{ field }}
-									</div>
 								{% else %}
 									<div class="input-group col-sm-{% if field.auto_id == 'id_passport_birthday_date' or field.auto_id == 'id_passport_kogda_vydan' %}3{% else %}9{% endif %}">
 										{{ field }}
@@ -236,13 +173,16 @@
 								</div>
 							{% endif %}
 						{% endfor %}
+						<br>
+						<br>
 						<div class="form-group text-right">
 							<div class="col-sm-offset-2 col-sm-10">
 								<button type="submit" class="btn btn-success"{% if froze.status == 'pay' %} disabled{% endif %}>Сохранить данные по договору</button>
 							</div>
 						</div>
+						<br>
+						<br>
 					</form>
-					<div class="text-muted">{{ self_id }}</div>
 				</div>
 			</div>
 		</div>
