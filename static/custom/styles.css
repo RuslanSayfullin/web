@@ -1,0 +1,421 @@
+ul.stream {
+  margin: 0;
+  padding: 0;
+}
+ul.stream li {
+  list-style: none;
+  border-bottom: 1px solid #eeeeee;
+  padding: 1em 0;
+}
+ul.stream li:last-child {
+  border-bottom: none;
+}
+ul.stream li a img.user {
+  width: 60px;
+  border-radius: 100px;
+  float: left;
+}
+ul.stream li div.post {
+  margin-left: 60px;
+  padding: 0 0 0 1.2em;
+  overflow-x: auto;
+}
+ul.stream li div.post h3 {
+  font-size: 1em;
+  margin: 0;
+  margin-bottom: .2em;
+}
+ul.stream li div.post h3 small {
+  margin-left: .3em;
+  font-size: .8em;
+}
+ul.stream li div.post p {
+  margin: 0;
+}
+ul.stream li div.post div.interaction {
+  padding-top: .2em;
+}
+ul.stream li div.post div.interaction a {
+  margin-right: .6em;
+  font-size: .8em;
+}
+.stream-update {
+  text-align: center;
+  border-bottom: 1px solid #eeeeee;
+  display: none;
+}
+.stream-update a {
+  display: block;
+  padding: .6em 0;
+  background-color: #f5f8fa;
+}
+.stream-update a:hover {
+  text-decoration: none;
+  background-color: #e1e8ed;
+}
+.compose {
+  display: none;
+  border-bottom: 1px solid #eee;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.compose h2 {
+  font-size: 1.4em;
+}
+.comments {
+  margin-top: .6em;
+}
+.comments ol {
+  margin: .8em 0 0;
+  padding: .2em 0;
+  background-color: #f4f4f4;
+  border-radius: 3px;
+  overflow-x: auto;
+}
+.comments ol li {
+  list-style: none;
+  padding: 0;
+}
+.comments ol li img.user-comment {
+  width: 35px;
+  border-radius: 4px;
+  float: left;
+  margin-left: 10px;
+}
+.comments ol li div {
+  /*margin-left: 45px;*/
+  padding: 0 .8em;
+  font-size: .9em;
+}
+.comments ol li {
+  padding: .6em .6em .6em 0;
+  border-bottom: none;
+}
+.comments ol li h4 {
+  margin: 0;
+  /*margin-left: 45px;*/
+  padding: 0 0 .2em .8em;
+  font-size: .9em;
+}
+.comments ol li h4 small {
+  margin-left: .3em;
+}
+.empty {
+  margin: 0 .8em;
+  font-size: .9em;
+}
+.load {
+  text-align: center;
+  padding-top: 1em;
+  border-top: 1px solid #eeeeee;
+  display: none;
+  padding: 15px 0;
+}
+.loadcomment {
+  text-align: center;
+}
+.remove-feed {
+  color: #bbbbbb;
+  font-size: .8em;
+  padding-top: .2em;
+  float: right;
+  cursor: pointer;
+}
+.remove-feed:hover {
+  color: #333333;
+}
+.panel-feed {
+  margin-top: 20px;
+}
+.panel-feed .panel-body {
+  padding: 0;
+}
+.feed-container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* <new> */
+.comments span{color:#23527c;}
+.froze-status {
+  margin-bottom: 10px;
+}
+@page {
+  size: A4;
+  margin: 0;
+}
+@media print {
+  .no-print{display: none;}
+  form{display: none;}
+  h1.preprint {font-size: 18px;}
+  table.preprint{font-size:12px;}
+}
+/* </new> */
+/* <technical preprint */
+a.hide-comment, a.hide-comments{cursor: pointer;}
+/*a.hide-comment {display: block;}*/
+
+td.comments br {display: none;}
+td.comments u {margin: 0 10px 0 0;}
+td.comments small {margin: 0 10px 0 0;}
+td.comments div {/* margin: 0 0 -10px 0; *//* padding: 0; */}
+td.comments div p {margin: 0;padding: 0;}
+td.comments-left {text-align:right;}
+/* </technical preprint */
+/* <dogovora */
+form.dogovora .input-group .form-control:first-child, .input-group .form-control:last-child {
+    border-radius: 4px !important;
+}
+a.js_link {
+    cursor: pointer;
+}
+div#nomer_dogovora_info a {cursor: pointer;}
+ul#dogovora_na_izgotovlenie_mebeli a {cursor: pointer;}
+div.naydennye_dogovora a.copy_data {
+    cursor: pointer;
+}
+div.naydennye_dogovora div {
+	display: none;
+}
+div.naydennye_dogovora span {
+	font-weight: bold;
+}
+/* </dogovora */
+/* <otchety */
+table#otchet_1 tbody tr td{cursor:pointer;}
+table#otchet_1.table-hover > tbody > tr:hover{background-color:#fdfed7;}
+/* </otchety */
+/* <vechernie_otchety */
+.view_otchet_vyezd th{vertical-align: middle !important;}
+.send_otchet_vyezd .bootstrap-tagsinput input{max-width:158px;}
+.view_otchet_call #get_full_name{text-align:center;}
+.view_otchet_call th{vertical-align:middle !important;text-align:center;}
+.view_otchet_call .zamerov_na_vyezd,
+.view_otchet_call .nazn_priglash_v_salon,
+.view_otchet_call .zamerov_s_vk,
+.view_otchet_call .zamerov_s_insta,
+.view_otchet_call .zamerov_iz_jivo,
+.view_otchet_call .priglas_iz_jivo,
+.view_otchet_call .konsult_v_jivo,
+.view_otchet_call #zamerov_na_vyezd,
+.view_otchet_call #nazn_priglash_v_salon,
+.view_otchet_call #zamerov_s_vk,
+.view_otchet_call #zamerov_s_insta,
+.view_otchet_call #zamerov_iz_jivo,
+.view_otchet_call #priglas_iz_jivo,
+.view_otchet_call #konsult_v_jivo {
+	text-align: center;
+	vertical-align: middle;
+}
+/* </vechernie_otchety */
+/* <month_calendar */
+td.m_cal {vertical-align:middle;}
+td.m_restday a {
+	color:#000;
+	background:#689f38;
+}
+td.m_restday a:hover,
+td.m_restday a:focus {
+	background: #77bf39 !important;
+}
+td.m_restday {
+    background: #689f38;
+}
+td.m_cal a {
+    padding: 5px;
+    width: 22px;
+}
+#month_calendar table thead {
+    /*position: fixed;*/
+    top: 0px;
+}
+div#month_calendar table td {
+    padding: 1px !important;
+    vertical-align: middle;
+}
+div#month_calendar table td:nth-child(1) {
+    padding: 1px 1px 1px 8px !important;
+}
+div#month_calendar td a {
+    /*background: rgba(238, 255, 65, 0.21);*/
+}
+#month_calendar a.btn.btn-default {
+    width: 100%;
+    height: 100%;
+    border: none !important;
+}
+/* </month_calendar */
+/* <search */
+div#loading_image img {
+    height: 300px;
+}
+/* </search */
+table#sotrudniki td {
+    vertical-align: middle;
+}
+/*
+*
+*
+*
+<staff.prava_dostupa
+*
+*
+*
+*/
+div.prava_dostupa table {
+  position: relative;
+  width: 1170px;
+  overflow: hidden;
+  border-collapse: collapse;
+}
+/*thead*/
+div.prava_dostupa thead {
+  position: relative;
+  display: block; /*seperates the header from the body allowing it to be positioned*/
+  width: 1170px;
+  overflow: visible;
+}
+div.prava_dostupa thead th {
+  min-width: 180px;
+  height: 98px;
+  vertical-align: top !important;
+  text-align: center;
+}
+div.prava_dostupa thead th:nth-child(1) {/*first cell in the header*/
+  position: relative;
+  display: block; /*seperates the first cell in the header from the header*/
+  background-color: #fff;
+}
+/*tbody*/
+div.prava_dostupa tbody {
+  position: relative;
+  display: block; /*seperates the tbody from the header*/
+  width: 1170px;
+  height: 405px;
+  overflow: scroll;
+}
+div.prava_dostupa tbody td {
+  min-width: 180px;
+  vertical-align: middle !important;
+  text-align: center;
+}
+div.prava_dostupa tbody tr td:nth-child(1) {  /*the first cell in each tr*/
+  position: relative;
+  display: block; /*seperates the first column from the tbody*/
+  /*height: 75px;*/
+  background-color: #fff;
+  vertical-align: middle !important;
+  text-align: left;
+}
+table#prava_dostupa tbody td:nth-child(1) {
+    width: 180px;
+}
+table#prava_dostupa thead th {
+    width: 180px;
+}
+/*
+*
+*
+*
+</staff.prava_dostupa
+*
+*
+*
+*/
+/*
+*
+*
+*
+<NAVBAR. TOP MENU
+*
+*
+*
+*/
+.dropdown-menu {
+	min-width: 200px;
+}
+.dropdown-menu.columns-2 {
+	min-width: 400px;
+}
+.dropdown-menu.columns-3 {
+	min-width: 690px;
+}
+.dropdown-menu li a {
+	padding: 5px 15px;
+	font-weight: 300;
+}
+.multi-column-dropdown {
+	list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+.multi-column-dropdown li a {
+	display: block;
+	clear: both;
+	line-height: 1.428571429;
+	color: #333;
+	white-space: normal;
+}
+.multi-column-dropdown li a:hover {
+	text-decoration: none;
+	color: #262626;
+	background-color: #999;
+}
+
+@media (max-width: 767px) {
+	.dropdown-menu.multi-column {
+		min-width: 240px !important;
+		overflow-x: hidden;
+	}
+}
+ul.nav.navbar-nav:nth-child(1) {
+    max-width: 750px;
+}
+/*
+*
+*
+*
+</NAVBAR. TOP MENU
+*
+*
+*
+*/
+/*
+*
+*
+*
+<FROZES
+*
+*
+*
+*/
+.paid {
+	background-color: #d2fbd2;
+}
+.canceled_or_not_pay {
+	background-color: #ff000005;
+}
+/*
+*
+*
+*
+</FROZES
+*
+*
+*
+*/
+/*.any_ko_tz_status{display:none;}*/
+.inline-flex {
+    display: inline-flex;
+}
+button.btn.btn-default.otpr_v_zamer {
+    position: relative;
+    top: -14px;
+    float: right;
+}
+
+
+
+input.form-control.input-sm.files_tz {
+  display: none;
+}
