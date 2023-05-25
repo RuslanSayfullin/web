@@ -16,14 +16,14 @@ SPOSOB_OPLATY = (
 class DogovorIndiForm(forms.Form):
     tip_dogovora = forms.ChoiceField(
         required=False, label='Тип договора', choices=(('', '--выбрать тип договора--'),) + DogovorIndi.TIPY_DOGOVOROV,
-        widget=forms.Select(attrs={'class': 'selectpicker show-tick', 'placeholder': 'Тип договора'}))
+        widget=forms.Select(attrs={'class': 'form-select', 'placeholder': 'Тип договора'}))
     technics_sroki_dostavki_tehniki = forms.ChoiceField(
         required=False, label='Сроки доставки техники/матраса', choices=(
             ('', '--выбери срок доставки--'),
             ('1', 'в день исполнения обязательств по договору'),
             ('2', 'в течении ___ рабочих дней со дня заключения Договора')
         ),
-        widget=forms.Select(attrs={'class': 'selectpicker show-tick'}))
+        widget=forms.Select(attrs={'class': 'form-select'}))
     technics_sroki_dostavki_tehniki_v_dnyah = forms.IntegerField(
         required=False, max_value=365, min_value=0, label='Сроки доставки техники/матраса в днях',
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '3'}))
@@ -57,7 +57,7 @@ class DogovorIndiForm(forms.Form):
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ГОР. УФА'}))
     passport_seria = forms.CharField(
         required=False, max_length=4, label='Серия паспорта',
-        widget=forms.TextInput(attrs={'class':'form-control','placeholder': '8000'}))
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '8000'}))
     passport_nomer = forms.CharField(
         required=False, max_length=6, label='Номер паспорта',
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '123456'}))

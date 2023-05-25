@@ -89,12 +89,20 @@ class DogovorIndi(models.Model):
             return ''
         if 'izgotovlenie_2021_02_mebeli' in self.tip_dogovora:
             return 'izgotovlenie_2021_02_mebeli'
+        if 'mygkaya_2021_02_mebel' in self.tip_dogovora:
+            return 'mygkaya_2021_02_mebel'
+        if 'technic_2021_04' in self.tip_dogovora:
+            return 'technic_2021_04'
 
     def kakoy_tip_dogovora_na_kirillice(self):
         if self.tip_dogovora is None:
             return ''
         if 'izgotovlenie' in self.tip_dogovora:
             return 'на изготовление мебели'
+        if 'mygkaya' in self.tip_dogovora:
+            return 'на мягкую мебель'
+        if 'technic_2021_04' in self.tip_dogovora:
+            return 'Техника'
 
     def kakoe_yur_lico_na_kirillice(self):
         if 'frolov' in self.tip_dogovora:

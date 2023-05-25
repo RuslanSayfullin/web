@@ -6,7 +6,8 @@
 <p>
 	<br>
 	<a class="btn btn-secondary" href="{% url 'froze_uuid' froze_uuid %}">Вернуться к заявке</a>&nbsp;
-	<a class="btn btn-secondary" target="_blank"{% if create_or_update == 'create' %} title="Сначала заполните данные для договора" disabled{% else %} href="#"{% endif %}>Печатать договор...</a>&nbsp;
+	<a class="btn btn-secondary" target="_blank"{% if create_or_update == 'create' %} title="Сначала заполните данные для договора" disabled{% else %} href="{% url 'dogovora:view' froze_uuid %}"{% endif %}>Печатать договор...</a>&nbsp;
+
 	{% if create_or_update == 'update' and froze.dogovor.kakoy_tip_dogovora in 'tehnika,technic_2021_04,m_householdtec,entity_householdtec,juridical_moscow_ooo-refabrik_householdtec,entity_ufa_householdtec,entity_ufa_ooo-refabrik_householdtec' %}
 		<a class="btn btn-secondary" href="{% url 'dogovora:tovarnyy_chek' froze_uuid %}">Заполнить поля для товарного чека</a>
 
