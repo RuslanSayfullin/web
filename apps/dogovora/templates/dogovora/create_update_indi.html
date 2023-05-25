@@ -123,10 +123,6 @@
 											<div class="col-sm-{% if field.auto_id == 'id_passport_birthday_date' or field.auto_id == 'id_passport_kogda_vydan' %}3{% else %}9{% endif %}">
 												{{ field }}
 											</div>
-										{% elif field.auto_id == 'id_passport_birthday_date' or field.auto_id == 'id_passport_kogda_vydan' %}
-											<div class="col-sm-9">
-												{{ field }}
-											</div>
 										{% elif field.auto_id == 'id_passport_birthday_place' %}
 											<div class="col-sm-9">
 												{{ field }}
@@ -156,9 +152,9 @@
 												{{ field }}
 												<p>
 													{% if field.auto_id == 'id_adres_propiski' or field.auto_id == 'id_adres_ustanovki' %}
-														<a onclick="use_froze_data_for_dogovor('{{ field.auto_id }}', '{{ froze.client.address }}{% if froze.client.room and froze.client.room != '-' %}, кв {{ froze.client.room }}{% endif %}');" class="js_link text-danger">Использовать</a> адрес клиента из заявки: <span class="text-success">{{ froze.client.address }}{% if froze.client.room and froze.client.room != '-' %}, кв {{ froze.client.room }}{% endif %}</span>.
+														<a onclick="use_froze_data_for_dogovor('{{ field.auto_id }}', '{{ froze.address }}');" class="js_link text-danger">Использовать</a> адрес клиента из заявки: <span class="text-success">{{ froze.address }}</span>.
 													{% else %}
-														<a onclick="use_froze_data_for_dogovor('{{ field.auto_id }}', '{{ froze.client.name }}');" class="js_link text-danger">Использовать</a> название/ФИО клиента из заявки: <span class="text-success">{{ froze.client.name }}</span>.
+														<a onclick="use_froze_data_for_dogovor('{{ field.auto_id }}', '{{ froze.name }}');" class="js_link text-danger">Использовать</a> название/ФИО клиента из заявки: <span class="text-success">{{ froze.name }}</span>.
 													{% endif %}
 												</p>
 											</div>
@@ -209,11 +205,11 @@
 												{{ field }}
 											</div>
 										{% elif field.auto_id == 'id_doverennye_lica' %}
-											<div class="col-sm-3">
+											<div class="col-sm-9">
 												{{ field }}
 											</div>
 										{% else %}
-											<div class="col-sm-3">
+											<div class="col-sm-9">
 												{{ field }}
 											</div>
 										{% endif %}

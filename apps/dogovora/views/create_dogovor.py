@@ -183,6 +183,7 @@ class CreateUpdateDogovorIndi(generic.FormView):
         })
         return context
 
+
     def dispatch(self, *args, **kwargs):
         self.froze_uuid = kwargs.get('froze_uuid')
         self.froze = get_object_or_404(Froze, uuid=self.froze_uuid)
