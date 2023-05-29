@@ -3,7 +3,7 @@
 
 {% block content_dogovor %}
 <div class="container">
-	{% if froze.status == 'pay' %}
+	{% if status == 'pay' %}
 	<div class="row">
 		<div class="col-md-12">
 			<div class="alert alert-danger">Внесение правок в договор не доступно, т.к. выставлен статус &laquo;Оплачен&raquo;<br /></div>
@@ -40,7 +40,7 @@
 			<div class="row">
 				<div class="col-md-8 offset-2">
 					<h3 class="text-muted">Договор</h3><br>
-					<form role="form" class="form-horizontal dogovora" method="post" enctype="multipart/form-data" allowed="{% if froze.status == 'pay' %}disallowed{% else %}allowed{% endif %}">
+					<form role="form" class="form-horizontal dogovora" method="post" enctype="multipart/form-data" allowed="{% if status == 'pay' %}disallowed{% else %}allowed{% endif %}">
 						{% csrf_token %}
 						{% for field in form %}
 
@@ -66,11 +66,11 @@
 												{{ field }}
 												{% if create_or_update == 'create' %}
 													 Номер договора можно будет указать после сохранения.
-												{% elif froze.status == 'pay' %}
+												{% elif status == 'pay' %}
 													 Номер договора изменить нельзя, т.к. выставлен статус «Оплачен»
 												{% else %}
 													 <div id="nomer_dogovora_info">
-													 {% if froze.dogovor.tip_dogovora is not None and froze.dogovor.tip_dogovora != '0' and froze.dogovor.tip_dogovora != 'tekstil_ip_sadykov_fiz' and froze.dogovor.tip_dogovora != 'tekstil_ip_usmanov_fiz' and froze.dogovor.tip_dogovora != 'm_textile' and froze.dogovor.tip_dogovora != 'msk_textile_ip_sadykov' and froze.dogovor.tip_dogovora != 'msk_textile_ip_usmanov' and froze.dogovor.tip_dogovora != 'entity_textile' and froze.dogovor.tip_dogovora != 'juridical_moscow_ooo-refabrik_textile' and froze.dogovor.tip_dogovora != 'entity_ufa_textile' and froze.dogovor.tip_dogovora != 'entity_ufa_ooo-refabrik_textile' %}
+													 {% if dogovor.tip_dogovora is not None and dogovor.tip_dogovora != '0' and dogovor.tip_dogovora != 'tekstil_ip_sadykov_fiz' and froze.dogovor.tip_dogovora != 'tekstil_ip_usmanov_fiz' and froze.dogovor.tip_dogovora != 'm_textile' and froze.dogovor.tip_dogovora != 'msk_textile_ip_sadykov' and froze.dogovor.tip_dogovora != 'msk_textile_ip_usmanov' and froze.dogovor.tip_dogovora != 'entity_textile' and froze.dogovor.tip_dogovora != 'juridical_moscow_ooo-refabrik_textile' and froze.dogovor.tip_dogovora != 'entity_ufa_textile' and froze.dogovor.tip_dogovora != 'entity_ufa_ooo-refabrik_textile' %}
 														 {% if dogovora_s_takimi_zhe_fio == 0 %}
 															Других договоров, с таким же ФИО клиента и заполненным номером, не найдено.<br>
 															<a onclick="nomer_dogovora('{{ csrf_token }}', '{{ self_id }}');" class="text-danger">Присвоить этому договору новый номер, например, <b>{{ novy_nomer_dogovora }}</b></a>?
