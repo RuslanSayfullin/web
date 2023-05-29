@@ -1,10 +1,17 @@
 from rest_framework import generics
 from rest_framework import status
+from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
-from apps.api.serializer import FrozeSerializer
+from rest_framework import viewsets
+from django.contrib.auth.models import User
+from apps.api.serializer import FrozeSerializer, UserSerializer
 from apps.dogovora.models import DogovorIndi
+
+
+class FrozeAPICreate(generics.CreateAPIView):
+    """Первый вариант"""
+    serializer_class = FrozeSerializer
 
 
 class FrozeAndDogovorIndiView(APIView):
@@ -18,7 +25,9 @@ class FrozeAndDogovorIndiView(APIView):
         return Response(froze_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAdminUser,)
 
-class FrozeAPICreate(generics.CreateAPIView):
-    """Первый вариант"""
-    serializer_class = FrozeSerializer
+
