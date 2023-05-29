@@ -10,6 +10,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 from apps.dogovora import forms
 from apps.dogovora.models import DogovorIndi
+from apps.dogovora.views.send_data_to_url import send_data_to_url_b24
 from apps.froze.models import Froze
 
 
@@ -253,9 +254,21 @@ class CreateUpdateDogovorIndi(generic.FormView):
         if form.cleaned_data.get('sposob_oplaty'):
             self.froze.type_pay = form.cleaned_data.get('sposob_oplaty')
             self.froze.save(update_fields=('type_pay',))
+        if form.cleaned_data.get('sposob_oplaty'):
+            self.froze.type_pay = form.cleaned_data.get('sposob_oplaty')
+            self.froze.save(update_fields=('type_pay',))
         if form.cleaned_data.get('tip_opisanie_izdeliya'):
             self.froze.type_production = form.cleaned_data.get('tip_opisanie_izdeliya')
             self.froze.save(update_fields=('type_production',))
+        if form.cleaned_data.get('passport_familiya') or form.cleaned_data.get('passport_imya') or form.cleaned_data.get('passport_otchestvo'):
+            froze_familiya = form.cleaned_data.get('passport_familiya') if form.cleaned_data.get('passport_familiya') else ''
+            froze_imya = form.cleaned_data.get('passport_imya') if form.cleaned_data.get('passport_imya') else ''
+            froze_otchestvo = form.cleaned_data.get('passport_otchestvo') if form.cleaned_data.get('passport_otchestvo') else ''
+            self.froze.name = froze_familiya + ' ' + froze_imya + ' ' + froze_otchestvo
+            self.froze.save()
+        if form.cleaned_data.get('adres_propiski'):
+            self.froze.address = form.cleaned_data.get('adres_propiski')
+            self.froze.save(update_fields=('address',))
 
 
         passport_familiya = form.cleaned_data.get('passport_familiya')
@@ -329,6 +342,7 @@ class CreateUpdateDogovorIndi(generic.FormView):
             self.dogovor.technics_sroki_dostavki_tehniki_v_dnyah = technics_sroki_dostavki_tehniki_v_dnyah if technics_sroki_dostavki_tehniki_v_dnyah else None
 
             self.dogovor.save()
+            send_data_to_url_b24(self.froze, self.dogovor)  # Функция обновляет заявку на Б24 по url
             return super(CreateUpdateDogovorIndi, self).form_valid(form)
         elif self.create_or_update == 'create':
             author = self.request.user
