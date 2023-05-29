@@ -94,7 +94,7 @@ def dogovor_main_view(request, froze_uuid):
         'entity_ufa_assembling',
     ):
         return HttpResponse('Нужно выбрать другой тип договора! Для данного типа договора, печать недоступна!')
-    template = 'dogovora/dogovor_' + dogovor.kakoy_tip_dogovora() + '.html'
+    template = 'dogovora/indi/dogovor_' + dogovor.kakoy_tip_dogovora() + '.html'
 
     months_v_rod_padezhe = ("", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря")
     RUB_forms = (u'рубль', u'рубля', u'рублей')

@@ -93,6 +93,83 @@ class DogovorIndi(models.Model):
             return 'mygkaya_2021_02_mebel'
         if 'technic_2021_04' in self.tip_dogovora:
             return 'technic_2021_04'
+        if 'podklyuchenie_2021_06_tehniki' in self.tip_dogovora:
+            return 'podklyuchenie_2021_06_tehniki'
+        if 'matrasy_2021_06' in self.tip_dogovora:
+            return 'matrasy_2021_06'
+        if 'carpets_and_rugs_ip' in self.tip_dogovora:
+            return 'carpets_and_rugs_ip'
+        if 'decoration' in self.tip_dogovora:
+            return 'decoration'
+        if 'gotovaya_mebel_2021_06' in self.tip_dogovora:
+            return 'gotovaya_mebel_2021_06'
+        if 'iskusstvenny_2021_02_kamen' in self.tip_dogovora:
+            return 'iskusstvenny_2021_02_kamen'
+        if self.tip_dogovora == 'tekstil_ip_sadykov_fiz':
+            return 'tekstil_ip_sadykov_fiz'
+        if self.tip_dogovora == 'tekstil_ip_usmanov_fiz':
+            return 'tekstil_ip_usmanov_fiz'
+        if 'dveri' in self.tip_dogovora:
+            return 'dveri'
+        if 'delivery' in self.tip_dogovora:
+            return 'delivery'
+        if self.tip_dogovora == 'montazh_demontazh_ip_sadykov_fiz':
+            return 'montazh_demontazh_ip_sadykov_fiz'
+        if 'ekspress_dizayn' in self.tip_dogovora:
+            return 'ekspress_dizayn'
+
+        """Договоры физ.лиц с ООО Ре-фабрик"""
+        if 'furniture_making_ooo-refabrik' in self.tip_dogovora:
+            return 'furniture_making'
+        if 'upholstered_furniture_ooo-refabrik' in self.tip_dogovora:
+            return 'upholstered_furniture'
+        if self.tip_dogovora == 'mattresses_ooo-refabrik':
+            return 'mattresses_ooo-refabrik'
+        if self.tip_dogovora == 'carpets_and_rugs_ooo-refabrik':
+            return 'carpets_and_rugs_ooo-refabrik'
+        if self.tip_dogovora == 'finishedfur_ooo-refabrik':
+            return 'finishedfur_ooo-refabrik'
+        if 'artificial_stone_ooo-refabrik' in self.tip_dogovora:
+            return 'artificial_stone'
+        if 'door_manufacturing_ooo-refabrik' in self.tip_dogovora:
+            return 'door_manufacturing'
+        if 'transportation_services_ooo-refabrik' in self.tip_dogovora:
+            return 'transportation_services'
+
+        """Московские договоры с физ. лицами"""
+        if 'm_furniture_making' in self.tip_dogovora:
+            return 'm_furniture_making'
+        if 'm_upholstered_furniture' in self.tip_dogovora:
+            return 'm_upholstered_furniture'
+        if 'm_mattresses' in self.tip_dogovora:
+            return 'm_mattresses'
+        if 'm_householdtec' in self.tip_dogovora:
+            return 'm_householdtec'
+        if 'm_connectiontec' in self.tip_dogovora:
+            return 'm_connectiontec'
+        if 'm_finishedfur' in self.tip_dogovora:
+            return 'm_finishedfur'
+        if 'm_doors' in self.tip_dogovora:
+            return 'm_doors'
+        if 'm_stone' in self.tip_dogovora:
+            return 'm_stone'
+        if 'm_textile' in self.tip_dogovora:
+            return 'm_textile'
+        if self.tip_dogovora == 'msk_textile_ip_sadykov':
+            return 'msk_textile_ip_sadykov'
+        if self.tip_dogovora == 'msk_textile_ip_usmanov':
+            return 'msk_textile_ip_usmanov'
+        if 'm_transport' in self.tip_dogovora:
+            return 'm_transport'
+        if 'm_assembling' in self.tip_dogovora:
+            return 'm_assembling'
+        if 'm_manufacturingassembling' in self.tip_dogovora:
+            return 'm_manufacturingassembling'
+        if 'm_furnitureassemblywork' in self.tip_dogovora:
+            return 'm_furnitureassemblywork'
+        if 'm_2furnitureassemblywork' in self.tip_dogovora:
+            return 'm_2furnitureassemblywork'
+
 
     def kakoy_tip_dogovora_na_kirillice(self):
         if self.tip_dogovora is None:
@@ -103,6 +180,81 @@ class DogovorIndi(models.Model):
             return 'на мягкую мебель'
         if 'technic_2021_04' in self.tip_dogovora:
             return 'Техника'
+        if 'podklyuchenie' in self.tip_dogovora:
+            return 'Подключение техники'
+        if 'matrasy' in self.tip_dogovora:
+            return 'на матрасы'
+        if 'carpets_and_rugs_ip' in self.tip_dogovora:
+            return 'Ковры и ковровые покрытия'
+        if 'decoration' in self.tip_dogovora:
+            return 'Декор'
+        if 'gotovaya' in self.tip_dogovora:
+            return 'мебели выстовочного образца'
+        if 'iskusstvenny' in self.tip_dogovora:
+            return 'на изготовление изделий из искусственного камня'
+        if self.tip_dogovora == 'tekstil_ip_sadykov_fiz':
+            return 'на изготовление текстильных изделий и сопутсвующих услуг'
+        if self.tip_dogovora == 'tekstil_ip_usmanov_fiz':
+            return 'на изготовление текстильных изделий и сопутсвующих услуг'
+        if 'dveri' in self.tip_dogovora:
+            return 'на двери'
+        if 'delivery' in self.tip_dogovora:
+            return 'Оказание транспортных услуг'
+        if self.tip_dogovora == 'montazh_demontazh_ip_sadykov_fiz':
+            return 'Монтаж/демонтаж | ИП Садыков | Физ'
+        if 'ekspress_dizayn' in self.tip_dogovora:
+            return 'Экспресс дизайн–проект'
+
+        """Договоры физ.лиц с ООО Ре-фабрик"""
+        if self.tip_dogovora == 'furniture_making_ooo-refabrik':
+            return 'на изготовление мебели'
+        if self.tip_dogovora == 'upholstered_furniture_ooo-refabrik':
+            return 'Мягкая мебель ООО «Ре-фабрик»'
+        if self.tip_dogovora == 'mattresses_ooo-refabrik':
+            return 'Матрасы ООО «Ре-фабрик»'
+        if self.tip_dogovora == 'carpets_and_rugs_ooo-refabrik':
+            return 'Ковры и ковровые покрытия ООО «Ре-фабрик»'
+        if self.tip_dogovora == 'finishedfur_ooo-refabrik':
+            return 'мебели выстовочного образца ООО «Ре-фабрик»'
+        if self.tip_dogovora == 'martificial_stone_ooo-refabrik':
+            return 'на изготовление изделий из искусственного камня'
+        if self.tip_dogovora == 'door_manufacturing_ooo-refabrik':
+            return 'Двери ООО «Ре-фабрик»'
+        if self.tip_dogovora == 'transportation_services_ooo-refabrik':
+            return 'Оказание транспортных услуг «Ре-фабрик»'
+
+        """Московские договоры с физ. лицами"""
+        if 'm_furniture_making' in self.tip_dogovora:
+            return 'на изготовление мебели'
+        if 'm_upholstered_furniture' in self.tip_dogovora:
+            return 'на изготовление мягкой мебели'
+        if 'm_mattresses' in self.tip_dogovora:
+            return 'М матрасы ФЗ'
+        if 'm_householdtec' in self.tip_dogovora:
+            return 'М бытовая техника ФЗ'
+        if 'm_connectiontec' in self.tip_dogovora:
+            return 'М подключение техники ФЗ'
+        if 'm_finishedfur' in self.tip_dogovora:
+            return 'мебели выстовочного образца'
+        if 'm_doors' in self.tip_dogovora:
+            return 'на изготовление и поставку межкомнатных дверей, отделку'
+        if 'm_stone' in self.tip_dogovora:
+            return 'на изготовление изделий из искусственного камня'
+        if 'm_textile' in self.tip_dogovora:
+            return 'на изготовление текстильных изделий и сопутствующих услуг'
+        if self.tip_dogovora == 'msk_textile_ip_sadykov' or self.tip_dogovora == 'msk_textile_ip_usmanov':
+            return 'на изготовление текстильных изделий и сопутсвующих услуг'
+        if 'm_transport' in self.tip_dogovora:
+            return 'М транспортные услуги ФЗ'
+        if 'm_assembling' in self.tip_dogovora:
+            return 'М Монтаж/демонтаж ФЗ'
+        if 'm_manufacturingassembling' in self.tip_dogovora:
+            return 'М Изготовление/монтаж мягкой мебели ФЗ'
+        if 'm_furnitureassemblywork' in self.tip_dogovora:
+            return 'М Выполнение работ по сборке мебели ФЗ'
+        if 'm_2furnitureassemblywork' in self.tip_dogovora:
+            return 'М (по согласованию) Выполнение работ по сборке мебели ФЗ'
+
 
     def kakoe_yur_lico_na_kirillice(self):
         if 'frolov' in self.tip_dogovora:

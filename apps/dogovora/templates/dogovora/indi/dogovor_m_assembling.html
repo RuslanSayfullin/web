@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8"/>
+	<link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}" type="image/x-icon" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<link rel="stylesheet" href="{% static 'dogovora/dogovor_izgotovlenie_mebeli/base.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'dogovora/dogovor_izgotovlenie_mebeli/fancy.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'dogovora/dogovor_izgotovlenie_mebeli/main.css' %}"/>
+	<link rel="stylesheet" href="{% static 'dogovora/dogovora_original_docx_view.css' %}"/>
+	<script src="{% static 'dogovora/dogovor_izgotovlenie_mebeli/compatibility.min.js' %}"></script>
+	<script src="{% static 'dogovora/dogovor_izgotovlenie_mebeli/theViewer.min.js' %}"></script>
+	<script>try{theViewer.defaultViewer = new theViewer.Viewer({});}catch(e){}</script>
+	<title>Монтаж/демонтаж</title>
+</head>
+<body>
+<div id="sidebar"><div id="outline"></div></div>
+<div id="page-container">
+<div id="pf1" class="pf w0 h0" data-page-no="1">
+	<div class="pc pc1 w0 h0">
+		<img class="bi x0 y0 w1 h1" src="{% static 'dogovora/dogovor_izgotovlenie_mebeli/bg1.png' %}" style="opacity:0.5;filter:alpha(opacity=50)">
+
+		<div class="t m0 x4 h5 y4 ff5 fs0 fc0 sc0 ls0 ws0">ДОГОВОР</div>
+		<div class="t m0 x5 h5 y5 fs0 fc0 sc0 ls0 ws0" style="margin-left: -70px;"><b>ВОЗМЕЗДНОГО ОКАЗАНИЯ УСЛУГ № {% if dogovor.nomer_dogovora %}<v>{{ dogovor.nomer_dogovora }}</v>{% else %}_____{% endif %}</b></div>
+		<div class="t m0 x6 h6 y6 ff7 fs0 fc0 sc0 ls0 ws0">Республика Башкортостан, г.<span class="ff8"> </span>Уфа<span class="ff8">                                                                                                                                                       {% if dogovor.data_podpisaniya %}                   «<v>{{ dogovor.data_podpisaniya|date:'j' }}</v>» <v>{{ dogovor_more.data_podpisaniya_month }}</v> <v>{{ dogovor.data_podpisaniya|date:'Y' }}</v>{% else %}«____» _____________ 20____{% endif %} </span>г.</div>
+
+		<div class="t m0 x8 h6 ff8 fs0 fc0 sc0 ls0 ws0 pf1text">
+            <p>{% if dogovor.passport_familiya and dogovor.passport_imya and dogovor.passport_otchestvo %}<v>{{ dogovor.passport_familiya }}</v> <v>{{ dogovor.passport_imya }}</v> <v>{{ dogovor.passport_otchestvo }}</v>{% else %}_______________________________________________________________________________________________{% endif %}, именуемый в дальнейшем «Заказчик», с одной стороны и <b>Индивидуальный предприниматель <v>{{ postavshik.fio }}</v></b>, действующий на основании ОГРНИП <v>{{ postavshik.ogrnip }}</v>, именуемый в дальнейшем «Исполнитель», с другой стороны, совместно именуемые в дальнейшем «Стороны», заключили настоящий Договор о следующем:</p>
+            <p style="text-align: center; font-weight: bold;"><br>1. ПРЕДМЕТ ДОГОВОРА</p>
+            <p>1.1. Исполнитель обязуется оказать Заказчику Услуги, именованные в Перечне оказываемых услуг (Приложение 1), являющемся неотъемлемой частью Договора, а Заказчик обязуется оплатить эти Услуги.</p>
+            <p>1.2. Исполнитель имеет право:</p>
+            <p>- оказать Услуги лично.</p>
+            <p>- привлекать к оказанию Услуг третьих лиц без предварительного получения на то согласия Заказчика.</p>
+            <p>1.3. Сроки оказания Услуг определены в Перечне оказываемых услуг (Приложение 1).</p>
+            <p style="text-align: center; font-weight: bold;"><br>2. ПОРЯДОК СДАЧИ И ПРИЕМКИ РАБОТ</p>
+            <p>2.1. По факту оказания Услуг Исполнитель представляет Заказчику на подписание Акт сдачи-приемки оказанных услуг в двух экземплярах.</p>
+            <p>2.2. В течение 1 (одного) дня после получения Акта сдачи-приемки оказанных услуг Заказчик обязан подписать его и направить один экземпляр Исполнителю, либо, при наличии недостатков, представить Исполнителю письменный мотивированный отказ от его подписания в течении 1 (одного) дня. В случае не поступления письменных претензий Заказчика и/или уклонении Заказчика от подписания Акта сдачи - приемки оказанных услуг, акт считается подписанным по истечении трех дней с момента получения Заказчиков Акта сдачи - приемки оказанных услуг.</p>
+            <p>2.3. В случае наличия недостатков, Исполнитель обязуется устранить их в течение 15 дней со дня получения соответствующих претензий Заказчика, а в случае осуществления Заказчиком каких-либо препятствий в доступе к наличию выявленных недостатков, срок увеличивается на время, необходимое для устранения указанных препятствий.</p>
+            <p>2.4. Услуги считаются оказанными с момента подписания Сторонами Акта сдачи-приема оказанных услуг.</p>
+            <p style="text-align: center; font-weight: bold;"><br>3. ЦЕНА И ПОРЯДОК РАСЧЕТОВ</p>
+            <p>3.1. Общая стоимость Услуг, порядок оплаты, другие заслуживающие внимание обстоятельства Договора, указываются в Приложении 1, являющемся неотъемлемой частью Договора.</p>
+            <p>3.2. Заказчик обязуется в день заключения Договора внести 100 % оплату.</p>
+            <p>3.3. Оплата по настоящему Договору производится наличными денежными средствами, либо в безналичном порядке через банковский терминал или на расчетный счет, с последующей выдачей кассового чека.</p>
+            <p style="text-align: center; font-weight: bold;"><br>4. ОТВЕТСТВЕННОСТЬ СТОРОН</p>
+            <p>4.1. За нарушение сроков оказания Услуг (п. 1.3 Договора) Заказчик вправе требовать от Исполнителя уплаты неустойки (пени) в размере 0,1% от суммы, оплаченной по Договору за каждый день просрочки, но не более 3% от суммы.</p>
+            <p>4.2. За нарушение сроков оплаты (п. 3.2 Договора) Исполнитель вправе требовать с Заказчика уплаты неустойки (пени) в размере 0,1% процента от неуплаченной суммы предусмотренной Приложением 1, за каждый день просрочки.</p>
+            <p>4.3 Заказчик, при проведении работ осуществляет надзор за сохранностью собираемых предметов мебели и помещения (полы, стены, потолки, двери, мебель, окна и т.п.), в котором происходит монтаж/демонтаж мебели.</p>
+            <p>4.4 Заказчик предупрежден о том, что:</p>
+            <p>4.4.1 Мебель, предназначенная для монтажа/демонтажа должна находиться в том помещении, в котором она будет собираться/разбираться.</p>
+            <p>4.4.2 Обязан подготовить место для проведения монтажа/демонтажа, укрыть во избежание порчи пол, убрать мешающие работе предметы, отвести место для инструмента и вещей рабочих.</p>
+            <p>4.4.3 Не должен предпринимать попыток перемещения и распаковки мебели до приезда сборщиков.</p>
+            <p>4.4.4 Обязан обеспечить нахождение в помещении, где происходит монтаж/демонтаж, только представителей Исполнителя.</p>
+            <p>4.4.5 Претензии получателя услуги к Исполнителю за сохранность собираемых предметов мебели и помещения (полы, стены, потолки, двери, мебель, окна и т.п.), в котором происходит монтаж/демонтаж, принимаются в течение производства работ по монтажу/демонтажу, после оформления Акта приема услуги претензии не принимаются.</p>
+            <p>4.4.6 В помещении, предназначенном для монтажа/демонтажа и установки мебели должен быть беспрепятственный доступ к электророзеткам с переменным напряжением 220 Вольт, а также присутствовать дневное либо искусственное освещение, пригодное для осуществления работ.</p>
+            <p>4.5 Исполнитель несет ответственность за сохранность собираемой мебели и помещения, где происходит монтаж/демонтаж, только с момента начала работ и до сдачи работ получателю услуги. Исполнитель не несет ответственность за сохранность собираемой мебели и помещения, где происходит монтаж/демонтаж, за изменение функциональных, физических и прочих свойств мебели, а также за утрату, недостачу, порчу или повреждение мебели в случаях, если утрата, недостача, порча или повреждение мебели, произошла вследствие обстоятельств, которые он не мог предотвратить и устранение которых от него не зависело, в частности, вследствие:</p>
+            <p>- перемещение упаковок с мебелью до приезда сборщиков;</p>
+            <p>- распаковка или сборка мебели, в том числе частичная, производилась до приезда сборщиков;</p>
+            <p>- условия хранения мебели не соответствуют, правилам хранения производителя мебели;</p>
+            <p>- порча упаковок или мебели по неосторожности Покупателя;</p>
+            <p>- собранная или частично собранная мебель, после ухода сборщиков подвергалась перемещению или регулировке;</p>
+            <p>- неправильная эксплуатация мебели;</p>
+            <p>- началась эксплуатация мебели до ее полного и окончательного сбора.</p>
+            <p>- особых естественных свойств собираемой мебели.</p>
+            <p>4.6. Во всех других случаях неисполнения или ненадлежащего исполнения обязательств по Договору Стороны несут ответственность в соответствии с действующим законодательством РФ.</p>
+            <p style="text-align: center; font-weight: bold;"><br>5. ФОРС-МАЖОР</p>
+            <p>5.1. При возникновении обстоятельств, стороны освобождаются от ответственности за неисполнение или ненадлежащее исполнение обязательств по Договору при возникновении непреодолимой силы, то есть чрезвычайных и непредотвратимых при данных условиях обстоятельств, под которыми понимаются: запретные действия властей, гражданские волнения, эпидемии, блокада, эмбарго, землетрясения, наводнения, пожары или другие стихийные бедствия.</p>
+            <p>5.2. В случае наступления этих обстоятельств Сторона обязана уведомить об этом другую Сторону.</p>
+            <p>5.3. Документ, выданный Уполномоченным государственным органом, является достаточным подтверждением наличия и продолжительности действия обстоятельств непреодолимой силы.</p>
+        </div>
+	</div>
+	<div class="c x1 y1 w2 h2">
+		<div class="t m0 x2 h3 y2 ff1 fs0 fc0 sc0 ls0 ws0">1</div>
+	</div>
+	<div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
+</div>
+<div id="pf2" class="pf w0 h0" data-page-no="2">
+	<div class="pc w0 h0">
+		<div class="t m0 x8 h6 ff8 fs0 fc0 sc0 ls0 ws0 page_without_logo">
+            <p style="text-align: center; font-weight: bold;"><br>6. СРОК ДЕЙСТВИЯ, ИЗМЕНЕНИЕ И ДОСРОЧНОЕ РАСТОРЖЕНИЕ ДОГОВОРА</p>
+            <p>6.1. Договор действует в течении 45 (сорока пяти) суток, с даты его заключения, а в части обязательств и ответственности за их исполнение, до полного исполнения их сторонами.</p>
+            <p>6.2. Все изменения и дополнения к Договору действительны, если совершены в письменной форме и подписаны обеими Сторонами. Соответствующие дополнительные соглашения Сторон являются неотъемлемой частью Договора.</p>
+            <p>6.3. Договор может быть досрочно расторгнут по соглашению Сторон, либо по требованию одной из Сторон в порядке и по основаниям, предусмотренным действующим законодательством РФ.</p>
+            <p>6.4. Если какое-либо положение настоящего Договора является или становится недействительным, это не затрагивает действительности остальных положений. В этом случае Стороны, насколько это допустимо в правовом отношении, попытаются договориться о замене недействительного положения, другим положением, позволяющим достичь сходный экономический результат.</p>
+            <p style="text-align: center; font-weight: bold;"><br>7. ПОРЯДОК РАЗРЕШЕНИЯ СПОРОВ</p>
+            <p>7.1. Стороны будут стремиться к разрешению всех возможных споров и разногласий, которые могут возникнуть по Договору или в связи с ним, путем переговоров.</p>
+            <p>7.2. Споры, не урегулированные путем переговоров, подлежат урегулированию в претензионном порядке, при этом срок ответа на претензию 10 (десять) суток с момента фактического получения Стороной претензии в письменном виде.</p>
+			<p>7.3. Споры, не урегулированные в претензионном порядке, передаются на рассмотрение Суд Республики Башкортостан по месту нахождения Исполнителя.</p>
+            <p style="text-align: center; font-weight: bold;"><br>8. ЗАКЛЮЧИТЕЛЬНЫЕ ПОЛОЖЕНИЯ</p>
+            <p>8.1. Договор вступает в силу с момента его подписания Сторонами. Договор составлен в двух экземплярах, по одному для каждой из Сторон.</p>
+            <p>8.2. К Договору прилагается перечень оказываемых услуг (Приложение 1).</p>
+			&nbsp;
+			<p style="text-align: center; font-weight: bold;">СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ</p>
+			<p>Заказчик дает свое согласие на обработку своих персональных данных и использование их в целях заключения гражданско-правового договора, к которым относятся:</p>
+			<p>- паспортные данные;</p>
+			<p>- год, месяц, дата и место рождения, а также иные данные, содержащиеся в удостоверении личности;</p>
+			<p>- данные о месте жительства, почтовом адресе, телефоне, адресе электронной почты;</p>
+			<p>- данные о контактных номерах телефона.</p>
+			<p>Настоящее согласие предоставляется на осуществление любых действий в отношении заказчика персональных данных, которые необходимы или желаемы для достижения указанной выше цели, включая (без ограничения) сбор, систематизацию, накопление, хранение, уточнение (обновление, изменение), использование, распространение (в том числе передачу третьим лицам), передачу персональных данных, а также осуществление любых иных действий с моими персональными данными, предусмотренных действующим законодательством Российской Федерации.</p>
+			<p>Заказчик проинформирован(а), Исполнитель гарантирует обработку моих персональных данных в соответствии с действующим законодательством Российской Федерации как неавтоматизированным, так и автоматизированным способами.</p>
+			<p>Данное согласие действует бессрочно с момента его выдачи.</p>
+			<p>Данное согласие может быть отозвано в любой момент по моему письменному заявлению.</p>
+			<p>Заказчик подтверждает, что, давая такое согласие, действует по собственной воле и в своих интересах.</p>
+			&nbsp;
+			<p style="text-align: center; font-weight: bold;"><br>АДРЕСА И РЕКВИЗИТЫ СТОРОН</p>
+			<p>&nbsp;</p>
+			<table border="1" cellpadding="10" cellspacing="0" class="requisites">
+				<tbody>
+					<tr>
+						<td style="vertical-align: top; width: 50%;">
+							<p align="center"><b>ИСПОЛНИТЕЛЬ:</b></p>
+							<p align="center"><b>Индивидуальный предприниматель</b></p>
+							<p align="center"><v>{{ postavshik.fio }}</v></p>
+							<p>Юр.адрес: <v>{{ postavshik.adres1 }}</v> <v>{{ postavshik.adres2 }}</v></p>
+							<p align="justify">Доставка корреспонденции: <v>{{ postavshik.adres1_post }}</v> <v>{{ postavshik.adres2_post }}</v></p>
+							<p>ИНН: <v>{{ postavshik.inn }}</v></p>
+							<p>ОГРНИП <v>{{ postavshik.ogrnip }}</v></p>
+							<p>р/с: <v>{{ postavshik.rs }}</v></p>
+							<p><v>{{ postavshik.bank1 }}</v> <v>{{ postavshik.bank2 }}</v></p>
+							<p>к/с: <v>{{ postavshik.ks }}</v></p>
+							<p>БИК <v>{{ postavshik.bik }}</v></p>
+							<p>Тел: 8(347) 299-11-70 (отдел по работе с клиентами)</p>
+							<p>8(937)325-79-75 (сервис)</p>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+							<p><b>_______________________/<v>{{ postavshik.inicialy }}</v>/</b></p>
+							<p>&nbsp;</p>
+						</td>
+						<td style="vertical-align: top; width: 50%;">
+							<p align="center"><b>ЗАКАЗЧИК:</b></p>
+							<p>&nbsp;</p>
+							<p>Фамилия&nbsp;<v>{{ dogovor.passport_familiya|default:'___________________________' }}</v></p>
+							<p>Имя&nbsp;<v>{{ dogovor.passport_imya|default:'_____________________________' }}</v></p>
+							<p>Отчество &nbsp;<v>{{ dogovor.passport_otchestvo|default:'_____________________________' }}</v></p>
+							<p>Дата рождения&nbsp;: <v>{{ dogovor.passport_birthday_date|default:'________________________' }}</v></p>
+							<p>Место рождения&nbsp;: <v>{{ dogovor.passport_birthday_place|default:'________________________' }}</v></p>
+							<p>Паспорт:&nbsp;серия&nbsp;{% if dogovor.passport_seria and dogovor.passport_nomer %}<v>{{ dogovor.passport_seria }}</v> № <v>{{ dogovor.passport_nomer }}</v>{% else %}_______________________________{% endif %}</p>
+							<p>выдан&nbsp;<v>{{ dogovor.passport_kem_vydan|default:'__________________________________ _____________________________________<br>__________________________________ _____________________________________<br>__________________________________ _____________________________________' }}</v></p>
+							<p>дата выдачи <v>{{ dogovor.passport_kogda_vydan|default:'_____________' }}</v> к/п <v>{{ dogovor.passport_kp|default:'_____________' }}</v></p>
+							<p>Адрес&nbsp;прописки: <v>{{ dogovor.adres_propiski|default:'___________________________ _________________________________________<br>___________________________ _________________________________________' }}</v></p>
+							<p>Адрес установки: <v>{{ dogovor.adres_ustanovki|default:'___________________________ _________________________________________<br>___________________________ _________________________________________' }}</v></p>
+							<p>Телефон:</p>
+							<p>1. <v>{{ froze.client.phone|default:'_______________________' }}</v></p>
+							<p>2. <v>{{ froze.client.phone_two|default:'_______________________' }}</v></p>
+							<p>e-mail:____________________________________</p>
+							<p>Согласие на смс рассылку<sup>1</sup>:______________________</p>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+							<p>_________________/ <v>{{ dogovor_more.inicialy|default:'_____________________' }}</v>/</p>
+							<p>&nbsp;</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			<table border="2" cellpadding="20" cellspacing="0" class="requisites">
+				<tbody>
+					<tr>
+						<td style="vertical-align: top; width: 100%;">
+							<p>&nbsp;</p>
+							<p style="font-size: 130%"> Уважаемый Заказчик! Обращаем Ваше внимание на то, что Исполнитель будет вести все переговоры по изделию, его изготовлению, назначению монтажных работ, обсуждать иные вопросы, возникающие по данному договору, а также обсуждать вопросы, касающиеся оплаты в рамках данного договора, только исключительно с самим Заказчиком, указанным в реквизитах сторон, или с его доверенным лицом, указанным в договоре в Примечании №1.</p>
+							<p style="font-size: 130%">  Любая информация по заказу, полученная от лиц, не указанных в Договоре, не подлежит рассмотрению Исполнителем.</p>
+							<p>&nbsp;</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+	</div>
+	<div class="c x1 y1 w2 h2">
+		<div class="t m0 x2 h3 y2 ff1 fs0 fc0 sc0 ls0 ws0">2</div>
+	</div>
+	<div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
+</div>
+<div id="pf3" class="pf w0 h0" data-page-no="3">
+	<div class="pc pc1 w0 h0">
+		<img class="bi x0 y0 w1 h1" src="{% static 'dogovora/dogovor_izgotovlenie_mebeli/bg1.png' %}" style="opacity:0.5;filter:alpha(opacity=50)">
+
+		<div class="t m0 x4 h5 y4 ff5 fs0 fc0 sc0 ls0 ws0" style="margin-left: -80px;">ПРИЛОЖЕНИЕ <b>1</b> К ДОГОВОРУ № {% if dogovor.nomer_dogovora %}<v>{{ dogovor.nomer_dogovora }}</v>{% else %}_____{% endif %}</div>
+		<div class="t m0 x5 h5 y5 fs0 fc0 sc0 ls0 ws0" style="margin-left: -80px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ВОЗМЕЗДНОГО ОКАЗАНИЯ УСЛУГ</b></div>
+		<div class="t m0 x6 h6 y6 ff7 fs0 fc0 sc0 ls0 ws0">г.<span class="ff8"> </span>Уфа</div>
+
+		<div class="t m0 x8 h6 ff8 fs0 fc0 sc0 ls0 ws0 pf1text">
+            <table border="1" cellpadding="20" cellspacing="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td style="vertical-align: top; width: 20%;"><b>Заказчик</b><p>&nbsp;</p></td>
+                        <td style="vertical-align: top; width: 80%;"><p>{% if dogovor.passport_familiya and dogovor.passport_imya and dogovor.passport_otchestvo %}<v>{{ dogovor.passport_familiya }}</v> <v>{{ dogovor.passport_imya }}</v> <v>{{ dogovor.passport_otchestvo }}</v>{% else %}____{% endif %}</p></td>
+                    </tr>
+                    <tr>
+                        <td><b>Адрес</b><p>&nbsp;</p></td>
+                        <td>&nbsp;<p><v>{{ dogovor.adres_ustanovki|default:'___________________________ _________________________________________<br>___________________________ _________________________________________' }}</v></p></td>
+                    </tr>
+                    <tr>
+                        <td><b>Телефон</b><p>&nbsp;</p></td>
+                        <td>&nbsp;<p>+<v>{{ froze.client.phone|default:'_______________________' }}</v></p></td>
+                    </tr>
+                    <tr>
+                        <td><b>Вид оплаты</b><p>&nbsp;</p></td>
+                        <td>&nbsp;<p><v>{% if froze.type_pay == 'cash' %}Оплата наличными{% elif froze.type_pay == 'cash_discont' %}Оплата наличными{% elif froze.type_pay == 'card' %}Оплата картой / Терминал{% elif froze.type_pay == 'installment' %}Рассрочка{% elif froze.type_pay == 'perechislenie' %}Перечисление{% elif froze.type_pay == 'internal_installment' %}Внутренняя рассрочка{% endif %}</v></p></td>
+                    </tr>
+                </tbody>
+            </table>
+			<p style="text-align: center; font-weight: bold;"><br>ПЕРЕЧЕНЬ ОКАЗЫВАЕМЫХ УСЛУГ</p>
+			<p>&nbsp;</p>
+			<table border="1" cellpadding="15" cellspacing="0" width="100%" class="uslugi">
+				<tbody>
+					<tr>
+						<td align="center" width="77%"><b>Наименование услуги</b></td>
+						<td align="center" width="11%"><b>Срок выполнения (сут.)</b></td>
+						<td align="center" width="11%"><b>Стоимость (руб.)</b></td>
+					</tr>
+					<tr>
+						<td>{{ uslugi_installation.1.usluga|default:'&nbsp;' }}</td>
+						<td>{{ uslugi_installation.1.deadline|default:'' }}</td>
+						<td>{{ uslugi_installation.1.tsena|default:'' }}</td>
+					</tr>
+					<tr>
+						<td>{{ uslugi_installation.2.usluga|default:'&nbsp;' }}</td>
+						<td>{{ uslugi_installation.2.deadline|default:'' }}</td>
+						<td>{{ uslugi_installation.2.tsena|default:'' }}</td>
+					</tr>
+					<tr>
+						<td>{{ uslugi_installation.3.usluga|default:'&nbsp;' }}</td>
+						<td>{{ uslugi_installation.3.deadline|default:'' }}</td>
+						<td>{{ uslugi_installation.3.tsena|default:'' }}</td>
+					</tr>
+					<tr>
+						<td>{{ uslugi_installation.4.usluga|default:'&nbsp;' }}</td>
+						<td>{{ uslugi_installation.4.deadline|default:'' }}</td>
+						<td>{{ uslugi_installation.4.tsena|default:'' }}</td>
+					</tr>
+					<tr>
+						<td>{{ uslugi_installation.5.usluga|default:'&nbsp;' }}</td>
+						<td>{{ uslugi_installation.5.deadline|default:'' }}</td>
+						<td>{{ uslugi_installation.5.tsena|default:'' }}</td>
+					</tr>
+					<tr>
+						<td>{{ uslugi_installation.6.usluga|default:'&nbsp;' }}</td>
+						<td>{{ uslugi_installation.6.deadline|default:'' }}</td>
+						<td>{{ uslugi_installation.6.tsena|default:'' }}</td>
+					</tr>
+					<tr>
+						<td>{{ uslugi_installation.7.usluga|default:'&nbsp;' }}</td>
+						<td>{{ uslugi_installation.7.deadline|default:'' }}</td>
+						<td>{{ uslugi_installation.7.tsena|default:'' }}</td>
+					</tr>
+					<tr>
+						<td>{{ uslugi_installation.8.usluga|default:'&nbsp;' }}</td>
+						<td>{{ uslugi_installation.8.deadline|default:'' }}</td>
+						<td>{{ uslugi_installation.8.tsena|default:'' }}</td>
+					</tr>
+					<tr>
+						<td>{{ uslugi_installation.9.usluga|default:'&nbsp;' }}</td>
+						<td>{{ uslugi_installation.9.deadline|default:'' }}</td>
+						<td>{{ uslugi_installation.9.tsena|default:'' }}</td>
+					</tr>
+					<tr>
+						<td>{{ uslugi_installation.10.usluga|default:'&nbsp;' }}</td>
+						<td>{{ uslugi_installation.10.deadline|default:'' }}</td>
+						<td>{{ uslugi_installation.10.tsena|default:'' }}</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="left"><b>ИТОГО :     {% if uslugi_installation.itogo_summa %}<v>{{ uslugi_installation.itogo_summa|default:'' }}</v> (<v>{{ uslugi_installation.itogo_summa_propisyu }}</v>){% else %}_________________________________________(________________________________________________________________){% endif %} руб. с ндс</b></td>
+						<td><v>{{ uslugi_installation.itogo_summa|default:'' }}</v></td>
+					</tr>
+				</tbody>
+			</table>
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			<table border="0" cellpadding="20" cellspacing="0" class="requisites" width="100%">
+				<tbody>
+					<tr>
+						<td style="vertical-align: top; width: 59%;">
+							<p>Исполнитель <b>_______________________/<v>{{ postavshik.inicialy }}</v>/</b></p>
+						</td>
+						<td style="vertical-align: top;">
+							<p class="no-border">Заказчик <b>_______________________/ <v>{{ dogovor_more.inicialy|default:'_______________________' }}</v>/</b></p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
+</div>
+</div><div class="loading-indicator"></div>
+</body>
+<script>window.print();</script>
+<style>
+	.zakazchik p {
+		border-bottom: solid 1px rgb(0,0,0);
+	}
+	p.no-border {
+		border-bottom: none;
+	}
+	.t.m0.x8.h6.ff8.fs0.fc0.sc0.ls0.ws0.page_without_logo {
+		margin-top: -22px;
+		padding-top: 0 !important;
+	}
+	img.logo {
+		width: 87px;
+	}
+	.pf.w0.h0 .t.m0.x8.h6.ff8.fs0.fc0.sc0.ls0.ws0 {
+		width: 2275px;
+		white-space: normal;
+		line-height: 39.5px;
+		text-align: justify;
+		left: 14.000000px;
+		padding-top: 25px;
+	}
+	.pf.w0.h0 .t.m0.x8.h6.ff8.fs0.fc0.sc0.ls0.ws0 p {
+		text-indent: 143.650001px;
+		margin: 0;
+	}
+	.pf1text {
+		padding-top: 58px !important;
+	}
+	@media print{
+		img.logo {
+			width: 155px;
+		}
+		.pf.w0.h0 .t.m0.x8.h6.ff8.fs0.fc0.sc0.ls0.ws0 {
+			width: 4044.620px;line-height: 65.5px;
+			left: 18.666667pt;
+			padding-top: 42px;
+		}
+		.pf.w0.h0 .t.m0.x8.h6.ff8.fs0.fc0.sc0.ls0.ws0 p {
+			text-indent: 243.650001px;
+			margin: 0;
+		}
+		.pf1text {
+			padding-top: 102px !important;
+		}
+	}
+	v {
+		color: black;
+		font-weight: bold;
+	}
+	.requisites p {
+		text-indent: 0px !important;
+	}
+</style>
+</html>
