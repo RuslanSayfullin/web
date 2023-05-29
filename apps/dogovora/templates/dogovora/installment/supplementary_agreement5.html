@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8"/>
+	<link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}" type="image/x-icon" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<link rel="stylesheet" href="{% static 'dogovora/dogovor_izgotovlenie_mebeli/base.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'dogovora/dogovor_izgotovlenie_mebeli/fancy.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'dogovora/dogovor_izgotovlenie_mebeli/main.css' %}"/>
+	<link rel="stylesheet" href="{% static 'dogovora/dogovora_original_docx_view.css' %}"/>
+	<script src="{% static 'dogovora/dogovor_izgotovlenie_mebeli/compatibility.min.js' %}"></script>
+	<script src="{% static 'dogovora/dogovor_izgotovlenie_mebeli/theViewer.min.js' %}"></script>
+	<script>try{theViewer.defaultViewer = new theViewer.Viewer({});}catch(e){}</script>
+	<title>График платежей</title>
+</head>
+<body>
+<div id="sidebar"><div id="outline"></div></div>
+<div id="page-container">
+<div id="pf1" class="pf w0 h0" data-page-no="1">
+	<div class="pc pc1 w0 h0">
+		<img class="bi x0 y0 w1 h1 logo" src="{% static 'dogovora/02_logo.jpg' %}" style="opacity:0.5;filter:alpha(opacity=50)">
+		<div class="t m0 x8 h6 ff8 fs0 fc0 sc0 ls0 ws0 page_without_logo">
+			<p>&nbsp;</p>
+			<p style="text-align: right; font-weight: bold;">Приложение</p>
+			<p style="text-align: right; font-weight: bold;">к Договору купли-продажи </p>
+			<p style="text-align: right; font-weight: bold;">№ {% if dogovor.nomer_dogovora %}<v>{{ dogovor.nomer_dogovora }}</v>{% else %}_____{% endif %} А/В</p>
+			<p style="text-align: right; font-weight: bold;"><span class="ff8">от {% if dogovor.data_podpisaniya %}«<v>{{ dogovor.data_podpisaniya|date:'j' }}</v>» <v>{{ dogovor_more.data_podpisaniya_month }}</v> <v>{{ dogovor.data_podpisaniya|date:'Y' }}</v>{% else %}«____» _____________ 20____{% endif %}</span>г.</p>
+			<p>&nbsp;</p><p>&nbsp;</p>
+			<p align="center"><b>Дополнительное соглашение №{% if dogovor.nomer_dogovora %}<v>{{ dogovor.nomer_dogovora }}</v>{% else %}_________{% endif %} А/В</b></p>
+			<p align="center"><b>о предоставлении отсрочки (рассрочки) платежа</b></p>
+			<p><b><span class="ff8"> РБ, г. Уфа</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="ff8">{% if dogovor.data_podpisaniya %}  «<v>{{ dogovor.data_podpisaniya|date:'j' }}</v>» <v>{{ dogovor_more.data_podpisaniya_month }}</v> <v>{{ dogovor.data_podpisaniya|date:'Y' }}</v>{% else %}«____» _____________ 20____{% endif %}</span></b></p>
+			<p>&nbsp;</p><p>&nbsp;</p>
+			<p><b>Индивидуальный предприниматель <v>{{ postavshik.fio }}</v></b>, именуемый в дальнейшем «Продавец» с одной стороны и {% if dogovor.passport_familiya and dogovor.passport_imya and dogovor.passport_otchestvo %}<v>{{ dogovor.passport_familiya }}</v> <v>{{ dogovor.passport_imya }}</v> <v>{{ dogovor.passport_otchestvo }}</v>{% else %}_______________________________________________________________________________________________{% endif %}, именуемый в дальнейшем «Покупатель», с другой стороны, вместе именуемые «Стороны», заключили настоящее Дополнительное соглашение о нижеследующем:</p>
+			<p>&nbsp;</p>
+			<p>1. Стороны в рамках действия Договора купли-продажи (далее - Товар)  № {% if dogovor.nomer_dogovora %}<v>{{ dogovor.nomer_dogovora }}</v>{% else %}_________{% endif %} А/В от <span class="ff8">{% if dogovor.data_podpisaniya %}  «<v>{{ dogovor.data_podpisaniya|date:'j' }}</v>» <v>{{ dogovor_more.data_podpisaniya_month }}</v> <v>{{ dogovor.data_podpisaniya|date:'Y' }}</v>{% else %}«____» _____________ 20____{% endif %}</span> на основании ст. 489 Гражданского кодекса Российской Федерации договорились о новых условиях оплаты Изделия с рассрочкой платежа, в том числе:</p>
+			<p>1.1. <b>Цена Товара по заключенному Договору составляет {% if dogovor.vsego_k_oplate %}<v>{{ dogovor_more.vsego_k_oplate }}</v> (<v>{{ dogovor_more.vsego_k_oplate_propisyu }}</v>) <v>{{ dogovor_more.vsego_k_oplate_the_word }}</v>{% else %}________________ (______________________________________) рублей{% endif %} 00 коп.</b></p>
+			<p>1.2. Покупатель обязуется в день подписания Договора внести предоплату(авансовый платеж) в размере не менее <v>{{ dogovor_more.oplata_predoplata_procent|default:'70' }}%</v> от общей стоимости мебели, что составляет в денежном выражении {% if dogovor.oplata_predoplata_rub and dogovor.vsego_k_oplate %}<v>{{ dogovor_more.oplata_predoplata_rub }}</v> (<v>{{ dogovor_more.oplata_predoplata_rub_propisyu }}</v>) <v>{{ dogovor_more.oplata_predoplata_rub_the_word }}</v> {% else %}________________ (______________________________________) рублей{% endif %} 00 коп.</p>
+			<p>1.3. <i> Оплата оставшейся части, что составляет в денежном выражении {% if dogovor.oplata_predoplata_rub and dogovor.vsego_k_oplate %} <v>{{ dogovor_more.oplata_ostatok_rub }}</v> (<v>{{ dogovor_more.oplata_ostatok_rub_propisyu }}</v>) {% else %} _________ (______________________________) {% endif %} рублей 00 коп., оплачивается Покупателем ежемесячно равными долями в течение {% if dogovor.installment_plan %} <v>{{ dogovor.installment_plan }}</v>  {% else %}________________ {% endif %} месяцев, согласно следующего графика платежей:</i></p>
+			<p>&nbsp;</p>
+			<p>- до {% if dogovor_more.data_platejya_pervyi %} «<v>{{ dogovor_more.data_platejya_pervyi|date:'j' }}</v>» <v>{{ dogovor_more.data_platejya_pervyi_month }}</v> <v>{{ dogovor_more.data_platejya_pervyi|date:'Y' }}</v> {% else %}«___» ________ 202_г.{% endif %} ежемесячный платеж в размере {% if dogovor_more.platej_pervyi_sum %} }<v>{{ dogovor_more.platej_pervyi_sum }}</v> (<v>{{ dogovor_more.platej_pervyi_rub_propisyu }}</v> рублей){% else %}______ (________________ рублей) {% endif %} 00 копеек;</p>
+			<p>- до {% if dogovor_more.data_platejya_vtoroy %} «<v>{{ dogovor_more.data_platejya_vtoroy|date:'j' }}</v>» <v>{{ dogovor_more.data_platejya_vtoroy_month }}</v> <v>{{ dogovor_more.data_platejya_vtoroy|date:'Y' }}</v> {% else %}«___» ________ 202_г.{% endif %} ежемесячный платеж в размере {% if dogovor_more.platej_vtoroy_sum %} }<v>{{ dogovor_more.platej_vtoroy_sum }}</v> (<v>{{ dogovor_more.platej_vtoroy_rub_propisyu }}</v> рублей){% else %}______ (________________ рублей) {% endif %} 00 копеек;</p>
+			<p>- до {% if dogovor_more.data_platejya_tretii %} «<v>{{ dogovor_more.data_platejya_tretii|date:'j' }}</v>» <v>{{ dogovor_more.data_platejya_tretii_month }}</v> <v>{{ dogovor_more.data_platejya_tretii|date:'Y' }}</v> {% else %}«___» ________ 202_г.{% endif %} ежемесячный платеж в размере {% if dogovor_more.platej_tretii_sum %} }<v>{{ dogovor_more.platej_tretii_sum }}</v> (<v>{{ dogovor_more.platej_tretii_rub_propisyu }}</v> рублей){% else %}______ (________________ рублей) {% endif %} 00 копеек;</p>
+			<p>- до {% if dogovor_more.data_platejya_chetvertyi %} «<v>{{ dogovor_more.data_platejya_chetvertyi|date:'j' }}</v>» <v>{{ dogovor_more.data_platejya_chetvertyi_month }}</v> <v>{{ dogovor_more.data_platejya_chetvertyi|date:'Y' }}</v> {% else %}«___» ________ 202_г.{% endif %} ежемесячный платеж в размере {% if dogovor_more.platej_chetvertyi_sum %} }<v>{{ dogovor_more.platej_chetvertyi_sum }}</v> (<v>{{ dogovor_more.platej_chetvertyi_rub_propisyu }}</v> рублей){% else %}______ (________________ рублей) {% endif %} 00 копеек;</p>
+			<p>- до {% if dogovor_more.data_platejya_pyatii %} «<v>{{ dogovor_more.data_platejya_pyatii|date:'j' }}</v>» <v>{{ dogovor_more.data_platejya_pyatii_month }}</v> <v>{{ dogovor_more.data_platejya_pyatii|date:'Y' }}</v> {% else %}«___» ________ 202_г.{% endif %} ежемесячный платеж в размере {% if dogovor_more.platej_pyatii_sum %} }<v>{{ dogovor_more.platej_pyatii_sum }}</v> (<v>{{ dogovor_more.platej_pyatii_rub_propisyu }}</v> рублей){% else %}______ (________________ рублей) {% endif %} 00 копеек;</p>
+			<p>- до {% if dogovor_more.data_platejya_chestoy %} «<v>{{ dogovor_more.data_platejya_chestoy|date:'j' }}</v>» <v>{{ dogovor_more.data_platejya_chestoy_month }}</v> <v>{{ dogovor_more.data_platejya_chestoy|date:'Y' }}</v> {% else %}«___» ________ 202_г.{% endif %} ежемесячный платеж в размере {% if dogovor_more.platej_chestoy_sum %} }<v>{{ dogovor_more.platej_chestoy_sum }}</v> (<v>{{ dogovor_more.platej_chestoy_rub_propisyu }}</v> рублей){% else %}______ (________________ рублей) {% endif %} 00 копеек;</i></p>
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			<p>1.4. Покупатель может в любое время перечислить всю оставшуюся часть от стоимости Товара досрочно.</p>
+			<p>2. В случае когда Покупатель не исполняет обязанность по оплате переданного Товара в установленный срок по оплате ежемесячного платежа настоящего Соглашения, то на просроченную сумму подлежат уплате проценты в соответствии со ст. 395 Гражданского кодекса Российской Федерации со дня, когда по Договору Товар должен был быть оплачен, до дня оплаты Товара Покупателем.</p>
+			<p>3. С момента передачи Товара Покупателю и до его оплаты Товар, проданный с рассрочкой, признается находящимся в залоге у Продавца для обеспечения исполнения Покупателем его обязанности по оплате Товара.</p>
+			<p>4. В остальном условия Договора купли-продажи от № {% if dogovor.nomer_dogovora %}<v>{{ dogovor.nomer_dogovora }}</v>{% else %}_________{% endif %} А/В от {% if dogovor.data_podpisaniya %}«<v>{{ dogovor.data_podpisaniya|date:'j' }}</v>» <v>{{ dogovor_more.data_podpisaniya_month }}</v> <v>{{ dogovor.data_podpisaniya|date:'Y' }}</v>{% else %}«____» _____________ 20____{% endif %}</span>г. остаются неизменными.</p>
+			<p>5. Настоящее Дополнительное соглашение вступает в силу с момента его подписания Сторонами и является неотъемлемой частью Договора № {% if dogovor.nomer_dogovora %}<v>{{ dogovor.nomer_dogovora }}</v>{% else %}_________{% endif %} А/В от {% if dogovor.data_podpisaniya %}«<v>{{ dogovor.data_podpisaniya|date:'j' }}</v>» <v>{{ dogovor_more.data_podpisaniya_month }}</v> <v>{{ dogovor.data_podpisaniya|date:'Y' }}</v>{% else %}«____» _____________ 20____{% endif %}</span>г.</p>
+			<p>6. Настоящее Дополнительное соглашение составлено в двух экземплярах, обладающих равной юридической силой, по одному экземпляру для каждой из Сторон.</p>
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			<table border="1" cellpadding="10" cellspacing="0" class="requisites" style="margin-left: 0%;">
+				<tbody>
+					<tr>
+						<td style="vertical-align: top; width: 50%;">
+							<p align="center"><b>ПРОДАВЕЦ:</b></p>
+							<p align="center"><b>Индивидуальный предприниматель</b></p>
+							<p align="center"><v>{{ postavshik.fio }}</v></p>
+							<p>Юр.адрес: <v>{{ postavshik.adres1 }}</v> <v>{{ postavshik.adres2 }}</v></p>
+							<p align="justify">Доставка корреспонденции: <v>{{ postavshik.adres1_post }}</v> <v>{{ postavshik.adres2_post }}</v></p>
+							<p>ИНН: <v>{{ postavshik.inn }}</v></p>
+							<p>ОГРНИП <v>{{ postavshik.ogrnip }}</v></p>
+							<p>р/с: <v>{{ postavshik.rs }}</v></p>
+							<p><v>{{ postavshik.bank1 }}</v> <v>{{ postavshik.bank2 }}</v></p>
+							<p>к/с: <v>{{ postavshik.ks }}</v></p>
+							<p>БИК <v>{{ postavshik.bik }}</v></p>
+							<p>Тел: 8 (347) 299-11-70 (отдел по работе с клиентами)</p>
+							<p>8 (937) 325-79-75 (сервис)</p>
+							<p>&nbsp;</p>
+							<p><b>_______________________/ <v>{{ postavshik.inicialy }}</v>/</b></p>
+							<p>&nbsp;</p>
+						</td>
+						<td style="vertical-align: top; width: 50%;">
+							<p align="center"><b>ПОКУПАТЕЛЬ:</b></p>
+							<p>Фамилия&nbsp;<v>{{ dogovor.passport_familiya|default:'___________________________' }}</v></p>
+							<p>Имя&nbsp;<v>{{ dogovor.passport_imya|default:'_____________________________' }}</v></p>
+							<p>Отчество &nbsp;<v>{{ dogovor.passport_otchestvo|default:'_____________________________' }}</v></p>
+							<p>Дата рождения&nbsp;: <v>{{ dogovor.passport_birthday_date|default:'________________________' }}</v></p>
+							<p>Паспорт:&nbsp;серия&nbsp;{% if dogovor.passport_seria and dogovor.passport_nomer %}<v>{{ dogovor.passport_seria }}</v> № <v>{{ dogovor.passport_nomer }}</v>{% else %}_______________________________{% endif %}</p>
+							<p>выдан&nbsp;<v>{{ dogovor.passport_kem_vydan|default:'__________________________________ _____________________________________<br>__________________________________ _____________________________________<br>__________________________________ _____________________________________' }}</v></p>
+							<p>дата выдачи <v>{{ dogovor.passport_kogda_vydan|default:'_____________' }}</v> к/п <v>{{ dogovor.passport_kp|default:'_____________' }}</v></p>
+							<p>Адрес&nbsp;прописки: <v>{{ dogovor.adres_propiski|default:'___________________________ _________________________________________<br>___________________________ _________________________________________' }}</v></p>
+							<p>Адрес доставки: <v>{{ dogovor.adres_ustanovki|default:'___________________________ _________________________________________<br>___________________________ _________________________________________' }}</v></p>
+							<p>Телефон:</p>
+							<p>1. <v>{{ froze.client.phone|default:'_______________________' }}</v></p>
+							<p>2. <v>{{ froze.client.phone_two|default:'_______________________' }}</v></p>
+							<p>e-mail:____________________________________</p>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+							<p>Подпись ____________/ <v>{{ dogovor_more.inicialy|default:'_______________' }}</v>/</p>
+							<p>&nbsp;</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="c x1 y1 w2 h2">
+		<div class="t m0 x2 h3 y2 ff1 fs0 fc0 sc0 ls0 ws0">1</div>
+	</div>
+	<div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
+</div>
+
+</body>
+
+<script>window.print();</script>
+<style>
+	.zakazchik p {
+		border-bottom: solid 1px rgb(0,0,0);
+	}
+	p.no-border {
+		border-bottom: none;
+	}
+	.t.m0.x8.h6.ff8.fs0.fc0.sc0.ls0.ws0.page_without_logo {
+		margin-top: -22px;
+		padding-top: 0 !important;
+	}
+	img.logo {
+		width: 111px;
+	}
+	.pf.w0.h0 .t.m0.x8.h6.ff8.fs0.fc0.sc0.ls0.ws0 {
+		width: 2275px;
+		white-space: normal;
+		line-height: 39.5px;
+		text-align: justify;
+		left: 14.000000px;
+		padding-top: 25px;
+	}
+	.pf.w0.h0 .t.m0.x8.h6.ff8.fs0.fc0.sc0.ls0.ws0 p {
+		text-indent: 143.650001px;
+		margin: 0;
+	}
+	.pf1text {
+		padding-top: 58px !important;
+	}
+	@media print{
+		img.logo {
+			width: 198px;
+		}
+		.pf.w0.h0 .t.m0.x8.h6.ff8.fs0.fc0.sc0.ls0.ws0 {
+			width: 4044.620px;line-height: 65.5px;
+			left: 18.666667pt;
+			padding-top: 42px;
+		}
+		.pf.w0.h0 .t.m0.x8.h6.ff8.fs0.fc0.sc0.ls0.ws0 p {
+			text-indent: 243.650001px;
+			margin: 0;
+		}
+		.pf1text {
+			padding-top: 102px !important;
+		}
+	}
+	v {
+		color: black;
+		font-weight: bold;
+	}
+	.requisites p {
+		text-indent: 0px !important;
+	}
+</style>
+</html>

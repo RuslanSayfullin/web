@@ -1,0 +1,52 @@
+{% extends "dogovora/view_dogovor_base.html" %}
+{% load static %}
+
+{% block content_dogovor %}
+<div class="container">
+
+{% if froze.status == 'pay' %}
+<div class="row">
+	<div class="col-md-12">
+		<div class="alert alert-danger">Внесение правок в договор не доступно, т.к. выставлен статус &laquo;Оплачен&raquo;<br /></div>
+	</div>
+</div>
+{% endif %}
+
+<div class="row">
+<div class="col-md-12">
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+	<h3 class="text-muted">
+	СПИСОК ВЫПОЛНЯЕМЫХ РАБОТ
+	</h3>
+	<form role="form" class="form-horizontal dogovora" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th class="col-md-1">№</th>
+					<th class="col-md-9">Список выполняемых работ</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for key, num in work_performed.items %}
+					<tr>
+						<td>{{ key }}</td>
+						<td><input value="{{ num.work_performed_list|default:'' }}" class="form-control" name="work_performed_list_{{ key }}" placeholder="Список работ {{ key }}" type="text"></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="form-group text-left">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-success">Сохранить данные по списку работ</button>
+			</div>
+		</div>
+	</form>
+	</div>
+</div>
+</div>
+</div>
+
+</div>
+{% endblock content_dogovor %}
