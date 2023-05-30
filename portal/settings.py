@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'debug_toolbar',
+    'drf_yasg',  # Необходим для  swagger
 ] + [
     'apps',
     'apps.api',
