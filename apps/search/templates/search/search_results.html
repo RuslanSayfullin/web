@@ -1,28 +1,22 @@
 {% load pretty_number_phone from froze %}
 
-		{% for client in client_items %}
-		  {% with froze=client.froze_set.all.first %}
-		    {% if froze.uuid %}
-		      <div class="col-md-6">
-		        <div class="panel panel-default">
-		          <div class="panel-body">
-		            <ul class="list-unstyled">
-		              <li><strong>{{ client.name }}</strong></li>
-		              {% if froze.dogovor.nomer_dogovora %}<li class="text-info">Номер договора: {{ froze.dogovor.nomer_dogovora }}</li>{% endif %}
-		              <li>{{ client.phone|pretty_number_phone }}&nbsp;&nbsp;&nbsp;&nbsp;{% if client.phone_two %}
-		                {{ client.phone_two|pretty_number_phone }}{% endif %}</li>
-		              <li>{{ client.address }}, кв. {{ client.room }}</li>
+		{% for froze in froze_items %}
+			<div class="col-md-6">
+				<div class="card">
+		          	<div class="card-body">
+		            	<ul class="list-unstyled">
+							<li><strong>{{ froze.name }}</strong></li>
+							{% if froze.dogovor.nomer_dogovora %}<li class="text-info">Номер договора: {{ froze.dogovor.nomer_dogovora }}</li>{% endif %}
+							<li>{{ froze.phone|pretty_number_phone }}</li>
+							<li>{{ froze.address }}</li>
 				            <li>Тип изделия: {{ froze.type_production }}</li>
-		            </ul>
-		          </div>
-		          <div class="panel-footer">
-		            {% if perms.froze.vozm_prosmatrivat_zayavki_no_ne_redaktirovat_zayavki or perms.froze.vozm_prosmatrivat_lyubye_zayavki_no_ne_redaktirovat_zayavki %}
-		              <a target="_blank" href="{% url "froze_uuid" froze.designer froze.uuid %}" class="btn btn-default">Подробнее</a>
-		            {% endif %}
-		            <p class="pull-right"><b>Дизайнер</b>: {{ froze.designer.get_full_name }}</p>
-		          </div>
-		        </div>
-		      </div>
-		    {% endif %}
-		  {% endwith %}
+						</ul>
+					</div>
+					<div class="panel-footer">
+						<a target="_blank" href="{% url "froze_uuid" froze.uuid %}" class="btn btn-secondary">Подробнее</a>
+						<p class="pull-right"><b>Создатель</b>: {{ froze.owner.get_full_name }}</p>
+					</div>
+				</div>
+				<br>
+			</div>
 		{% endfor %}
