@@ -124,7 +124,7 @@ AUTHENTICATION_BACKENDS = (
 
 OAUTH_MAIL_RU_CLIENT_ID = client_id
 OAUTH_MAIL_RU_CLIENT_SECRET = client_secret
-OAUTH_MAIL_RU_REDIRECT_URI = 'http://chiffre.tech/auth/mailru/'
+OAUTH_MAIL_RU_REDIRECT_URI = 'http://portal-re-formaufa.ru/auth/mailru/'
 
 LOGO_NAME = "Ре-Форма"
 
