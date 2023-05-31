@@ -93,15 +93,15 @@ class DogovorIndiForm(forms.Form):
     stoimost_dostavki_vne_ufa = forms.IntegerField(
         required=False, min_value=0, max_value=2147483647, label='Стоимость доставки',
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': ''}))
-    data_podpisaniya = forms.DateField(
-        required=False, input_formats=['%d.%m.%Y'], initial="", label='Дата подписания договора',
-        widget=forms.TextInput(attrs={'class': 'form-control dogovora_dates', 'placeholder': '01.06.2022', 'data-inputmask-alias': 'dd.mm.yyyy'}))
     srok_ispolneniya_rabot = forms.IntegerField(
         required=False, max_value=32767, min_value=0, label='Срок исполнения работ',
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '30'}))
     installment_plan = forms.IntegerField(
         required=False, max_value=32767, min_value=0, label='Срок внутренней рассрочки',
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '6'}))
+    data_podpisaniya = forms.DateField(
+        required=False, input_formats=['%d.%m.%Y'], initial="", label='Дата подписания',
+        widget=forms.TextInput(attrs={'class': 'form-control dogovora_dates', 'placeholder': '01.06.2022', 'data-inputmask-alias': 'dd.mm.yyyy'}))
     nachalo_rabot_data = forms.DateField(
         required=False, input_formats=['%d.%m.%Y'], initial="", label='Начало работ',
         widget=forms.TextInput(attrs={'class': 'form-control dogovora_dates', 'placeholder': '01.06.2022', 'data-inputmask-alias': 'dd.mm.yyyy'}))

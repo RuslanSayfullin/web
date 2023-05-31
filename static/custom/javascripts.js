@@ -185,6 +185,20 @@ $(document).ready(function() {
 			$('#id_drugoy_dogovor').parent().parent().hide();
 		}
 	})
+	// Поле для указания срока внутренней рассрочки, отображаеться только в случае выбора типа оплаты "Внутренняя рассрочка"
+	if ($("#id_sposob_oplaty").val() != "internal_installment") {
+		$('#id_installment_plan').parent().parent().hide();
+	}
+	$('#id_installment_plan').on('change', function() {
+		if ($("#id_sposob_oplaty").val() == "internal_installment") {
+			$('#id_installment_plan').parent().parent().show();
+			$('#id_installment_plan').prop('required',true);
+		} else {
+			$('#id_installment_plan').parent().parent().hide();
+			$('#id_installment_plan').prop('required',false);
+			$('#id_installment_plan').val('');
+		}
+	})
 });
 
 function drugoy_dogovor(csrf_token, self_id, id_dogovora_na_izgotovlenie_mebeli){

@@ -48,20 +48,23 @@
 							<div class="form-group{% if field.errors %} has-error{% endif %}">
 								<div class="container">
 									<div class="row">
-										<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 										{% if field.auto_id == 'id_tip_dogovora' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-9">
 												{{ field }}
 											</div>
 										{% elif field.auto_id == 'id_technics_sroki_dostavki_tehniki' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-9">
 												{{ field }}
 											</div>
 										{% elif field.auto_id == 'id_technics_sroki_dostavki_tehniki_v_dnyah' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-9">
 												{{ field }}
 											</div>
 										{% elif field.auto_id == 'id_nomer_dogovora' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-9">
 												{{ field }}
 												{% if create_or_update == 'create' %}
@@ -96,6 +99,7 @@
 												{% endif %}
 											</div>
 										{% elif field.auto_id == 'id_drugoy_dogovor' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="input-group col-sm-9">
 												{{ field }}
 												{% if dogovora_na_izgotovlenie_mebeli and dogovor.kakoy_tip_dogovora in "technic_2021_04,matrasy_2021_06,carpets_and_rugs_ip,carpets_and_rugs_ooo-refabrik,mattresses_ooo-refabrik,m_householdtec,m_mattresses,entity_householdtec,juridical_moscow_ooo-refabrik_householdtec,entity_mattresses,juridical_ooo-refabrik_mattresses,entity_ufa_householdtec,entity_ufa_ooo-refabrik_householdtec,entity_ufa_mattresses,entity_ufa_carpets_and_rugs,entity_ufa_ooo-refabrik_mattresses" %}
@@ -112,42 +116,52 @@
 												{% endif %}
 											</div>
 										{% elif field.auto_id == 'id_sposob_oplaty' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-9">
 												{{ field }}
 											</div>
 										{% elif field.auto_id == 'id_tip_opisanie_izdeliya' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-9">
 												{{ field }}
 											</div>
 										{% elif field.auto_id == 'id_passport_birthday_date' or field.auto_id == 'id_passport_kogda_vydan' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-{% if field.auto_id == 'id_passport_birthday_date' or field.auto_id == 'id_passport_kogda_vydan' %}3{% else %}9{% endif %}">
 												{{ field }}
 											</div>
 										{% elif field.auto_id == 'id_passport_birthday_place' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-9">
 												{{ field }}
 											</div>
 										{% elif field.auto_id == 'id_passport_seria' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-9">
 												{{ field }}
 											</div>
 										{% elif field.auto_id == 'id_passport_nomer' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-9">
 												{{ field }}
 											</div>
 										{% elif field.auto_id == 'id_passport_kem_vydan' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-9">
 												{{ field }}
 											</div>
 										{% elif field.auto_id == 'id_ passport_kogda_vydan' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-9">
 												{{ field }}
 											</div>
 										{% elif field.auto_id == 'id_passport_kp' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-9">
 												{{ field }}
 											</div>
 										{% elif field.auto_id == 'id_adres_propiski' or field.auto_id == 'id_adres_ustanovki' or field.auto_id == 'id_passport_familiya' or field.auto_id == 'id_passport_imya' or field.auto_id == 'id_passport_otchestvo' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-9">
 												{{ field }}
 												<p>
@@ -158,17 +172,69 @@
 													{% endif %}
 												</p>
 											</div>
+										{% elif field.auto_id == 'id_vsego_k_oplate' %}
+											<div class="input-group mb-3">
+											  <span class="input-group-text">Всего к оплате в рублях&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+											  {{ field }}
+											  <span class="input-group-text">.00 руб.</span>
+											</div>
+										{% elif field.auto_id == 'id_oplata_predoplata_rub' %}
+											<div class="input-group mb-3">
+											  	<span class="input-group-text">Сумма предоплаты в рублях</span>
+											  		{{ field }}
+											  	<span class="input-group-text">.00 руб.</span>
+											</div>
 
-										{% elif field.auto_id == 'id_vsego_k_oplate' or field.auto_id == 'id_oplata_predoplata_rub' or field.auto_id == 'id_summa_za_soputstv_uslugi' or field.auto_id == 'id_stoimost_dostavki_vne_ufa'%}
-											<div class="col-sm-3 show-tick">
-												{{ field }}
-												<label class="input-group-text">.00 руб.</label>
+											<div class="form-group oplata_ostatok_procent_form_group">
+												<div class="col-sm-3 input-group">
+													<span class="input-group-text">Сумма предоплаты в рублях</span>
+													<input class="form-control" id="id_oplata_ostatok_procent" placeholder="30" value="" type="text" title="Считается автоматически после заполнения &laquo;Всего к оплате в рублях&raquo; и &laquo;Сумма предоплаты в рублях&raquo;" disabled>
+													<label class="input-group-text">%</label>
+												</div>
+												<p class="text-muted">&nbsp;При печати будет округлено до целого числа</p>
+											</div>
+											<div class="form-group oplata_ostatok_rub_form_group">
+													<div class="col-sm-3 input-group specials">
+														<span class="input-group-text">Сумма, остаток в рублях&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+														<input class="form-control" id="id_oplata_ostatok_rub" placeholder="30000" value="" type="text" title="Считается автоматически после заполнения &laquo;Всего к оплате в рублях&raquo; и &laquo;Сумма предоплаты в рублях&raquo;" disabled>
+														<label class="input-group-text">.00 руб.</label>
+													</div>
+											</div>
+										{% elif field.auto_id == 'id_summa_za_soputstv_uslugi' %}
+											<div class="input-group mb-3">
+											  	<span class="input-group-text">Сумма за сопутств.услуги (если они есть)</span>
+											  		{{ field }}
+											  	<span class="input-group-text">.00 руб.</span>
+											</div>
+										{% elif field.auto_id == 'id_stoimost_dostavki_vne_ufa' %}
+											<div class="input-group mb-3">
+											  	<span class="input-group-text">Стоимость доставки&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+											  		{{ field }}
+											  	<span class="input-group-text">..00 руб.</span>
 											</div>
 										{% elif field.auto_id == 'id_naimenov_soputstv_izdeliy' %}
-											<div class="col-sm-9">
-												{{ field }}
+											<div class="input-group mb-3 specials2">
+											  	<span class="input-group-text">Наименования сопутствующих изделий&nbsp;&nbsp;</span>
+											  		{{ field }}
 											</div>
+										{% elif field.auto_id == 'id_srok_ispolneniya_rabot' %}
+											<div class="input-group mb-3">
+												<span class="input-group-text">Срок исполнения работ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+												  {{ field }}
+												<span class="input-group-text">дней</span>
+											</div>
+										{% elif field.auto_id == 'id_installment_plan' %}
+											<div class="input-group mb-3">
+												<span class="input-group-text">Срок внутренней рассрочки</span>
+												  {{ field }}
+												<span class="input-group-text">месяцев</span>
+												{% if froze.type_pay == 'internal_installment' and dogovor.installment_plan == 0 %}
+													<p class="js_link text-danger">Срок рассрочки не должен быть больше 6 месяцев и не меньше 1</p>
+												{% endif %}
+											</div>
+
 										{% elif field.auto_id == 'id_data_podpisaniya' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-3">
 												<!--Проверка, дата подписания, не может быть раньше текущей даты-->
 												{{ field }}
@@ -179,36 +245,23 @@
 														{% endif %}
 													{% endif %}
 											</div>
-										{% elif field.auto_id == 'id_srok_ispolneniya_rabot' %}
-											<div class="col-sm-3">
-												{{ field }}
-												<label class="input-group-text">дней</label>
-											</div>
-										{% elif field.auto_id == 'id_installment_plan' %}
-											<div class="col-sm-3">
-												{{ field }}
-													{% if froze.type_pay == 'internal_installment' and dogovor.installment_plan == 0 %}
-														<p class="js_link text-danger">Срок рассрочки не должен быть больше 6 месяцев и не меньше 1</p>
-													{% endif %}
-												<label class="input-group-text">месяцев</label>
-											</div>
-										{% elif field.auto_id == 'id_data_podpisaniya' %}
-											<div class="col-sm-3">
-												{{ field }}
-											</div>
 										{% elif field.auto_id == 'id_nachalo_rabot_data' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-3">
 												{{ field }}
 											</div>
 										{% elif field.auto_id == 'id_okonchanie_rabot_data' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-3">
 												{{ field }}
 											</div>
 										{% elif field.auto_id == 'id_doverennye_lica' %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-9">
 												{{ field }}
 											</div>
 										{% else %}
+											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-9">
 												{{ field }}
 											</div>
@@ -217,24 +270,6 @@
 										</div>
 								</div>
 							{# </the_CYCLE!> #}
-
-							{% if field.auto_id == 'id_oplata_predoplata_rub' %}
-								<div class="form-group oplata_ostatok_procent_form_group">
-									<label class="col-sm-3 control-label">Сумма, остаток в процентах</label>
-									<div class="col-sm-3 input-group">
-										<input class="form-control" id="id_oplata_ostatok_procent" placeholder="30" value="" type="text" title="Считается автоматически после заполнения &laquo;Всего к оплате в рублях&raquo; и &laquo;Сумма предоплаты в рублях&raquo;" disabled>
-										<label class="input-group-text">%</label>
-									</div>
-									<p class="text-muted">При печати будет округлено до целого числа</p>
-								</div>
-								<div class="form-group oplata_ostatok_rub_form_group">
-									<label class="col-sm-3 control-label">Сумма, остаток в рублях</label>
-									<div class="col-sm-3 input-group">
-										<input class="form-control" id="id_oplata_ostatok_rub" placeholder="30000" value="" type="text" title="Считается автоматически после заполнения &laquo;Всего к оплате в рублях&raquo; и &laquo;Сумма предоплаты в рублях&raquo;" disabled>
-										<label class="input-group-text">.00 руб.</label>
-									</div>
-								</div>
-							{% endif %}
 
 						{% endfor %}
 						<br>

@@ -13,12 +13,10 @@ SECRET_KEY = secret_key
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '80.78.244.196', 'chiffre.tech', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', '80.78.244.196', 'chiffre.tech', 'localhost', '95.163.243.230', 'portal-reforma.ru']
 # кортеж с перечнем IP-адресов, с которых может вестись разработка.
-INTERNAL_IPS = ('127.0.0.1', '80.78.244.196', 'chiffre.tech', 'localhost')
+INTERNAL_IPS = ('127.0.0.1', '80.78.244.196', 'chiffre.tech', 'localhost', '95.163.243.230', 'portal-reforma.ru')
 
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -124,7 +122,7 @@ AUTHENTICATION_BACKENDS = (
 
 OAUTH_MAIL_RU_CLIENT_ID = client_id
 OAUTH_MAIL_RU_CLIENT_SECRET = client_secret
-OAUTH_MAIL_RU_REDIRECT_URI = 'http://portal-re-formaufa.ru/auth/mailru/'
+OAUTH_MAIL_RU_REDIRECT_URI = 'http://portal-reforma.ru/auth/mailru/'
 
 LOGO_NAME = "Ре-Форма"
 

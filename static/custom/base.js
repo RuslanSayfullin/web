@@ -11,7 +11,7 @@ $('.type_production').tagsinput({
   freeInput: false
 });
 
-// FIXME: see https://github.com/timschlechter/bootstrap-tagsinput/issues/386
+
 $('.bootstrap-tagsinput').change(function(){
   $(this).find('input').val('');
 });
