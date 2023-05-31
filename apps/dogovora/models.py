@@ -284,6 +284,24 @@ class DogovorIndi(models.Model):
             postavshik['otkaz']['dveri'] = ''
             postavshik['doverennost'] = 'б/н от 21.06.2021 г.'
             postavshik['adres_poryadok_razresheniya_sporov'] = '__'
+
+        elif 'ooo-refabrik' in self.tip_dogovora:
+            postavshik['fio'] = 'ООО РЕ - ФАБРИК'
+            postavshik['svidetelstvo'] = ''
+            postavshik['adres1'] = '450022, Республика Башкортостан, '
+            postavshik['adres2'] = 'г. Уфа, ул. Менделеева,  д.145, пом.20'
+            postavshik['adres1_post'] = '450112, Республика Башкортостан, '
+            postavshik['adres2_post'] = 'г. Уфа, ул. Ульяновых, д.57'
+            postavshik['inn'] = '0278931524'
+            postavshik['kpp'] = '027801001'
+            postavshik['ogrn'] = '1170280042008'
+            postavshik['rs'] = '40702810306000021744'
+            postavshik['otkaz']['izgotovlenie_mebeli'] = ''
+            # postavshik['otkaz']['mygkaya_mebel'] = ''
+            # postavshik['otkaz']['dveri'] = ''
+            postavshik['doverennost'] = '-'
+            postavshik['adres_poryadok_razresheniya_sporov'] = '__'
+
         elif 'bagautdinov' in self.tip_dogovora:
             postavshik['fio'] = 'Багаутдинов Эмиль Разитович'
             postavshik['svidetelstvo'] = '007758247 от 23.12.2016'
@@ -347,6 +365,26 @@ class DogovorIndi(models.Model):
             postavshik['otkaz']['mygkaya_mebel'] = '450022, РБ, г. Уфа, ул. Ульяновых, д.57'
             postavshik['otkaz']['izgotovlenie_mebeli'] = '450022, РБ, г. Уфа, ул. Ульяновых, д.57'
             postavshik['otkaz']['dveri'] = '450022, РБ, г. Уфа, ул. Ульяновых, д.57'
+        else:
+            postavshik['fio'] = '___ ____ ___________'
+            postavshik['svidetelstvo'] = ''
+            postavshik['adres1'] = '__________________'
+            postavshik['adres2'] = '__________________'
+            postavshik['adres1_post'] = '__________________'
+            postavshik['adres2_post'] = '__________________'
+            postavshik['inn'] = '__________________'
+            postavshik['ogrnip'] = '__________________'
+            postavshik['rs'] = '__________________'
+            postavshik['doverennost'] = '__________________'
+
+        postavshik['nomer_dog'] = postavshik['fio'][0]
+        postavshik['bank1'] = 'БАШКИРСКОЕ ОТДЕЛЕНИЕ № 8598'
+        postavshik['bank2'] = 'ПАО СБЕРБАНК г. УФА'
+        postavshik['ks'] = '30101810300000000601'
+        postavshik['bik'] = '048073601'
+        inicialy = postavshik['fio'].split(' ')
+        postavshik['inicialy'] = inicialy[0] + ' ' + inicialy[1][0:1] + '.' + inicialy[2][0:1] + '.'
+        return postavshik
 
 
 

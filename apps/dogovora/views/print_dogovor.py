@@ -4,6 +4,9 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
 from apps.dogovora.models import DogovorIndi
+from apps.dogovora.type_of_contracts import types_of_contracts_for_print, types_of_contracts_for_individuals, \
+    types_of_contracts_with_sales_receipt, connect_with_other_contract
+from apps.dogovora.type_of_contracts import SRAVN, SRAVN2, SRAVN3
 from apps.dogovora.views import summa_propisyu
 from apps.froze.models import Froze
 from json import loads, dumps
@@ -18,83 +21,13 @@ def dogovor_main_view(request, froze_uuid):
     except ObjectDoesNotExist:
         return HttpResponseRedirect(reverse('dogovora:create_update', kwargs={'froze_uuid': froze_uuid}))
 
-    if dogovor.kakoy_tip_dogovora() not in (
-        'izgotovlenie_2021_02_mebeli',
-        'mygkaya_2021_02_mebel',
-        'technic_2021_04',
-        'dveri', 'izgotovlenie_mebeli', 'mygkaya_mebel', 'tehnika', 'delivery',
-        'izgotovlenie_2019_11_mebeli', 'izgotovlenie_2020_09_mebeli',
-        'mygkaya_2019_11_mebel', 'mygkaya_2020_09_mebel',
-        'tekstil_ip_sadykov_fiz', 'tekstil_ip_usmanov_fiz',
-        'montazh_demontazh_ip_sadykov_fiz',
-        'iskusstvenny_kamen', 'iskusstvenny_2021_02_kamen',
-        'ekspress_dizayn',
-        'podklyuchenie_2021_06_tehniki',
-        'matrasy_2021_06',
-        'carpets_and_rugs_ip',
-        'decoration',
-        'gotovaya_mebel_2021_06',
-        'kuhonny_2021_07_garnitur_lite',
-        'furniture_making',
-        'upholstered_furniture',
-        'mattresses_ooo-refabrik',
-        'carpets_and_rugs_ooo-refabrik',
-        'finishedfur_ooo-refabrik',
-        'artificial_stone',
-        'door_manufacturing',
-        'transportation_services',
-        'm_furniture_making',
-        'm_upholstered_furniture',
-        'm_mattresses',
-        'm_householdtec',
-        'm_connectiontec',
-        'm_finishedfur',
-        'm_doors',
-        'm_stone',
-        'm_textile',
-        'm_transport',
-        'm_assembling',
-        'msk_textile_ip_sadykov',
-        'msk_textile_ip_usmanov',
-        'm_manufacturingassembling',
-        'm_furnitureassemblywork',
-        'm_2furnitureassemblywork',
-        'entity_furniture_making',
-        'juridical_moscow_ooo-refabrik_furniture_making',
-        'entity_householdtec',
-        'juridical_moscow_ooo-refabrik_householdtec',
-        'entity_connectiontec',
-        'entity_mattresses',
-        'juridical_ooo-refabrik_mattresses',
-        'entity_finishedfur',
-        'juridical_ooo-refabrik_finishedfur',
-        'entity_stone',
-        'juridical_ooo-refabrik_stone',
-        'entity_textile',
-        'juridical_moscow_ooo-refabrik_textile',
-        'entity_transport',
-        'entity_assembling',
-        'entity_furnitureassemblywork',
-        'juridical_moscow_ooo-refabrik_furnitureassemblywork',
-        'entity_ufa_furniture_making',
-        'entity_ufa_ooo-refabrik_furniture_making',
-        'entity_ufa_householdtec',
-        'entity_ufa_ooo-refabrik_householdtec',
-        'entity_ufa_connectiontec',
-        'entity_ufa_mattresses',
-        'entity_ufa_ooo-refabrik_mattresses',
-        'entity_ufa_carpets_and_rugs',
-        'entity_ufa_finishedfur',
-        'entity_ufa_ooo-refabrik_finishedfur',
-        'entity_ufa_stone',
-        'entity_ufa_ooo-refabrik_stone',
-        'entity_ufa_textile',
-        'entity_ufa_ooo-refabrik_textile',
-        'entity_ufa_transport',
-        'entity_ufa_assembling',
-    ):
+    if dogovor.kakoy_tip_dogovora() not in types_of_contracts_for_print:
         return HttpResponse('Нужно выбрать другой тип договора! Для данного типа договора, печать недоступна!')
-    template = 'dogovora/indi/dogovor_' + dogovor.kakoy_tip_dogovora() + '.html'
+
+    if dogovor.kakoy_tip_dogovora() in types_of_contracts_for_individuals:
+        template = 'dogovora/indi/dogovor_' + dogovor.kakoy_tip_dogovora() + '.html'
+    else:
+        template = 'dogovora/entity/dogovor_' + dogovor.kakoy_tip_dogovora() + '.html'
 
     months_v_rod_padezhe = ("", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря")
     RUB_forms = (u'рубль', u'рубля', u'рублей')
@@ -170,37 +103,8 @@ def dogovor_main_view(request, froze_uuid):
 
     # Товарный чек - техника
     tovarnyy_chek = None
-    if dogovor.kakoy_tip_dogovora() in ('tehnika', 'technic_2021_04', 'matrasy_2021_06', 'carpets_and_rugs_ip',
-                                        'carpets_and_rugs_ooo-refabrik',
-                                        'decoration', 'gotovaya_mebel_2021_06', 'finishedfur_ooo-refabrik',
-                                        'mattresses_ooo-refabrik', 'm_mattresses',
-                                        'm_householdtec', 'm_finishedfur', 'entity_householdtec',
-                                        'juridical_moscow_ooo-refabrik_householdtec',
-                                        'entity_mattresses', 'juridical_ooo-refabrik_mattresses',
-                                        'entity_finishedfur', 'juridical_ooo-refabrik_finishedfur',
-                                        'entity_ufa_householdtec', 'entity_ufa_ooo-refabrik_householdtec',
-                                        'entity_ufa_mattresses', 'entity_ufa_ooo-refabrik_mattresses',
-                                        'entity_ufa_carpets_and_rugs',
-                                        'entity_ufa_finishedfur', 'entity_ufa_ooo-refabrik_finishedfur'):
-        sravn = '{"1": {"tovchek_naim_tovara": null, "tovchek_brand": null, "tovchek_artikul": null, "tovchek_kolvo":' \
-                ' null, "tovchek_tsena": null}, "2": {"tovchek_naim_tovara": null, "tovchek_brand": null, "tovchek_ar' \
-                'tikul": null, "tovchek_kolvo": null, "tovchek_tsena": null}, "3": {"tovchek_naim_tovara": null, "tov' \
-                'chek_brand": null, "tovchek_artikul": null, "tovchek_kolvo": null, "tovchek_tsena": null}, "4": {"to' \
-                'vchek_naim_tovara": null, "tovchek_brand": null, "tovchek_artikul": null, "tovchek_kolvo": null, "to' \
-                'vchek_tsena": null}, "5": {"tovchek_naim_tovara": null, "tovchek_brand": null, "tovchek_artikul": nu' \
-                'll, "tovchek_kolvo": null, "tovchek_tsena": null}, "6": {"tovchek_naim_tovara": null, "tovchek_brand' \
-                '": null, "tovchek_artikul": null, "tovchek_kolvo": null, "tovchek_tsena": null}, "7": {"tovchek_naim' \
-                '_tovara": null, "tovchek_brand": null, "tovchek_artikul": null, "tovchek_kolvo": null, "tovchek_tsen' \
-                'a": null}, "8": {"tovchek_naim_tovara": null, "tovchek_brand": null, "tovchek_artikul": null, "tovch' \
-                'ek_kolvo": null, "tovchek_tsena": null}, "9": {"tovchek_naim_tovara": null, "tovchek_brand": null, "' \
-                'tovchek_artikul": null, "tovchek_kolvo": null, "tovchek_tsena": null}, "10": {"tovchek_naim_tovara":' \
-                ' null, "tovchek_brand": null, "tovchek_artikul": null, "tovchek_kolvo": null, "tovchek_tsena": null},'\
-                ' "11": {"tovchek_naim_tovara": null, "tovchek_brand": null, "tovchek_artikul": null, "tovchek_artikul": null, "tovchek_kolvo": null, "tovchek_tsena": null}, ' \
-                '"12": {"tovchek_naim_tovara": null, "tovchek_brand": null, "tovchek_artikul": null, "tovchek_artikul": null, "tovchek_kolvo": null, "tovchek_tsena": null}, ' \
-                '"13": {"tovchek_naim_tovara": null, "tovchek_brand": null, "tovchek_artikul": null, "tovchek_artikul": null, "tovchek_kolvo": null, "tovchek_tsena": null}, ' \
-                '"14": {"tovchek_naim_tovara": null, "tovchek_brand": null, "tovchek_artikul": null, "tovchek_artikul": null, "tovchek_kolvo": null, "tovchek_tsena": null}, ' \
-                '"15": {"tovchek_naim_tovara": null, "tovchek_brand": null, "tovchek_artikul": null, "tovchek_artikul": null, "tovchek_kolvo": null, "tovchek_tsena": null}, ' \
-                '"16": {"tovchek_naim_tovara": null, "tovchek_brand": null, "tovchek_artikul": null, "tovchek_artikul": null, "tovchek_kolvo": null, "tovchek_tsena": null},}'
+    if dogovor.kakoy_tip_dogovora() in types_of_contracts_with_sales_receipt:
+        sravn = SRAVN
         if dogovor.tovarny_chek_tehnika and dogovor.tovarny_chek_tehnika != sravn:
             try:
                 tovarnyy_chek = {}
@@ -246,16 +150,7 @@ def dogovor_main_view(request, froze_uuid):
     # Список выполняемых работ, для договоров монтаж/демонтаж
     uslugi_installation = None
     if dogovor.kakoy_tip_dogovora() in ('montazh_demontazh_ip_sadykov_fiz', 'entity_ufa_assembling', 'm_assembling', 'entity_assembling'):
-        sravn = '{"1": {"usluga": null, "deadline": null, "tsena": null},' \
-                '"2": {"usluga": null, "deadline": null, "tsena": null},' \
-                '"3": {"usluga": null, "deadline": null, "tsena": null},' \
-                '"4": {"usluga": null, "deadline": null, "tsena": null}, ' \
-                '"5": {"usluga": null, "deadline": null, "tsena": null}, ' \
-                '"6": {"usluga": null, "deadline": null, "tsena": null}, ' \
-                '"7": {"usluga": null, "deadline": null, "tsena": null}, ' \
-                '"8": {"usluga": null, "deadline": null, "tsena": null}, ' \
-                '"9": {"usluga": null, "deadline": null, "tsena": null},' \
-                '"10": {"usluga": null, "deadline": null, "tsena": null}}'
+        sravn = SRAVN2
 
         if dogovor.list_of_work_installation and dogovor.list_of_work_installation != sravn:
             try:
@@ -282,13 +177,7 @@ def dogovor_main_view(request, froze_uuid):
     # Товарный чек - услуги по подключению бытовой техники
     uslugi = None
     if dogovor.kakoy_tip_dogovora() in ('podklyuchenie_2021_06_tehniki', 'm_connectiontec', 'entity_connectiontec', 'entity_ufa_connectiontec'):
-        sravn = '{"1": {"usluga": null, "tsena": null}, "2": {"usluga": null, "tsena": null}, "3": {"usluga": null, "' \
-                'tsena": null}, "4": {"usluga": null, "tsena": null}, "5": {"usluga": null, "tsena": null}, "6": {"us' \
-                'luga": null, "tsena": null}, "7": {"usluga": null, "tsena": null}, "8": {"usluga": null, "tsena": nu' \
-                'll}, "9": {"usluga": null, "tsena": null}, "10": {"usluga": null, "tsena": null}, "11": {"usluga": n' \
-                'ull, "tsena": null}, "12": {"usluga": null, "tsena": null}, "13": {"usluga": null, "tsena": null}, "' \
-                '14": {"usluga": null, "tsena": null}, "15": {"usluga": null, "tsena": null}, "16": {"usluga": null, ' \
-                '"tsena": null}}'
+        sravn = SRAVN3
         if dogovor.uslugi_po_podklyucheniyu_tehniki and dogovor.uslugi_po_podklyucheniyu_tehniki != sravn:
             try:
                 uslugi = {}
@@ -312,7 +201,7 @@ def dogovor_main_view(request, froze_uuid):
     # Товарный чек - услуги по подключению бытовой техники
 
     if dogovor.srok_ispolneniya_rabot:
-        dogovor_more['srok_ispolneniya_rabot'] =  '{:,}'.format(dogovor.srok_ispolneniya_rabot).replace(',', ' ')
+        dogovor_more['srok_ispolneniya_rabot'] = '{:,}'.format(dogovor.srok_ispolneniya_rabot).replace(',', ' ')
         dogovor_more['srok_ispolneniya_rabot_propisyu'] = summa_propisyu.num2text(dogovor.srok_ispolneniya_rabot)
         if dogovor.kakoy_tip_dogovora() == 'tehnika':
             dogovor_more['srok_ispolneniya_rabot_the_word'] = summa_propisyu.num_words_forms(dogovor.srok_ispolneniya_rabot, rabochiy_den_forms_TEHNIKA)
@@ -325,22 +214,12 @@ def dogovor_main_view(request, froze_uuid):
     if dogovor.doverennye_lica_telefony:
         dogovor_more['doverennye_lica_telefony'] = dogovor.doverennye_lica_telefony.split(',')
 
-    if dogovor.kakoy_tip_dogovora() in ('technic_2021_04', 'matrasy_2021_06', 'carpets_and_rugs_ip',
-                                        'carpets_and_rugs_ooo-refabrik', 'mattresses_ooo-refabrik', 'm_mattresses',
-                                        'm_householdtec', 'entity_householdtec',
-                                        'juridical_moscow_ooo-refabrik_householdtec',
-                                        'entity_mattresses', 'juridical_ooo-refabrik_mattresses',
-                                        'entity_ufa_householdtec',
-                                        'entity_ufa_ooo-refabrik_householdtec', 'entity_ufa_mattresses',
-                                        'entity_ufa_ooo-refabrik_mattresses', 'entity_ufa_carpets_and_rugs') and dogovor.drugoy_dogovor:
+    if dogovor.kakoy_tip_dogovora() in connect_with_other_contract and dogovor.drugoy_dogovor:
         nomer_drugogo_dogovora = str(dogovor.drugoy_dogovor.nomer_dogovora)[1:] if str(dogovor.drugoy_dogovor.nomer_dogovora)[0] == '.' else str(dogovor.drugoy_dogovor.nomer_dogovora)
         nomer_drugogo_dogovora = nomer_drugogo_dogovora + dogovor.drugoy_dogovor.postavshik()['nomer_dog']
         dogovor_more['drugoy_dogovor_nomer'] = nomer_drugogo_dogovora
         dogovor_more['drugoy_dogovor_data_podpisaniya'] = dogovor.drugoy_dogovor.data_podpisaniya
         dogovor_more['drugoy_dogovor_data_podpisaniya_month'] = months_v_rod_padezhe[dogovor.drugoy_dogovor.data_podpisaniya.month] if dogovor.drugoy_dogovor.data_podpisaniya else None
-
-    if dogovor.kakoy_tip_dogovora() == 'kuhonny_2021_07_garnitur_lite':
-        template = 'dogovora/dogovor_izgotovlenie_2021_02_mebeli.html'
 
     return render(request, template, {
         'dogovor': dogovor,
