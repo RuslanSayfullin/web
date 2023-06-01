@@ -11,7 +11,10 @@ app_name = 'dogovora'
 urlpatterns = [
     re_path(r'^nomer_dogovora$', nomer_dogovora, name="nomer_dogovora"),
     re_path(r'^drugoy_dogovor$', drugoy_dogovor, name="drugoy_dogovor"),
-    re_path(r'^(?P<froze_uuid>\w+)$', CreateUpdateDogovorIndi.as_view(), name="create_update_indi"),
+    re_path(r'^indi/(?P<froze_uuid>\w+)/$', CreateUpdateDogovorIndi.as_view(), name="create_update_indi"),
+    re_path(r'^entry/(?P<froze_uuid>\w+)/$', CreateUpdateDogovorIndi.as_view(), name="create_update_indi"),
+
+
     re_path(r'^(?P<froze_uuid>\w+)/for_print$', dogovor_main_view, name='view'),    # расспечатать договор
 
     # Вспомогательные утилиты для при печати договоров

@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from rest_framework import viewsets
 from django.contrib.auth.models import User
 from apps.api.serializer import FrozeSerializer, UserSerializer
-from apps.dogovora.models import DogovorIndi
+from apps.dogovora.models import DogovorIndi, DogovorEntry
 
 
 class FrozeAPICreate(generics.CreateAPIView):
@@ -21,6 +21,7 @@ class FrozeAndDogovorIndiView(APIView):
         if froze_serializer.is_valid():
             froze = froze_serializer.save()
             DogovorIndi.objects.create(froze=froze, )
+            DogovorEntry.objects.create(froze=froze, )
             return Response({'status': 'success'}, status=status.HTTP_201_CREATED)
         return Response(froze_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
