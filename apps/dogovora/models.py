@@ -404,7 +404,6 @@ class DogovorEntry(models.Model):
 
     TIPY_DOGOVOROV = TIPY_DOGOVOROV_ENTRY
     froze = models.OneToOneField(Froze, db_index=True, on_delete=models.CASCADE, verbose_name="Заявка")
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор")
     published = models.DateTimeField(default=timezone.now, verbose_name="Дата Создания")
 
     passport_familiya = models.CharField(max_length=200, default='', db_index=True, blank=True)

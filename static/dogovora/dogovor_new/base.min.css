@@ -1,0 +1,22 @@
+@media screen{
+    .loading-indicator{
+        display:none
+    }
+    .loading-indicator.active{
+        display:block;
+        position:absolute;
+        width:64px;
+        height:64px;
+        top:50%;
+        left:50%;
+        margin-top:-32px;
+        margin-left:-32px
+    }
+    .loading-indicator img{
+        position:absolute;
+        top:0;
+        left:0;
+        bottom:0;
+        right:0
+    }
+}

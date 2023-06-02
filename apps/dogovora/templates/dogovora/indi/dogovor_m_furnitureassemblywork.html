@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta charset="utf-8"/>
-	<link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}" type="image/x-icon" />
+	<link rel="shortcut icon" href="{% static 'portal/favicon.ico' %}" type="image/x-icon" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 	<link rel="stylesheet" href="{% static 'dogovora/dogovor_izgotovlenie_mebeli/base.min.css' %}"/>
 	<link rel="stylesheet" href="{% static 'dogovora/dogovor_izgotovlenie_mebeli/fancy.min.css' %}"/>
@@ -32,7 +32,7 @@
 			<p align="left" width="100%"><v>- {{ performed_list.1.work_performed_list|default:'' }}</v></p>
 			<p>(подробно указать содержание, объем, этапы и другие условия выполняемой работы).</p>
             <p>1.3. Работа выполняется из материалов, предоставленных Заказчиком, силами и средствами Подрядчика.</p>
-			<p>1.4. <b>Срок выполнения работ составляет {% if dogovor.srok_ispolneniya_rabot %}<v>{{ dogovor_more.srok_ispolneniya_rabot }}</v> (<v>{{ dogovor_more.srok_ispolneniya_rabot_propisyu }}</v>) <v>{{ dogovor_more.srok_ispolneniya_rabot_the_word }}</v>{% else %}___________ (______ ___________________________________) рабочих дней{% endif %}.</b></p>
+			<p>1.4. <b>Срок выполнения работ составляет {% if dogovor.srok_ispolneniya_rabot %}<v>{{ dogovor_more.srok_ispolneniya_rabot }}</v> (<v>{{ dogovor_more.srok_ispolneniya_rabot_propisyu }}</v>) <v>{{ dogovor_more.srok_ispolneniya_rabot_the_word }}</v>{% else %}___________ (______ ___________________________________) рабочих дней{% endif %}, со следующего дня как Подрядчик убедиться в готовности помещения Заказчика, согласно Приложению 1 настоящего Договора..</b></p>
 			<p>1.5. Указанные в договоре сроки выполнения работ могут быть изменены по соглашению Сторон.</p>
             <p style="text-align: center; font-weight: bold;"><br>2. ЦЕНА И ПОРЯДОК РАСЧЕТОВ</p>
 			<p>2.1. <b>Цена работы, выполняемой по настоящему договору составляет {% if dogovor.vsego_k_oplate %}<v>{{ dogovor_more.vsego_k_oplate }}</v> (<v>{{ dogovor_more.vsego_k_oplate_propisyu }}</v>) <v>{{ dogovor_more.vsego_k_oplate_the_word }}</v>{% else %}________________ (______________________________________) рублей{% endif %} 00 коп. рублей, которая включает в себя компенсацию издержек Подрядчика и причитающееся ему вознаграждение.</b></p>
