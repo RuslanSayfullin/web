@@ -86,6 +86,8 @@ class CreateUpdateDogovorIndi(generic.FormView):
     froze_uuid = None
     dogovor = None
     create_or_update = None
+    indi_householdtec_list = ('technic_2021_04', 'matrasy_2021_06', 'carpets_and_rugs_ip',
+                              'carpets_and_rugs_ooo-refabrik', 'mattresses_ooo-refabrik', 'm_mattresses', 'm_householdtec',)
 
     def get_context_data(self, **kwargs):
         context = super(CreateUpdateDogovorIndi, self).get_context_data(**kwargs)
@@ -123,22 +125,7 @@ class CreateUpdateDogovorIndi(generic.FormView):
 
         """Если это техника, матрасы или ковровые покрытия, то привязываем к договорам по мягкой мебели или корпусной мебели"""
         if self.create_or_update == 'update' and self.dogovor.tip_dogovora is not None and \
-                self.dogovor.kakoy_tip_dogovora() in ('technic_2021_04',
-                                                      'matrasy_2021_06',
-                                                      'carpets_and_rugs_ip',
-                                                      'carpets_and_rugs_ooo-refabrik',
-                                                      'mattresses_ooo-refabrik',
-                                                      'm_mattresses',
-                                                      'm_householdtec',
-                                                      'entity_householdtec',
-                                                      'juridical_moscow_ooo-refabrik_householdtec',
-                                                      'entity_mattresses',
-                                                      'juridical_ooo-refabrik_mattresses',
-                                                      'entity_ufa_householdtec',
-                                                      'entity_ufa_ooo-refabrik_householdtec',
-                                                      'entity_ufa_mattresses',
-                                                      'entity_ufa_ooo-refabrik_mattresses',
-                                                      'entity_ufa_carpets_and_rugs'):
+                self.dogovor.kakoy_tip_dogovora() in self.indi_householdtec_list:
             dogovora_na_izgotovlenie_mebeli = DogovorIndi.objects.filter(
                 passport_familiya=self.dogovor.passport_familiya,
                 passport_imya=self.dogovor.passport_imya,
@@ -149,17 +136,9 @@ class CreateUpdateDogovorIndi(generic.FormView):
                                                                            | Q(tip_dogovora__contains='m_furniture_')
                                                                            | Q(tip_dogovora__contains='m_upholstered_')
                                                                            | Q(tip_dogovora__contains='m_manufacturingassembling_')
-                                                                           | Q(tip_dogovora__contains='entity_furniture_making')
-                                                                           | Q(tip_dogovora__contains='juridical_moscow_ooo-refabrik_furniture_making')
-                                                                           | Q(tip_dogovora__contains='entity_ufa_furniture_making')
-                                                                           | Q(tip_dogovora__contains='entity_ufa_ooo-refabrik_furniture_making')
                                                                            | Q(tip_dogovora__contains='iskusstvenny_2021_02_kamen')
                                                                            | Q(tip_dogovora__contains='artificial_stone')
-                                                                           | Q(tip_dogovora__contains='entity_ufa_stone')
-                                                                           | Q(tip_dogovora__contains='entity_ufa_ooo-refabrik_stone')
                                                                            | Q(tip_dogovora__contains='m_stone')
-                                                                           | Q(tip_dogovora__contains='entity_stone')
-                                                                           | Q(tip_dogovora__contains='juridical_ooo-refabrik_stone')
                                                                            )\
                 .exclude(passport_familiya='', passport_imya='', passport_otchestvo='') \
                 .exclude(id=self.dogovor.id).exclude(nomer_dogovora=None).exclude(nomer_dogovora='')
@@ -171,7 +150,6 @@ class CreateUpdateDogovorIndi(generic.FormView):
             'froze': self.froze,
             'create_or_update': self.create_or_update,
             'dogovor': self.dogovor,
-
             'dogovora_s_takimi_zhe_fio': dogovora_s_takimi_zhe_fio,
             'drugie_dogovora': drugie_dogovora,
             'novy_nomer_dogovora': novy_nomer_dogovora,
@@ -207,7 +185,6 @@ class CreateUpdateDogovorIndi(generic.FormView):
                 'passport_familiya': self.dogovor.passport_familiya,
                 'passport_imya': self.dogovor.passport_imya,
                 'passport_otchestvo': self.dogovor.passport_otchestvo,
-
                 'passport_birthday_date': passport_birthday_date,
                 'passport_birthday_place': self.dogovor.passport_birthday_place,
                 'passport_seria': self.dogovor.passport_seria,
@@ -226,7 +203,6 @@ class CreateUpdateDogovorIndi(generic.FormView):
                 'srok_ispolneniya_rabot': self.dogovor.srok_ispolneniya_rabot if self.dogovor.srok_ispolneniya_rabot or self.dogovor.srok_ispolneniya_rabot == 0 else None,
                 'installment_plan': self.dogovor.installment_plan if self.dogovor.installment_plan or self.dogovor.installment_plan == 0 else None,
                 'tip_dogovora': self.dogovor.tip_dogovora if self.dogovor.tip_dogovora else None,
-
                 'nomer_dogovora': nomer_dogovora,
                 'drugoy_dogovor': self.dogovor.drugoy_dogovor if self.dogovor.drugoy_dogovor else None,
                 'tip_opisanie_izdeliya': self.dogovor.tip_opisanie_izdeliya if self.dogovor.tip_opisanie_izdeliya else None,
@@ -390,6 +366,10 @@ class CreateUpdateDogovorEntry(generic.FormView):
     froze_uuid = None
     dogovor = None
     create_or_update = None
+    entity_householdtec_list = ('entity_householdtec', 'juridical_moscow_ooo-refabrik_householdtec',
+                                'entity_mattresses', 'juridical_ooo-refabrik_mattresses', 'entity_ufa_householdtec',
+                                'entity_ufa_ooo-refabrik_householdtec', 'entity_ufa_mattresses',
+                                'entity_ufa_ooo-refabrik_mattresses', 'entity_ufa_carpets_and_rugs')
 
     def get_context_data(self, **kwargs):
         context = super(CreateUpdateDogovorEntry, self).get_context_data(**kwargs)
@@ -424,37 +404,19 @@ class CreateUpdateDogovorEntry(generic.FormView):
             drugie_dogovora = None
             novy_nomer_dogovora = None
 
+        # выборка договора на изготовление мебели, к которым можно привязать договоры на технику и матрасы
         """Если это техника или матрасы, то привязываем к договорам по мягкой мебели или корпусной мебели"""
         if self.create_or_update == 'update' and self.dogovor.tip_dogovora is not None and \
-                self.dogovor.kakoy_tip_dogovora() in ('technic_2021_04', 'matrasy_2021_06',
-                                                      'carpets_and_rugs_ip', 'carpets_and_rugs_ooo-refabrik',
-                                                      'mattresses_ooo-refabrik', 'm_mattresses',
-                                                      'm_householdtec', 'entity_householdtec',
-                                                      'juridical_moscow_ooo-refabrik_householdtec',
-                                                      'entity_mattresses', 'juridical_ooo-refabrik_mattresses',
-                                                      'entity_ufa_householdtec',
-                                                      'entity_ufa_ooo-refabrik_householdtec',
-                                                      'entity_ufa_mattresses', 'entity_ufa_ooo-refabrik_mattresses',
-                                                      'entity_ufa_carpets_and_rugs'):
+                self.dogovor.kakoy_tip_dogovora() in self.entity_householdtec_list:
             dogovora_na_izgotovlenie_mebeli = DogovorEntry.objects.filter(
                 passport_familiya=self.dogovor.passport_familiya,
                 passport_imya=self.dogovor.passport_imya,
-                passport_otchestvo=self.dogovor.passport_otchestvo).filter(Q(tip_dogovora__contains='izgotovlenie_')    # выборка договора на изготовление мебели, к которым можно привязать договоры на технику и матрасы
-                                                                           | Q(tip_dogovora__contains='mygkaya_')
-                                                                           | Q(tip_dogovora__contains='furniture_making_')
-                                                                           | Q(tip_dogovora__contains='upholstered_furniture_')
-                                                                           | Q(tip_dogovora__contains='m_furniture_')
-                                                                           | Q(tip_dogovora__contains='m_upholstered_')
-                                                                           | Q(tip_dogovora__contains='m_manufacturingassembling_')
-                                                                           | Q(tip_dogovora__contains='entity_furniture_making')
+                passport_otchestvo=self.dogovor.passport_otchestvo).filter(Q(tip_dogovora__contains='entity_furniture_making')
                                                                            | Q(tip_dogovora__contains='juridical_moscow_ooo-refabrik_furniture_making')
                                                                            | Q(tip_dogovora__contains='entity_ufa_furniture_making')
                                                                            | Q(tip_dogovora__contains='entity_ufa_ooo-refabrik_furniture_making')
-                                                                           | Q(tip_dogovora__contains='iskusstvenny_2021_02_kamen')
-                                                                           | Q(tip_dogovora__contains='artificial_stone')
                                                                            | Q(tip_dogovora__contains='entity_ufa_stone')
                                                                            | Q(tip_dogovora__contains='entity_ufa_ooo-refabrik_stone')
-                                                                           | Q(tip_dogovora__contains='m_stone')
                                                                            | Q(tip_dogovora__contains='entity_stone')
                                                                            | Q(tip_dogovora__contains='juridical_ooo-refabrik_stone')
                                                                            )\
@@ -468,7 +430,6 @@ class CreateUpdateDogovorEntry(generic.FormView):
             'froze': self.froze,
             'create_or_update': self.create_or_update,
             'dogovor': self.dogovor,
-
             'dogovora_s_takimi_zhe_fio': dogovora_s_takimi_zhe_fio,
             'drugie_dogovora': drugie_dogovora,
             'novy_nomer_dogovora': novy_nomer_dogovora,
@@ -489,8 +450,6 @@ class CreateUpdateDogovorEntry(generic.FormView):
 
     def get_initial(self):
         if self.create_or_update == 'update':
-            passport_birthday_date = str(self.dogovor.passport_birthday_date.strftime("%d.%m.%Y")) if self.dogovor.passport_birthday_date else self.dogovor.passport_birthday_date
-            passport_kogda_vydan = str(self.dogovor.passport_kogda_vydan.strftime("%d.%m.%Y")) if self.dogovor.passport_kogda_vydan else self.dogovor.passport_kogda_vydan
             data_podpisaniya = str(self.dogovor.data_podpisaniya.strftime("%d.%m.%Y")) if self.dogovor.data_podpisaniya else None
             nachalo_rabot_data = str(self.dogovor.nachalo_rabot_data.strftime("%d.%m.%Y")) if self.dogovor.nachalo_rabot_data else None
             okonchanie_rabot_data = str(self.dogovor.okonchanie_rabot_data.strftime("%d.%m.%Y")) if self.dogovor.okonchanie_rabot_data else None
@@ -503,14 +462,6 @@ class CreateUpdateDogovorEntry(generic.FormView):
                 'passport_familiya': self.dogovor.passport_familiya,
                 'passport_imya': self.dogovor.passport_imya,
                 'passport_otchestvo': self.dogovor.passport_otchestvo,
-
-                'passport_birthday_date': passport_birthday_date,
-                'passport_birthday_place': self.dogovor.passport_birthday_place,
-                'passport_seria': self.dogovor.passport_seria,
-                'passport_nomer': self.dogovor.passport_nomer,
-                'passport_kem_vydan': self.dogovor.passport_kem_vydan,
-                'passport_kogda_vydan': passport_kogda_vydan,
-                'passport_kp': self.dogovor.passport_kp,
                 'adres_propiski': self.dogovor.adres_propiski if self.dogovor.adres_propiski else None,
                 'general_director': self.dogovor.general_director if self.dogovor.general_director else None,
                 'job_title': self.dogovor.job_title if self.dogovor.job_title else None,
@@ -532,7 +483,6 @@ class CreateUpdateDogovorEntry(generic.FormView):
                 'srok_ispolneniya_rabot': self.dogovor.srok_ispolneniya_rabot if self.dogovor.srok_ispolneniya_rabot or self.dogovor.srok_ispolneniya_rabot == 0 else None,
                 'installment_plan': self.dogovor.installment_plan if self.dogovor.installment_plan or self.dogovor.installment_plan == 0 else None,
                 'tip_dogovora': self.dogovor.tip_dogovora if self.dogovor.tip_dogovora else None,
-
                 'nomer_dogovora': nomer_dogovora,
                 'drugoy_dogovor': self.dogovor.drugoy_dogovor if self.dogovor.drugoy_dogovor else None,
                 'tip_opisanie_izdeliya': self.dogovor.tip_opisanie_izdeliya if self.dogovor.tip_opisanie_izdeliya else None,
@@ -541,7 +491,6 @@ class CreateUpdateDogovorEntry(generic.FormView):
                 'nachalo_rabot_data': nachalo_rabot_data,
                 'okonchanie_rabot_data': okonchanie_rabot_data,
                 'sposob_oplaty': self.froze.type_pay,
-
                 'technics_sroki_dostavki_tehniki': self.dogovor.technics_sroki_dostavki_tehniki if self.dogovor.technics_sroki_dostavki_tehniki else None,
                 'technics_sroki_dostavki_tehniki_v_dnyah': self.dogovor.technics_sroki_dostavki_tehniki_v_dnyah if self.dogovor.technics_sroki_dostavki_tehniki_v_dnyah else None,
             }
@@ -563,20 +512,15 @@ class CreateUpdateDogovorEntry(generic.FormView):
             froze_familiya = form.cleaned_data.get('passport_familiya') if form.cleaned_data.get('passport_familiya') else ''
             froze_imya = form.cleaned_data.get('passport_imya') if form.cleaned_data.get('passport_imya') else ''
             froze_otchestvo = form.cleaned_data.get('passport_otchestvo') if form.cleaned_data.get('passport_otchestvo') else ''
-            self.froze.client.name = froze_familiya + ' ' + froze_imya + ' ' + froze_otchestvo
-            self.froze.client.save()
+            self.froze.name = froze_familiya + ' ' + froze_imya + ' ' + froze_otchestvo
+            self.froze.save()
+        if form.cleaned_data.get('adres_propiski'):
+            self.froze.address = form.cleaned_data.get('adres_propiski')
+            self.froze.save(update_fields=('address',))
 
         passport_familiya = form.cleaned_data.get('passport_familiya')
         passport_imya = form.cleaned_data.get('passport_imya')
         passport_otchestvo = form.cleaned_data.get('passport_otchestvo')
-
-        passport_birthday_date = form.cleaned_data.get('passport_birthday_date')
-        passport_birthday_place = form.cleaned_data.get('passport_birthday_place')
-        passport_seria = form.cleaned_data.get('passport_seria')
-        passport_nomer = form.cleaned_data.get('passport_nomer')
-        passport_kem_vydan = form.cleaned_data.get('passport_kem_vydan')
-        passport_kogda_vydan = form.cleaned_data.get('passport_kogda_vydan')
-        passport_kp = form.cleaned_data.get('passport_kp')
         adres_propiski = form.cleaned_data.get('adres_propiski') if form.cleaned_data.get('adres_propiski') else None
         general_director = form.cleaned_data.get('general_director') if form.cleaned_data.get('general_director') else None
         job_title = form.cleaned_data.get('job_title') if form.cleaned_data.get('job_title') else None
@@ -589,12 +533,8 @@ class CreateUpdateDogovorEntry(generic.FormView):
         correspondent_account = form.cleaned_data.get('correspondent_account') if form.cleaned_data.get('correspondent_account') else None
         bank_identification_code = form.cleaned_data.get('bank_identification_code') if form.cleaned_data.get('bank_identification_code') else None
         adres_ustanovki = form.cleaned_data.get('adres_ustanovki') if form.cleaned_data.get('adres_ustanovki') else None
-
         vsego_k_oplate = form.cleaned_data.get('vsego_k_oplate') if form.cleaned_data.get('vsego_k_oplate') or form.cleaned_data.get('vsego_k_oplate') == 0 else None
-        # oplata_predoplata_procent = form.cleaned_data.get('oplata_predoplata_procent')
         oplata_predoplata_rub = form.cleaned_data.get('oplata_predoplata_rub') if form.cleaned_data.get('oplata_predoplata_rub') or form.cleaned_data.get('oplata_predoplata_rub') == 0 else None
-        # oplata_ostatok_procent = form.cleaned_data.get('oplata_ostatok_procent')
-        # oplata_ostatok_rub = form.cleaned_data.get('oplata_ostatok_rub')
         naimenov_soputstv_izdeliy = form.cleaned_data.get('naimenov_soputstv_izdeliy') if form.cleaned_data.get('naimenov_soputstv_izdeliy') else None
         summa_za_soputstv_uslugi = form.cleaned_data.get('summa_za_soputstv_uslugi') if form.cleaned_data.get('summa_za_soputstv_uslugi') or form.cleaned_data.get('summa_za_soputstv_uslugi') == 0 else None
         stoimost_dostavki_vne_ufa = form.cleaned_data.get('stoimost_dostavki_vne_ufa') if form.cleaned_data.get('stoimost_dostavki_vne_ufa') or form.cleaned_data.get('stoimost_dostavki_vne_ufa') == 0 else None
@@ -602,7 +542,6 @@ class CreateUpdateDogovorEntry(generic.FormView):
         srok_ispolneniya_rabot = form.cleaned_data.get('srok_ispolneniya_rabot') if form.cleaned_data.get('srok_ispolneniya_rabot') or form.cleaned_data.get('srok_ispolneniya_rabot') == 0 else None
         installment_plan = form.cleaned_data.get('installment_plan') if form.cleaned_data.get('installment_plan') or form.cleaned_data.get('installment_plan') == 0 else None
         tip_dogovora = form.cleaned_data.get('tip_dogovora') if form.cleaned_data.get('tip_dogovora') else None
-
         nomer_dogovora = form.cleaned_data.get('nomer_dogovora') if form.cleaned_data.get('nomer_dogovora') else None
         tip_opisanie_izdeliya = form.cleaned_data.get('tip_opisanie_izdeliya') if form.cleaned_data.get('tip_opisanie_izdeliya') else None
         doverennye_lica = form.cleaned_data.get('doverennye_lica') if form.cleaned_data.get('doverennye_lica') else None
@@ -616,14 +555,6 @@ class CreateUpdateDogovorEntry(generic.FormView):
             self.dogovor.passport_familiya = passport_familiya
             self.dogovor.passport_imya = passport_imya
             self.dogovor.passport_otchestvo = passport_otchestvo
-
-            self.dogovor.passport_birthday_date = passport_birthday_date
-            self.dogovor.passport_birthday_place = passport_birthday_place
-            self.dogovor.passport_seria = passport_seria
-            self.dogovor.passport_nomer = passport_nomer
-            self.dogovor.passport_kem_vydan = passport_kem_vydan
-            self.dogovor.passport_kogda_vydan = passport_kogda_vydan
-            self.dogovor.passport_kp = passport_kp
             self.dogovor.adres_propiski = adres_propiski if adres_propiski else None
             self.dogovor.general_director = general_director if general_director else None
             self.dogovor.job_title = job_title if job_title else None
@@ -645,10 +576,7 @@ class CreateUpdateDogovorEntry(generic.FormView):
             self.dogovor.srok_ispolneniya_rabot = srok_ispolneniya_rabot if srok_ispolneniya_rabot or srok_ispolneniya_rabot == 0 else None
             self.dogovor.installment_plan = installment_plan if installment_plan or installment_plan == 0 else None
             self.dogovor.tip_dogovora = tip_dogovora
-            if not self.dogovor.nomer_dogovora and (tip_dogovora == 'tekstil_ip_sadykov_fiz' or tip_dogovora == 'tekstil_ip_usmanov_fiz' or tip_dogovora == 'msk_textile_ip_sadykov' or tip_dogovora == 'msk_textile_ip_usmanov'):
-                self.dogovor.nomer_dogovora = nomer_dogovora_for_tekstil()
-            elif nomer_dogovora:
-                self.dogovor.nomer_dogovora = nomer_dogovora
+            self.dogovor.nomer_dogovora = nomer_dogovora
             self.dogovor.tip_opisanie_izdeliya = tip_opisanie_izdeliya if tip_opisanie_izdeliya else None
             self.dogovor.doverennye_lica = doverennye_lica if doverennye_lica else None
             self.dogovor.doverennye_lica_telefony = doverennye_lica_telefony if doverennye_lica_telefony else None
@@ -656,7 +584,7 @@ class CreateUpdateDogovorEntry(generic.FormView):
             self.dogovor.okonchanie_rabot_data = okonchanie_rabot_data if okonchanie_rabot_data else None
             self.dogovor.technics_sroki_dostavki_tehniki = technics_sroki_dostavki_tehniki if technics_sroki_dostavki_tehniki else None
             self.dogovor.technics_sroki_dostavki_tehniki_v_dnyah = technics_sroki_dostavki_tehniki_v_dnyah if technics_sroki_dostavki_tehniki_v_dnyah else None
-
+            #send_data_to_url_b24(self.froze, self.dogovor)  # Функция обновляет заявку на Б24 по url
             self.dogovor.save()
             return super(CreateUpdateDogovorEntry, self).form_valid(form)
         elif self.create_or_update == 'create':
@@ -665,18 +593,9 @@ class CreateUpdateDogovorEntry(generic.FormView):
                 DogovorEntry.objects.create(
                     froze=self.froze,
                     author=author,
-
                     passport_familiya=passport_familiya,
                     passport_imya=passport_imya,
                     passport_otchestvo=passport_otchestvo,
-
-                    passport_birthday_date=passport_birthday_date,
-                    passport_birthday_place=passport_birthday_place,
-                    passport_seria=passport_seria,
-                    passport_nomer=passport_nomer,
-                    passport_kem_vydan=passport_kem_vydan,
-                    passport_kogda_vydan=passport_kogda_vydan,
-                    passport_kp=passport_kp,
                     adres_propiski=adres_propiski,
                     general_director=general_director,
                     job_title=job_title,
@@ -709,4 +628,4 @@ class CreateUpdateDogovorEntry(generic.FormView):
             return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse_lazy('dogovora:create_update', args=(self.kwargs.get('froze_uuid'),))
+        return reverse_lazy('dogovora:create_update_entry', args=(self.kwargs.get('froze_uuid'),))

@@ -1,0 +1,29 @@
+{% extends "froze/base.html" %}
+
+{% load static %}
+{% block content %}
+<div class="container">
+<p>
+	<br>
+	<a class="btn btn-secondary" href="{% url 'froze_uuid' froze_uuid %}">Вернуться к заявке</a>&nbsp;
+	<a class="btn btn-secondary" target="_blank"{% if create_or_update == 'create' %} title="Сначала заполните данные для договора" disabled{% else %} href="{% url 'dogovora:view_entry' froze_uuid %}"{% endif %}>Печатать договор...</a>&nbsp;
+
+	{% if create_or_update == 'update' and dogovor.kakoy_tip_dogovora in 'technic_2021_04,m_householdtec,entity_householdtec,juridical_moscow_ooo-refabrik_householdtec,entity_ufa_householdtec,entity_ufa_ooo-refabrik_householdtec' %}
+		<a class="btn btn-secondary" href="{% url 'dogovora:tovarnyy_chek' froze_uuid %}">Заполнить поля для товарного чека</a>
+	{% elif create_or_update == 'update' and dogovor.kakoy_tip_dogovora in 'entity_mattresses,juridical_ooo-refabrik_mattresses,entity_finishedfur,juridical_ooo-refabrik_finishedfur,entity_ufa_mattresses,entity_ufa_ooo-refabrik_mattresses,entity_ufa_carpets_and_rugs,entity_ufa_finishedfur,entity_ufa_ooo-refabrik_finishedfur' %}
+		<a class="btn btn-secondary" href="{% url 'dogovora:tovarnyy_chek' froze_uuid %}?specifikacii=1">Заполнить спецификации</a>
+	{% elif create_or_update == 'update' and dogovor.kakoy_tip_dogovora in 'entity_furnitureassemblywork,juridical_moscow_ooo-refabrik_furnitureassemblywork' %}
+		<a class="btn btn-secondary" href="{% url 'dogovora:work_performed' froze_uuid %}">Заполнить список выполняемых работ</a>
+	{% elif create_or_update == 'update' and dogovor.kakoy_tip_dogovora in 'entity_ufa_assembling,entity_assembling' %}
+		<a class="btn btn-secondary" href="{% url 'dogovora:list_of_work_installation' froze_uuid %}">список работ для Приложения №1.</a>
+	{% elif create_or_update == 'update' and dogovor.kakoy_tip_dogovora in 'entity_connectiontec,entity_ufa_connectiontec' %}
+		<a class="btn btn-secondary" href="{% url 'dogovora:uslugi_po_podklyucheniyu' froze_uuid %}">Заполнить услуги для товарного чека</a>
+	{% elif tovarnyy_chek or uslugi_po_podklyucheniyu or uslugi_montage_demontage %}
+		<a class="btn btn-secondary" href="{% url 'dogovora:create_update_entry' froze_uuid %}">Вернуться к заполнению договора</a>
+	{% elif create_or_update == 'update' and dogovor.kakoy_tip_dogovora in 'entity_furniture_making,juridical_moscow_ooo-refabrik_furniture_making,entity_householdtec,juridical_moscow_ooo-refabrik_householdtec,entity_stone,juridical_ooo-refabrik_stone,entity_ufa_furniture_making,entity_ufa_ooo-refabrik_furniture_making,entity_ufa_ooo-refabrik_furniture_makin,entity_ufa_householdtec,entity_ufa_ooo-refabrik_householdtec,entity_ufa_stone,entity_ufa_ooo-refabrik_stone' %}
+		<a class="btn btn-secondary" href="{% url 'dogovora:teh_usloviya_na_mebel_dveri' froze_uuid %}" target="_blank">ТУ на мебель, двери</a>
+	{% endif %}
+</p>
+{% block content_dogovor %}{% endblock content_dogovor %}
+</div>
+{% endblock content %}

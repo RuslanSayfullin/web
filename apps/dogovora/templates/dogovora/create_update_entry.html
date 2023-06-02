@@ -1,4 +1,4 @@
-{% extends "dogovora/view_dogovor_base.html" %}
+{% extends "dogovora/view_dogovor_entry.html" %}
 {% load static %}
 
 {% block content_dogovor %}
@@ -78,14 +78,14 @@
 															Других договоров, с таким же ФИО клиента и заполненным номером, не найдено.<br>
 															<a onclick="nomer_dogovora('{{ csrf_token }}', '{{ self_id }}');" class="text-danger">Присвоить этому договору новый номер, например, <b>{{ novy_nomer_dogovora }}</b></a>?
 														 {% elif dogovora_s_takimi_zhe_fio == 1 %}
-															С таким же ФИО клиента найден <a href="{% url 'dogovora:create_update_indi' drugie_dogovora.0.froze.uuid %}" target="_blank">другой договор</a>.<br>
+															С таким же ФИО клиента найден <a href="{% url 'dogovora:create_update_entry' drugie_dogovora.0.froze.uuid %}" target="_blank">другой договор</a>.<br>
 															<a onclick="nomer_dogovora('{{ csrf_token }}', '{{ self_id }}', '{{ drugie_dogovora.0.id }}');" class="text-warning">Использовать № договора {{ drugie_dogovora.0 }}</a> из найденного?<br>
 															Или <a onclick="nomer_dogovora('{{ csrf_token }}', '{{ self_id }}');" class="text-warning">присвоить этому договору новый №, например, <b>{{ novy_nomer_dogovora }}</b></a>?
 														 {% elif dogovora_s_takimi_zhe_fio >= 2 %}
 															С таким же ФИО клиента найдено <b>несколько</b> других договоров:<br>
 															<ul>
 															{% for drugoy_dogovor in drugie_dogovora %}
-																<li><a onclick="nomer_dogovora('{{ csrf_token }}', '{{ self_id }}', '{{ drugoy_dogovor.id }}');" class="text-warning">Использовать № договора {{ drugoy_dogovor }}</a> из <a href="{% url 'dogovora:create_update_indi' drugoy_dogovor.froze.uuid %}" target="_blank">найденного</a>?</li>
+																<li><a onclick="nomer_dogovora('{{ csrf_token }}', '{{ self_id }}', '{{ drugoy_dogovor.id }}');" class="text-warning">Использовать № договора {{ drugoy_dogovor }}</a> из <a href="{% url 'dogovora:create_update_entry' drugoy_dogovor.froze.uuid %}" target="_blank">найденного</a>?</li>
 															{% endfor %}
 															</ul>
 															Или <a onclick="nomer_dogovora('{{ csrf_token }}', '{{ self_id }}');" class="text-warning">присвоить этому договору новый №, например, <b>{{ novy_nomer_dogovora }}</b></a>?
@@ -100,13 +100,13 @@
 											</div>
 										{% elif field.auto_id == 'id_drugoy_dogovor' %}
 											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
-											<div class="input-group col-sm-9">
+											<div class="col-sm-9">
 												{{ field }}
 												{% if dogovora_na_izgotovlenie_mebeli and dogovor.kakoy_tip_dogovora in "technic_2021_04,matrasy_2021_06,carpets_and_rugs_ip,carpets_and_rugs_ooo-refabrik,mattresses_ooo-refabrik,m_householdtec,m_mattresses,entity_householdtec,juridical_moscow_ooo-refabrik_householdtec,entity_mattresses,juridical_ooo-refabrik_mattresses,entity_ufa_householdtec,entity_ufa_ooo-refabrik_householdtec,entity_ufa_mattresses,entity_ufa_carpets_and_rugs,entity_ufa_ooo-refabrik_mattresses" %}
 													<div>С таким же ФИО клиента найдено несколько договоров на изготовление мебели:</div>
 													<ul id="dogovora_na_izgotovlenie_mebeli">
 													{% for drugoy_dogovor in dogovora_na_izgotovlenie_mebeli %}
-														<li><a onclick="drugoy_dogovor('{{ csrf_token }}', '{{ self_id }}', '{{ drugoy_dogovor.id }}');" class="text-danger">Связать с договором </a> <a href="{% url 'dogovora:create_update_indi' drugoy_dogovor.froze.uuid %}" target="_blank">{{ drugoy_dogovor }}</a>?</li>
+														<li><a onclick="drugoy_dogovor('{{ csrf_token }}', '{{ self_id }}', '{{ drugoy_dogovor.id }}');" class="text-danger">Связать с договором </a> <a href="{% url 'dogovora:create_update_entry' drugoy_dogovor.froze.uuid %}" target="_blank">{{ drugoy_dogovor }}</a>?</li>
 													{% endfor %}
 													</ul>
 												{% elif dogovor.kakoy_tip_dogovora in "technic_2021_04,matrasy_2021_06,carpets_and_rugs_ip,carpets_and_rugs_ooo-refabrik,m_mattresses,mattresses_ooo-refabrik,m_householdtec,entity_householdtec,juridical_moscow_ooo-refabrik_householdtec,entity_mattresses,juridical_ooo-refabrik_mattresses,entity_ufa_householdtec,entity_ufa_ooo-refabrik_householdtec,entity_ufa_mattresses,entity_ufa_carpets_and_rugs,entity_ufa_ooo-refabrik_mattresses" %}
@@ -125,41 +125,9 @@
 											<div class="col-sm-9">
 												{{ field }}
 											</div>
-										{% elif field.auto_id == 'id_passport_birthday_date' or field.auto_id == 'id_passport_kogda_vydan' %}
-											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
-											<div class="col-sm-{% if field.auto_id == 'id_passport_birthday_date' or field.auto_id == 'id_passport_kogda_vydan' %}3{% else %}9{% endif %}">
-												{{ field }}
-											</div>
-										{% elif field.auto_id == 'id_passport_birthday_place' %}
-											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
-											<div class="col-sm-9">
-												{{ field }}
-											</div>
-										{% elif field.auto_id == 'id_passport_seria' %}
-											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
-											<div class="col-sm-9">
-												{{ field }}
-											</div>
-										{% elif field.auto_id == 'id_passport_nomer' %}
-											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
-											<div class="col-sm-9">
-												{{ field }}
-											</div>
-										{% elif field.auto_id == 'id_passport_kem_vydan' %}
-											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
-											<div class="col-sm-9">
-												{{ field }}
-											</div>
-										{% elif field.auto_id == 'id_ passport_kogda_vydan' %}
-											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
-											<div class="col-sm-9">
-												{{ field }}
-											</div>
-										{% elif field.auto_id == 'id_passport_kp' %}
-											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
-											<div class="col-sm-9">
-												{{ field }}
-											</div>
+
+
+
 										{% elif field.auto_id == 'id_adres_propiski' or field.auto_id == 'id_adres_ustanovki' or field.auto_id == 'id_passport_familiya' or field.auto_id == 'id_passport_imya' or field.auto_id == 'id_passport_otchestvo' %}
 											<label for="{{ field.auto_id }}" class="col-sm-3 col-form-label"><b>{{ field.label }}</b></label>
 											<div class="col-sm-9">

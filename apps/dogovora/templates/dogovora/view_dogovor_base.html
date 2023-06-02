@@ -21,7 +21,7 @@
 	{% elif create_or_update == 'update' and dogovor.kakoy_tip_dogovora in 'podklyuchenie_2021_06_tehniki,m_connectiontec,entity_connectiontec,entity_ufa_connectiontec' %}
 		<a class="btn btn-secondary" href="{% url 'dogovora:uslugi_po_podklyucheniyu' froze_uuid %}">Заполнить услуги для товарного чека</a>
 	{% elif tovarnyy_chek or uslugi_po_podklyucheniyu or uslugi_montage_demontage %}
-		<a class="btn btn-secondary" href="{% url 'dogovora:create_update_indi' froze_uuid %}">Вернуться к заполнению договора</a>
+		<a class="btn btn-secondary" href="{% url 'dogovora:create_update_entry' froze_uuid %}">Вернуться к заполнению договора</a>
 	{% elif create_or_update == 'update' and dogovor.kakoy_tip_dogovora in 'izgotovlenie_2019_11_mebeli,izgotovlenie_2020_09_mebeli,izgotovlenie_2021_02_mebeli,mygkaya_2021_02_mebel,iskusstvenny_2021_02_kamen,dveri,furniture_making,upholstered_furniture,artificial_stone,door_manufacturing,m_furniture_making,m_upholstered_furniture,m_doors,m_stone,m_manufacturingassembling,entity_furniture_making,juridical_moscow_ooo-refabrik_furniture_making,entity_householdtec,juridical_moscow_ooo-refabrik_householdtec,entity_stone,juridical_ooo-refabrik_stone,entity_ufa_furniture_making,entity_ufa_ooo-refabrik_furniture_making,entity_ufa_ooo-refabrik_furniture_makin,entity_ufa_householdtec,entity_ufa_ooo-refabrik_householdtec,entity_ufa_stone,entity_ufa_ooo-refabrik_stone' %}
 		<a class="btn btn-secondary" href="{% url 'dogovora:teh_usloviya_na_mebel_dveri' froze_uuid %}" target="_blank">ТУ на мебель, двери</a>
 	{% endif %}

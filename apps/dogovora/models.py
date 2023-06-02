@@ -410,13 +410,6 @@ class DogovorEntry(models.Model):
     passport_imya = models.CharField(max_length=200, default='', db_index=True, blank=True)
     passport_otchestvo = models.CharField(max_length=200, default='', db_index=True, blank=True)
 
-    passport_birthday_date = models.DateField(default=None, blank=True, null=True)
-    passport_birthday_place = models.CharField(max_length=200, default='', blank=True, null=True)
-    passport_seria = models.CharField(max_length=4, default=None, blank=True, null=True)
-    passport_nomer = models.CharField(max_length=6, default=None, blank=True, null=True)
-    passport_kem_vydan = models.CharField(max_length=200, default='', blank=True, null=True)
-    passport_kogda_vydan = models.DateField(default=None, blank=True, null=True)
-    passport_kp = models.CharField(max_length=7, default=None, blank=True, null=True)
     adres_propiski = models.CharField(max_length=200, default='', blank=True, null=True)
     adres_ustanovki = models.CharField(max_length=200, default='', blank=True, null=True)
 

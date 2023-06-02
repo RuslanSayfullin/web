@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8"/>
+	<link rel="shortcut icon" href="{% static 'portal/favicon.ico' %}" type="image/x-icon" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<link rel="stylesheet" href="{% static 'dogovora/dogovor_izgotovlenie_mebeli/base.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'dogovora/dogovor_izgotovlenie_mebeli/fancy.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'dogovora/dogovor_izgotovlenie_mebeli/main.css' %}"/>
+	<link rel="stylesheet" href="{% static 'dogovora/dogovora_original_docx_view.css' %}"/>
+	<script src="{% static 'dogovora/dogovor_izgotovlenie_mebeli/compatibility.min.js' %}"></script>
+	<script src="{% static 'dogovora/dogovor_izgotovlenie_mebeli/theViewer.min.js' %}"></script>
+	<script>try{theViewer.defaultViewer = new theViewer.Viewer({});}catch(e){}</script>
+	<title>Техника</title>
+</head>
+<body>
+<div id="sidebar"><div id="outline"></div></div>
+<div id="page-container">
+<div id="pf1" class="pf w0 h0" data-page-no="1">
+	<div class="pc pc1 w0 h0">
+		<img class="bi x0 y0 w1 h1 logo" src="{% static 'dogovora/02_logo.jpg' %}" style="opacity:0.5;filter:alpha(opacity=50)">
+
+		<div class="t m0 x4 h5 y4 ff5 fs0 fc0 sc0 ls0 ws0">ДОГОВОР </div>
+		<div class="t m0 x5 h5 y5 fs0 fc0 sc0 ls0 ws0" style="margin-left: -20px;"><b>КУПЛИ-ПРОДАЖИ  № {% if dogovor.nomer_dogovora %}<v>{{ dogovor.nomer_dogovora }}</v>{% else %}_____{% endif %} /ДТ</b></div>
+		<div class="t m0 x6 h6 y6 ff7 fs0 fc0 sc0 ls0 ws0">Республика Башкортостан, г.<span class="ff8"> </span>Уфа<span class="ff8">                                                                                                                                              {% if dogovor.data_podpisaniya %}«<v>{{ dogovor.data_podpisaniya|date:'j' }}</v>» <v>{{ dogovor_more.data_podpisaniya_month }}</v> <v>{{ dogovor.data_podpisaniya|date:'Y' }}</v>{% else %}«____» _____________ 20____{% endif %}</span> г.</div>
+
+		<div class="t m0 x8 h6 ff8 fs0 fc0 sc0 ls0 ws0 pf1text">
+			<p>{% if dogovor.passport_familiya and dogovor.passport_imya %}<v>{{ dogovor.passport_familiya }}</v> <v>{{ dogovor.passport_imya }}</v>{% else %}___{% endif %}{% if dogovor.passport_otchestvo %} <v>{{ dogovor.passport_otchestvo }}</v>{% else %}{% endif %}, {% if dogovor.general_director %} в лице {% if dogovor.job_title %}<v>{{ dogovor.job_title }}</v>{% else %}___________{% endif %} <v>{{ dogovor.general_director }}</v>, действующего на основании {% if dogovor.letter_of_attorney %} Доверенности №<v>{{ dogovor.letter_of_attorney }}</v>{% else %}Устава{% endif %} {% else %} действующего на основании Свидетельства ОГРНИП {% if dogovor.registration_number %}<v>{{ dogovor.registration_number }}</v>{% else %}___________{% endif %}{% endif %}, именуемый в дальнейшем "Покупатель", с одной стороны и <b><v>{{ postavshik.fio }}</v></b>, в лице директора Садыкова Фархада Идиятулловича, действующего на основании Устава, именуемый в дальнейшем "Продавец", с другой стороны, именуемые вместе "Стороны", а по отдельности "Сторона", заключили настоящий Договор о нижеследующем:</p>
+			&nbsp;
+			<p style="text-align: center; font-weight: bold;">1. ПРЕДМЕТ ДОГОВОРА</p>
+			<p>1.1. По настоящему Договору Продавец обязуется передать в собственность Покупателя Товар, в ассортименте и в количестве, указанных в Товарном чеке, являющемся неотъемлемой частью настоящего Договора, в срок, предусмотренный Договором, а также выполнить, если это указано в Товарном чеке монтажу и установке Товара (далее по тексту - "Работы"), а Покупатель обязуется оплатить и принять Товар, принять выполненные Работы в порядке, установленном настоящим Договором.</p>
+			<p>1.2. Товар продается Покупателю по образцу на основании ознакомления Покупателя с предложенными Продавцом образцами Товаров или их описаниями, содержащимися в каталогах, проспектах, буклетах, фотоснимков или средств связи или иными способами.</p>
+			<p>1.3. Ассортимент, количество, цена единицы товара и общая сумма Договора определяются в Товарном чеке, являющемся неотъемлемой частью настоящего Договора.</p>
+			&nbsp;
+			<p style="text-align: center; font-weight: bold;">2. ЦЕНА ДОГОВОРА И ПОРЯДОК РАСЧЕТОВ</p>
+			<p>2.1. Цена Товара по настоящему Договору составляет : {% if dogovor.vsego_k_oplate %}<v>{{ dogovor_more.vsego_k_oplate }}</v> (<v>{{ dogovor_more.vsego_k_oplate_propisyu }}</v>) <v>{{ dogovor_more.vsego_k_oplate_the_word }}</v>{% else %}________________ (______________________________________) рублей{% endif %} 00 коп., в том числе НДС 20%, что составляет: {% if dogovor.vsego_k_oplate %}<v>{{ dogovor_more.nds_k_oplate }}</v> (<v>{{ dogovor_more.nds_k_oplate_propisyu }}</v>) <v>{{ dogovor_more.nds_k_oplate_the_word }}</v>{% else %}________________ (______________________________________) рублей{% endif %} {% if dogovor.vsego_k_oplate %}<v>{{ dogovor_more.nds_k_oplate_kop }}</v>{% endif %} коп.</p>
+			<p>2.2. Покупатель оплачивает цену Товара в 100% объеме в день заключения Договора.</p>
+			<p>2.3. Оплата по настоящему Договору производится путем перечисления денежных средств на расчетный счет Продавца (либо иным доступным способом по соглашению сторон), указанный в настоящем Договоре.</p>
+			&nbsp;
+			<p style="text-align: center; font-weight: bold;">3. ПОРЯДОК ОТГРУЗКИ И ПЕРЕДАЧИ ТОВАРА</p>
+			<p>3.1. Доставка Товара на адрес Покупателя осуществляется, транспортом Продавца в согласованные Сторонами сроки по указанному Покупателем в настоящем Договоре адресу доставки.</p>
+			<p><b>3.2. Срок исполнения обязанности Продавца передать Товар Покупателю :</b></p>
+			{% if dogovor.technics_sroki_dostavki_tehniki == 1 %}
+			<p><b>-Товар должен быть передан Покупателю в день исполнения обязательств по договору {% if dogovor_more.drugoy_dogovor_nomer %}<v>{{ dogovor.drugoy_dogovor.kakoy_tip_dogovora_na_kirillice }}</v> №<v>{{ dogovor.drugoy_dogovor.nomer_dogovora }}</v> от {% if dogovor_more.drugoy_dogovor_data_podpisaniya %}«<v>{{ dogovor_more.drugoy_dogovor_data_podpisaniya|date:'j' }}</v>» <v>{{ dogovor_more.drugoy_dogovor_data_podpisaniya_month }}</v> <v>{{ dogovor_more.drugoy_dogovor_data_podpisaniya|date:'Y' }}</v>{% else %}__ от __ ____ 20__г{% endif %}{% endif %}.</b></p>
+			{% else %}
+			<p><b>-Товар должен быть передан Покупателю в течение <u>{{ dogovor.technics_sroki_dostavki_tehniki_v_dnyah|default:'___' }}</u> рабочих дней со дня заключения Договора и выполнения обязательства согласно п. 2.2. настоящего Договора при отсутствии заключенного договора на изготовление мебели.</b></p>
+			{% endif %}
+			<p>3.3. Покупатель обязан осмотреть Товар на отсутствие внешних повреждений, проверить соответствие качества, количества, комплектности и ассортимента, согласно условиям настоящего Договора и принять Товар. Товар принимается Покупателем путем подписания Сторонами Акта сдачи-приема Товара и УПД.</p>
+			<p>3.4. В случае отказа от подписания Акта сдачи-приема Товара Покупатель обязан в течение 3 (трех) календарных дней предоставить Продавцу в письменной форме мотивированный отказ от приёма-передачи Товара. Факт не предоставления Покупателем в указанный срок обоснованных письменных замечаний Продавцу означает безоговорочное принятие Товара по настоящему Договору и по юридическим последствиям приравнивается к подписанию Покупателем Акта сдачи-приема Товара. В этом случае Продавец оформляет Акта сдачи-приема Товара в одностороннем порядке, и обязательства Продавца по передаче, установке и монтажу Товара считаются исполненными надлежаще и в полном объеме.</p>
+			<p>3.5. Право собственности на Товар, а также риск случайной гибели или повреждения Товара переходят от Продавца к Покупателю с даты подписания Акта сдачи-приема Товара и УПД.</p>
+			&nbsp;
+			<p style="text-align: center; font-weight: bold;">4. ПРАВА И ОБЯЗАННОСТИ СТОРОН</p>
+			<p><strong>4.1. Продавец обязан и вправе:</strong></p>
+			<p>4.1.1. Передать Покупателю Товар надлежащего качества и в обусловленном настоящим Договором ассортименте.</p>
+			<p>4.1.2. В случаях, когда Покупатель в нарушение закона, иных правовых актов или настоящего Договора не принимает Товар или отказывается его принять, Продавец вправе потребовать от Покупателя принять Товар или отказаться от исполнения Договора в соответствии с пунктом "Ответственность сторон".</p>
+			<p><strong>4.2. Покупатель обязан и вправе:</strong></p>
+			<p>4.2.1. Осуществить проверку при приемке Товара по количеству, качеству и ассортименту, подписать Акта сдачи-приема Товара.</p>
+			<p>4.2.2. Сообщить Продавцу о замеченных при приемке или в процессе эксплуатации недостатках проданного Товара в срок до 7 (семи) календарных дней с момента передачи данного Товара.<strong>Заводская упаковка должна быть сохранена в срок до 7 (семи) календарных дней с момента передачи данного Товара.</strong></p>
+			<p>4.2.3. Оплатить купленный Товар в срок, установленный Договором.</p>
+			<p>4.3. Товар, не соответствующий наименованию, количеству и ассортименту считается принятым, если Покупатель в срок до 7 (семи) календарных дней после его получения, не сообщит Продавцу о своем отказе от Товара.</p>
+			<p>4.4. Если Покупатель не отказался от Товара, наименование, количество и ассортимент которого не соответствует данному Договору, он обязан его оплатить по цене, согласованной с Продавцом. В случае, когда Продавцом не приняты необходимые меры по согласованию цены в разумный срок, Покупатель оплачивает Товар по цене, которая в момент заключения Договора при сравнимых обстоятельствах обычно взималась за аналогичный Товар.</p>
+			<p>4.5. Покупатель, которому передан Товар ненадлежащего качества, вправе по своему выбору потребовать от Продавца:</p>
+			<p>&ndash; соразмерного уменьшения покупной цены;</p>
+			<p>&ndash; безвозмездного устранения недостатков Товара в разумный срок;</p>
+			<p>&ndash; возмещения своих расходов на устранение недостатков Товара.</p>
+			<p>4.6. В случае существенного нарушения требований к качеству Товара (обнаружение неустранимых недостатков, недостатков, которые не могут быть устранены без несоразмерных расходов или затрат времени или выявляются неоднократно либо проявляются вновь после их устранения, и других подобных недостатков) Покупатель вправе по своему выбору:</p>
+			<p>&ndash; отказаться от исполнения данного Договора и потребовать возврата уплаченной за Товар денежной суммы;</p>
+			<p>&ndash; потребовать замены Товара ненадлежащего качества Товаром, соответствующим Договору.</p>
+			&nbsp;
+			<p style="text-align: center; font-weight: bold;">5. ГАРАНТИЙНЫЙ СРОК ТОВАРА</p>
+			<p>5.1. Гарантийный срок на Товар соответствует фирменной гарантии изготовителя, указанной в фирменном гарантийном талоне, с момента подписания Сторонами Акта сдачи-приема Товара.</p>
+			<p>5.2. Гарантийный срок начинает течь с момента передачи Товара Покупателю.</p>
+			&nbsp;
+			<p style="text-align: center; font-weight: bold;">6. ОТВЕТСТВЕННОСТЬ СТОРОН</p>
+			<p>6.1. За нарушение срока уплаты цены Договора, предусмотренного п. 2.1. настоящего Договора, Продавец вправе потребовать от Покупателя уплаты пени в размере 0,01 % от суммы Договора за каждый день просрочки.</p>
+			<p>6.2. За нарушение срока передачи Товара, согласно одному из условий п.3.2 настоящего Договора, не по вине Покупателя более, чем на 5 рабочих дней, Покупатель вправе потребовать от Продавца уплаты пени в размере 0,01%  в день от суммы Договора за каждый день просрочки.</p>
+			<p>6.3. В случае одностороннего необоснованного расторжения Договора со стороны Покупателя последний обязуется возместить Продавцу все понесенные в связи с выполнением данного Договора затраты (ст. №32 «Закон о защите прав потребителей» №212-ФЗ от 17.12. 1999 г.)</p>
+		</div>
+	</div>
+	<div class="c x1 y1 w2 h2">
+		<div class="t m0 x2 h3 y2 ff1 fs0 fc0 sc0 ls0 ws0">1</div>
+	</div>
+	<div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
+</div>
+<div id="pf2" class="pf w0 h0" data-page-no="2">
+	<div class="pc w0 h0">
+		<div class="t m0 x8 h6 ff8 fs0 fc0 sc0 ls0 ws0 page_without_logo">
+			&nbsp;
+			<p style="text-align: center; font-weight: bold;">7. ОБСТОЯТЕЛЬСТВА НЕПРЕОДОЛИМОЙ СИЛЫ</p>
+			<p>7.1. Ни одна из сторон настоящего Договора не несет ответственности перед другой стороной за невыполнение обязательств, обусловленное обстоятельствами, возникшими помимо воли и желания сторон, которые нельзя предвидеть или избежать, включая, но не ограничиваясь, объявленную или фактическую войну, гражданские волнения, эпидемии, блокаду, землетрясения, наводнения, пожары и другие стихийные бедствия, запрещения экспорта или импорта (эмбарго), решений Правительства или решений государственных таможенных органов, действиями правоохранительных органов. Документ, выданный соответствующим компетентным органом, является достаточным подтверждением наличия и продолжительности действия непреодолимой силы.</p>
+			<p>7.2. Сторона, которая не исполняет своего обязательства вследствие действия непреодолимой силы, должна немедленно известить другую сторону о препятствии и его влиянии на исполнение обязательств по Договору.</p>
+			<p>7.3. В случаях наступления обстоятельств, предусмотренных в п. 7.1, срок выполнения стороной обязательств по настоящему Договору отодвигается соразмерно времени, в течение которого действуют эти обстоятельства и их последствия.</p>
+			&nbsp;
+			<p style="text-align: center; font-weight: bold;">8. РАЗРЕШЕНИЕ СПОРОВ</p>
+			<p>8.1. Споры и разногласия, возникающие между Сторонами, разрешаются путем переговоров, в соответствии с действующим гражданским законодательством Российской Федерации.</p>
+			<p>8.2. В случае возникновения споров между Продавцом и Покупателем по вопросам, предусмотренным настоящим Договором, или в связи с ним, Стороны примут все меры к разрешению их путем переговоров между собой.</p>
+			<p>8.3. При невозможности урегулирования в процессе переговоров споры разрешаются в порядке, установленном действующим законодательством, с соблюдением претензионного порядка разрешения спора. Обращения направляются на адрес электронной почты client@re-forma.ru или отправляются в письменном виде по адресу доставки корреспонденции либо  по адресу: г. Москва, набережная Марка Шагала, д. 1 корпус 2 (помещение 9 и 9а).</p>
+			<p>8.4. Претензия Покупателя должна содержать конкретные, обоснованные требования нарушения норм законодательства, к которой должны быть приложены копии документов, подтверждающих изложенные обстоятельства. Доставка претензионного материала осуществляется заказным письмом с уведомлением, по электронной почте, телеграммой либо нарочной (курьерской) связью. Факт получения документов должен подтверждаться распиской стороны в его получении.</p>
+			<p>8.5. Сторона, получившая претензию, обязана ее рассмотреть в течение 14 (четырнадцати) рабочих дней и направить мотивированный ответ, а при необходимости проведения экспертизы срок продлевается на весь период исследования.</p>
+			<p>8.6. В случае, когда возникшие споры путем переговоров не урегулированы, они подлежат разрешению в судебном порядке на основе действующего законодательства Российской Федерации.</p>
+			&nbsp;
+			<p style="text-align: center; font-weight: bold;">9. ДОПОЛНИТЕЛЬНЫЕ УСЛОВИЯ И ЗАКЛЮЧИТЕЛЬНЫЕ ПОЛОЖЕНИЯ</p>
+			<p>9.1. Настоящий Договор вступает в силу с даты его подписания Сторонами и действует до полного исполнения Сторонами обязательств по нему.</p>
+			<p>9.2. Все изменения и дополнения к настоящему Договору должны быть составлены в письменной форме и подписаны обеими Сторонами.</p>
+			<p>9.3. Настоящий Договор может быть расторгнут по взаимному соглашению Сторон, а также по иным основаниям, предусмотренным действующим законодательством Российской Федерации.</p>
+			<p>9.4. Все извещения, сообщения, связанные с исполнением настоящего Договора, направляются Сторонами друг другу в письменной форме.</p>
+			<p>9.5. Во всем остальном, что не предусмотрено настоящим Договором, Стороны руководствуются действующим законодательством Российской Федерации.</p>
+			<p>9.6. Договор составлен в двух экземплярах, по одному для каждой из Сторон.</p>
+			<p>9.7. Неотъемлемую часть договора составляют:</p>
+			<p>-Товарный чек;</p>
+			<p>-Приложение №1</p>
+			&nbsp;
+			<p style="text-align: center; font-weight: bold;">СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ</p>
+			<p>Покупатель дает свое согласие на обработку своих персональных данных и использование их в целях заключения гражданско-правового договора, к которым относятся:</p>
+			<p>- паспортные данные;</p>
+			<p>- год, месяц, дата и место рождения, а также иные данные, содержащиеся в удостоверении личности;</p>
+			<p>- данные о месте жительства, почтовом адресе, телефоне, адресе электронной почты;</p>
+			<p>- данные о контактных номерах телефона.</p>
+			<p>Настоящее согласие предоставляется на осуществление любых действий в отношении Покупателя персональных данных, которые необходимы или желаемы для достижения указанной выше цели, включая (без ограничения) сбор, систематизацию, накопление, хранение, уточнение (обновление, изменение), использование, распространение (в том числе передачу третьим лицам), передачу персональных данных, а также осуществление любых иных действий с моими персональными данными, предусмотренных действующим законодательством Российской Федерации.</p>
+			<p>Покупатель проинформирован(а), Продавец гарантирует обработку моих персональных данных в соответствии с действующим законодательством Российской Федерации как неавтоматизированным, так и автоматизированным способами.</p>
+			<p>Данное согласие действует бессрочно с момента его выдачи.</p>
+			<p>Данное согласие может быть отозвано в любой момент по моему письменному заявлению.</p>
+			<p>Покупатель подтверждает, что, давая такое согласие, действует по собственной воле и в своих интересах.</p>
+			&nbsp;
+		</div>
+	</div>
+	<div class="c x1 y1 w2 h2">
+		<div class="t m0 x2 h3 y2 ff1 fs0 fc0 sc0 ls0 ws0">2</div>
+	</div>
+	<div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
+</div>
+<div id="pf3" class="pf w0 h0" data-page-no="3">
+	<div class="pc w0 h0">
+		<div class="t m0 x8 h6 ff8 fs0 fc0 sc0 ls0 ws0 page_without_logo">
+			&nbsp;
+            <p><b>Примечание №1 Доверенные лица, имеющие право подписывать Акт сдачи-приема Товара, УПД  (при наличии  надлежаще оформленной доверенности).</b>.</p>
+            <p>Фамилия И.О. <v>{{ dogovor_more.doverennye_lica.0|default:'________________________________________/' }}</v></p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Конт. телефон доверенного лица <v>{{ dogovor_more.doverennye_lica_telefony.0|default:'+7_____________________________' }}</v></p>
+            <p>Фамилия И.О. <v>{{ dogovor_more.doverennye_lica.1|default:'________________________________________/' }}</v></p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Конт. телефон доверенного лица <v>{{ dogovor_more.doverennye_lica_telefony.1|default:'+7_____________________________' }}</v></p>
+			<p>&nbsp;</p>
+			<p style="text-align: center; font-weight: bold;">АДРЕСА И РЕКВИЗИТЫ СТОРОН</p>
+			<table align="center" border="1" cellpadding="10" cellspacing="0" class="requisites">
+				<tbody>
+					<tr>
+						<td style="vertical-align: top; width: 50%;">
+							<p align="center"><b>ПРОДАВЕЦ:</b></p>
+							<p align="center"><v>{{ postavshik.fio }}</v></p>
+							<p>Юр.адрес: <v>{{ postavshik.adres1 }}</v></p>
+							<p><v>{{ postavshik.adres2 }}</v></p>
+							<p>ИНН: <v>{{ postavshik.inn }}</v>, КПП: <v>{{ postavshik.kpp }}</v></p>
+							<p>ОГРН <v>{{ postavshik.ogrn }}</v></p>
+							<p>р/с: <v>{{ postavshik.rs }}</v></p>
+							<p><v>{{ postavshik.bank1 }}</v> <v>{{ postavshik.bank2 }}</v></p>
+							<p>к/с: <v>{{ postavshik.ks }}</v></p>
+							<p>БИК <v>{{ postavshik.bik }}</v></p>
+							<p>Тел: 8 (347) 299-11-70 (отдел по работе с клиентами)</p>
+							<p>8-909-349-16-70 (отдел сервисного обслуживания),</p>
+							<p>8-967-738-7663 (бухгалтерия)</p>
+							<p>&nbsp;</p>
+							<p><b>Директор __________________________/ Садыков Ф. И./</b></p>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>М.П.</b></p>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+						</td>
+						<td style="vertical-align: top; width: 50%;">
+							<p align="center"><b>ПОКУПАТЕЛЬ:</b></p>
+							<p> </p>
+							<p align="center">&nbsp;<v>{{ dogovor.passport_familiya|default:'___________________________' }}</v>&nbsp;<v>{{ dogovor.passport_imya|default:'_____________________________' }}</v>&nbsp;<v>{{ dogovor.passport_otchestvo|default:'' }}</v></p>
+							<p>Юр.адрес: <v>{{ dogovor.adres_propiski|default:'___________________________ _________________________________________<br>___________________________ _________________________________________' }}</v></p>
+							<p>&nbsp;</p>
+							<p>ИНН&nbsp;: <v>{{ dogovor.tax_identification_number|default:'________________________' }}</v>{% if dogovor.general_director %}, КПП: <v>{{ dogovor.registration_reason_code|default:'_________' }}</v>{% else %}{% endif %}</p>
+							<p>{% if dogovor.general_director %} ОГРН</v>{% else %}ОГРНИП{% endif %}: <v>{{ dogovor.registration_number|default:'________________________' }}</v></p>
+							<p>р/с&nbsp;: <v>{{ dogovor.checking_account|default:'________________________' }}</v></p>
+							<p><v>{{ dogovor.account_bank|default:'________________________' }}</v></p>
+							<p>к/с&nbsp;: <v>{{ dogovor.correspondent_account|default:'________________________' }}</v></p>
+							<p>БИК&nbsp;: <v>{{ dogovor.bank_identification_code|default:'________________________' }}</v></p>
+							<p>Телефон /факс: <v>{{ froze.client.phone|default:'_______________________' }}</v></p>
+							<p>e-mail:____________________________________</p>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+							<p>________________/________________/ ________________/</p>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>М.П.</b></p>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			<table border="2" cellpadding="20" cellspacing="0" class="requisites">
+				<tbody>
+					<tr>
+						<td style="vertical-align: top; width: 100%;">
+							<p>&nbsp;</p>
+							<p style="font-size: 130%"> Уважаемый Покупатель! Обращаем Ваше внимание на то, что Продавец будет вести все переговоры по изделию, его изготовлению, назначению монтажных работ, обсуждать иные вопросы, возникающие по данному договору, а также обсуждать вопросы, касающиеся оплаты в рамках данного договора, только исключительно с самим Заказчиком, указанным в реквизитах сторон, или с его доверенным лицом, указанным в договоре в Примечании №1.</p>
+							<p style="font-size: 130%">  Любая информация по заказу, полученная от лиц, не указанных в Договоре, не подлежит рассмотрению Продавцом.</p>
+							<p>&nbsp;</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="c x1 y1 w2 h2">
+		<div class="t m0 x2 h3 y2 ff1 fs0 fc0 sc0 ls0 ws0">3</div>
+	</div>
+	<div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
+</div>
+<div id="pf4" class="pf w0 h0" data-page-no="4">
+	<div class="pc pc1 w0 h0">
+		<img class="bi x0 y0 w1 h1 logo" src="{% static 'dogovora/02_logo.jpg' %}" style="opacity:0.5;filter:alpha(opacity=50)">
+		<div class="t m0 x8 h6 ff8 fs0 fc0 sc0 ls0 ws0 page_without_logo">
+			<p>&nbsp;</p>
+			<p style="text-align: right; font-weight: bold;">К договору купли-продажи № {% if dogovor.nomer_dogovora %}<v>{{ dogovor.nomer_dogovora }}</v>{% else %}_________{% endif %} /ДТ</p>
+			<p style="text-align: right; font-weight: bold;"></p>
+			<p>&nbsp;</p><p>&nbsp;</p>
+			<p align="center"><b>ТОВАРНЫЙ ЧЕК</b></p>
+			<p>&nbsp;</p><p>&nbsp;</p>
+			<table border="1" cellpadding="20" cellspacing="0" width="100%">
+				<tbody>
+					<tr>
+						<td align="center" style="vertical-align: top;" width="5%">№</td>
+						<td align="center" style="vertical-align: top;" width="35%">Наименование товара</td>
+						<td align="center" style="vertical-align: top;" width="15%">Бренд</td>
+						<td align="center" style="vertical-align: top;" width="10%">Артикул</td>
+						<td align="center" style="vertical-align: top;" width="10%">Кол-во</td>
+						<td align="center" style="vertical-align: top;" width="10%">Цена</td>
+						<td align="center" style="vertical-align: top;" width="15%">Сумма к оплате</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td><v>{{ tovarnyy_chek.1.tovchek_naim_tovara|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.1.tovchek_brand|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.1.tovchek_artikul|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.1.tovchek_kolvo|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.1.tovchek_tsena|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.1.summa|default:'' }}</v></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td><v>{{ tovarnyy_chek.2.tovchek_naim_tovara|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.2.tovchek_brand|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.2.tovchek_artikul|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.2.tovchek_kolvo|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.2.tovchek_tsena|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.2.summa|default:'' }}</v></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td><v>{{ tovarnyy_chek.3.tovchek_naim_tovara|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.3.tovchek_brand|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.3.tovchek_artikul|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.3.tovchek_kolvo|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.3.tovchek_tsena|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.3.summa|default:'' }}</v></td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td><v>{{ tovarnyy_chek.4.tovchek_naim_tovara|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.4.tovchek_brand|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.4.tovchek_artikul|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.4.tovchek_kolvo|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.4.tovchek_tsena|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.4.summa|default:'' }}</v></td>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td><v>{{ tovarnyy_chek.5.tovchek_naim_tovara|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.5.tovchek_brand|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.5.tovchek_artikul|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.5.tovchek_kolvo|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.5.tovchek_tsena|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.5.summa|default:'' }}</v></td>
+					</tr>
+					<tr>
+						<td>6</td>
+						<td><v>{{ tovarnyy_chek.6.tovchek_naim_tovara|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.6.tovchek_brand|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.6.tovchek_artikul|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.6.tovchek_kolvo|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.6.tovchek_tsena|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.6.summa|default:'' }}</v></td>
+					</tr>
+					<tr>
+						<td>7</td>
+						<td><v>{{ tovarnyy_chek.7.tovchek_naim_tovara|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.7.tovchek_brand|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.7.tovchek_artikul|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.7.tovchek_kolvo|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.7.tovchek_tsena|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.7.summa|default:'' }}</v></td>
+					</tr>
+					<tr>
+						<td>8</td>
+						<td><v>{{ tovarnyy_chek.8.tovchek_naim_tovara|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.8.tovchek_brand|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.8.tovchek_artikul|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.8.tovchek_kolvo|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.8.tovchek_tsena|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.8.summa|default:'' }}</v></td>
+					</tr>
+					<tr>
+						<td>9</td>
+						<td><v>{{ tovarnyy_chek.9.tovchek_naim_tovara|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.9.tovchek_brand|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.9.tovchek_artikul|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.9.tovchek_kolvo|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.9.tovchek_tsena|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.9.summa|default:'' }}</v></td>
+					</tr>
+					<tr>
+						<td>10</td>
+						<td><v>{{ tovarnyy_chek.10.tovchek_naim_tovara|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.10.tovchek_brand|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.10.tovchek_artikul|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.10.tovchek_kolvo|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.10.tovchek_tsena|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.10.summa|default:'' }}</v></td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td><v>{{ tovarnyy_chek.11.tovchek_naim_tovara|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.11.tovchek_brand|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.11.tovchek_artikul|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.11.tovchek_kolvo|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.11.tovchek_tsena|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.11.summa|default:'' }}</v></td>
+					</tr>
+					<tr>
+						<td>12</td>
+						<td><v>{{ tovarnyy_chek.12.tovchek_naim_tovara|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.12.tovchek_brand|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.12.tovchek_artikul|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.12.tovchek_kolvo|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.12.tovchek_tsena|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.12.summa|default:'' }}</v></td>
+					</tr>
+					<tr>
+						<td>13</td>
+						<td><v>{{ tovarnyy_chek.13.tovchek_naim_tovara|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.13.tovchek_brand|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.13.tovchek_artikul|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.13.tovchek_kolvo|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.13.tovchek_tsena|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.13.summa|default:'' }}</v></td>
+					</tr>
+					<tr>
+						<td>14</td>
+						<td><v>{{ tovarnyy_chek.14.tovchek_naim_tovara|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.14.tovchek_brand|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.14.tovchek_artikul|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.14.tovchek_kolvo|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.14.tovchek_tsena|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.14.summa|default:'' }}</v></td>
+					</tr>
+					<tr>
+						<td>15</td>
+						<td><v>{{ tovarnyy_chek.15.tovchek_naim_tovara|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.15.tovchek_brand|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.15.tovchek_artikul|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.15.tovchek_kolvo|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.15.tovchek_tsena|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.15.summa|default:'' }}</v></td>
+					</tr>
+					<tr>
+						<td>16</td>
+						<td><v>{{ tovarnyy_chek.16.tovchek_naim_tovara|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.16.tovchek_brand|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.16.tovchek_artikul|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.16.tovchek_kolvo|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.16.tovchek_tsena|default:'' }}</v></td>
+						<td><v>{{ tovarnyy_chek.16.summa|default:'' }}</v></td>
+					</tr>
+				</tbody>
+			</table>
+			<p>&nbsp;</p><p>&nbsp;</p>
+			<p>Всего наименований _______, на сумму составляет: {% if tovarnyy_chek.itogo_summa %}<v>{{ tovarnyy_chek.itogo_summa }}</v> (<v>{{ tovarnyy_chek.itogo_summa_propisyu }}</v>){% else %}(____________________________________________){% endif %} 00 копеек</p>
+			<p>&nbsp;</p><p>&nbsp;</p>
+            <table border="1" cellpadding="20" cellspacing="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td style="vertical-align: top; width: 33.3%;"><span style="margin-left: 10%;">УСТАНОВКА</span></td>
+                        <td style="vertical-align: top; width: 33.3%; text-align: center;"><span style="color: green;">&#10065;</span> да</td>
+                        <td style="vertical-align: top; width: 33.3%; text-align: center;"><span style="color: green;">&#10065;</span> нет</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top; width: 33.3%;"><span style="margin-left: 10%;">ПОДКЛЮЧЕНИЕ</span></td>
+                        <td style="vertical-align: top; width: 33.3%; text-align: center;"><span style="color: green;">&#10065;</span> да</td>
+                        <td style="vertical-align: top; width: 33.3%; text-align: center;"><span style="color: green;">&#10065;</span> нет</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top; width: 33.3%;"><span style="margin-left: 10%;">ДОСТАВКА</span></td>
+                        <td style="vertical-align: top; width: 33.3%; text-align: center;"><span style="color: green;">&#10065;</span> да</td>
+                        <td style="vertical-align: top; width: 33.3%; text-align: center;"><span style="color: green;">&#10065;</span> нет</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top; width: 33.3%;"><span style="margin-left: 10%;">Адрес доставки</span></td>
+                        <td style="vertical-align: top; width: 66.6%;" colspan="2"></td>
+                    </tr>
+                </tbody>
+            </table>
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			<table border="0" cellpadding="20" cellspacing="0" class="requisites" width="100%">
+				<tbody>
+					<tr>
+						<td style="vertical-align: top; width: 59%;">
+							<p>ПРОДАВЕЦ: <b>_______________________/ Садыков Ф.И./</b></p>
+						</td>
+						<td style="vertical-align: top;">
+							<p class="no-border">ПОКУПАТЕЛЬ: <b>_______________________/ ________________/</b></p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
+</div>
+<div id="pf5" class="pf w0 h0" data-page-no="5">
+	<div class="pc pc1 w0 h0">
+		<img class="bi x0 y0 w1 h1 logo" src="{% static 'dogovora/02_logo.jpg' %}" style="opacity:0.5;filter:alpha(opacity=50)">
+		<div class="t m0 x8 h6 ff8 fs0 fc0 sc0 ls0 ws0 page_without_logo">
+			<p>&nbsp;</p>
+			<p style="text-align: right; font-weight: bold;">ПРИЛОЖЕНИЕ №1</p>
+			<p style="text-align: right; font-weight: bold;">К ДОГОВОРУ КУПЛИ-ПРОДАЖИ № {% if dogovor.nomer_dogovora %}<v>{{ dogovor.nomer_dogovora }}</v>{% else %}_________{% endif %} /ДТ</p>
+			<p>&nbsp;</p>
+			<p align="center"><b>Рекомендации к подготовке помещения для осуществления услуг установки</b></p>
+			<p><b>Требования к помещению:</b><br>
+			Помещение должно быть освобождено от старой мебели, сантехники и строительного мусора.<br>
+			Стены должны быть выполнены из прочного материала (кирпич, бетон). Если дом построен из круглого бревна, бруса, рекомендуется обшить стены, по которым планируется установка кухни, ДСП или фанерой, толщиной не менее 16 мм.<br>
+			В случае необходимости стены должны быть укреплены закладной балкой шириной не менее 100 мм на уровне крепления навесных шкафов.<br>
+			Для правильной установки все стены должны быть ровными и отвесными, углы сопряжения стен и полов должны быть 90 градусов, перепад высоты напольного покрытия не должен составлять более 10мм на Зм длины .<br>
+			Помещение должно быть электрифицированным и отапливаемым.<br>
+			Старое настенное покрытие должно быть удалено, а стена подготовлена для монтажа стеновой панели.<br>
+			Невыполнение этих условий Заказчиком, может привести к увеличению сроков по устранению недостатков, либо невозможности оказания услуг установки.</p>
+			<p><b>Требования к электропроводке и розеткам:</b><br>
+			Рекомендуемые места размещения розеток: для встраиваемой бытовой техники - на уровне цоколя (не выше 100 мм от пола);<br>
+			Для бытовых электроприборов - над столешницей (не менее 1100 мм от уровня пола);<br>
+			Запрещенные места размещения розеток:<br>
+			- за секциями встраиваемой бытовой техники;<br>
+			- за секциями с выдвижными ящиками и механизмами, выше 100 мм от уровня пола;<br>
+			К моменту монтажа все розетки должны быть установлены согласно рекомендуемой схеме.<br>
+			Рекомендации по электропроводке предоставляются после заключения.</p>
+			<p><b>Требования к размещению труб водопровода:</b><br>
+			Все водопроводные и канализационные выводы должны быть расположены в пределах секции с мойкой.<br>
+			Размещение выводов водопроводных труб от уровня пола:<br>
+			- стандарт - от 200 до 600 от пола мм для водопровода;<br>
+			- в случае подключения модели стиральной или посудомоечной машины, оснащенной системой &laquo;Aqua Stop&raquo; - от 300 до 600 мм от пола;<br>
+			- при установке измельчителя отходов - от 200 до 280 мм от пола;<br>
+			- слив в канализацию - от 200 до 400 мм от пола;<br>
+			Водопроводные трубы должны оканчиваться наружной 1/2-дюймовой резьбой; слив в канализацию - трубой ПВХ диаметром 50 мм, либо чугунной трубой для фланца диаметром 70 мм (очищенной от старой забивки, цемента и т.д.).<br>
+			Водопроводные трубы должны быть закреплены и иметь функционирующие перекрывающие краны.<br>
+			На водопровод должен быть установлен регулятор давления (во избежание скачков давления в системе водоснабжения). Давление воды в системе водопровода не должно превышать 6 атм.</p>
+			<p><b>Требования к подключению газовых духовых шкафов и варочных панелей:</b><br>
+			Подключается к центральному газовому стояку. Для подключения электроподжига конфорок и духовки необходимы:<br>
+			- розетка &laquo;евростандарт&raquo; с заземляющим контактом;<br>
+			- кабель 3 х 2,5 кв. мм, медь;&nbsp;возможно подключение в &laquo;параллель&raquo; к любой розетке кухонного помещения;<br>
+			Доступ к контрольному газовому крану после установки гарнитура должен быть свободным.<br>
+			В процессе монтажа в стенках кухонного гарнитура допустимы технологические выпилы для доступа к розеткам, выводам водопровода и канализации.<br>
+			Услуги по подключениям к газовым магистралям проводятся специализированными организациями, имеющим лицензию на данный вид деятельности.</p>
+			<img src="{% static 'dogovora/technic_2021_04_scheme.jpg' %}" style="width: 100%;">
+			<p>В случае несоблюдения данных рекомендаций, производитель бытовой техники оставляет за собой право отказать потребителю в гарантийном и бесплатном сервисном обслуживании, а компания-установщик вправе снять с себя ответственность за возможное возникновение порчи имущества, явившееся следствием несоблюдения потребителем данных рекомендаций.</p>
+			<p>Ознакомлен:____________________________(__________________________________________).</p>
+		</div>
+	</div>
+	<div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
+</div>
+</div><div class="loading-indicator"></div>
+</body>
+<script>window.print();</script>
+<style>
+	.zakazchik p {
+		border-bottom: solid 1px rgb(0,0,0);
+	}
+	p.no-border {
+		border-bottom: none;
+	}
+	.t.m0.x8.h6.ff8.fs0.fc0.sc0.ls0.ws0.page_without_logo {
+		margin-top: -22px;
+		padding-top: 0 !important;
+	}
+	img.logo {
+		width: 111px;
+	}
+	.pf.w0.h0 .t.m0.x8.h6.ff8.fs0.fc0.sc0.ls0.ws0 {
+		width: 2275px;
+		white-space: normal;
+		line-height: 39.5px;
+		text-align: justify;
+		left: 14.000000px;
+		padding-top: 25px;
+	}
+	.pf.w0.h0 .t.m0.x8.h6.ff8.fs0.fc0.sc0.ls0.ws0 p {
+		text-indent: 143.650001px;
+		margin: 0;
+	}
+	.pf1text {
+		padding-top: 58px !important;
+	}
+	@media print{
+		img.logo {
+			width: 198px;
+		}
+		.pf.w0.h0 .t.m0.x8.h6.ff8.fs0.fc0.sc0.ls0.ws0 {
+			width: 4044.620px;line-height: 65.5px;
+			left: 18.666667pt;
+			padding-top: 42px;
+		}
+		.pf.w0.h0 .t.m0.x8.h6.ff8.fs0.fc0.sc0.ls0.ws0 p {
+			text-indent: 243.650001px;
+			margin: 0;
+		}
+		.pf1text {
+			padding-top: 102px !important;
+		}
+	}
+	v {
+		color: black;
+		font-weight: bold;
+	}
+	.requisites p {
+		text-indent: 0px !important;
+	}
+</style>
+</html>

@@ -186,7 +186,7 @@ class DogovorFormEntry(forms.Form):
             ('1', 'в день исполнения обязательств по договору'),
             ('2', 'в течении ___ рабочих дней со дня заключения Договора')
         ),
-        widget=forms.Select(attrs={'class': 'selectpicker show-tick'}))
+        widget=forms.Select(attrs={'class': 'form-select'}))
     technics_sroki_dostavki_tehniki_v_dnyah = forms.IntegerField(
         required=False, max_value=365, min_value=0, label='Сроки доставки техники/матраса в днях',
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '3'}))
@@ -204,35 +204,18 @@ class DogovorFormEntry(forms.Form):
         required=False, max_length=500, label='Тип (описание) изделия',
         widget=forms.TextInput(attrs={'class': 'form-control type_production', 'placeholder': 'Тип (описание) изделия'}))
     passport_familiya = forms.CharField(
-        required=False, max_length=200, label='Фамилия заказчика',
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Фамилия'}))
+        required=False, max_length=200, label='Фамилия заказчика/Название Компаний',
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Фамилия/Название'}))
     passport_imya = forms.CharField(
         required=False, max_length=200, label='Имя заказчика',
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя'}))
     passport_otchestvo = forms.CharField(
         required=False, max_length=200, label='Отчество заказчика',
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Отчество'}))
-    passport_birthday_date = forms.DateField(
-        required=False, input_formats=['%d.%m.%Y'], initial="", label='Дата рождения',
-        widget=forms.TextInput(attrs={'class': 'form-control dogovora_dates', 'placeholder': '11.10.1990', 'data-inputmask-alias': 'dd.mm.yyyy'}))
-    passport_birthday_place = forms.CharField(
-        required=False, max_length=200, label='Место рождения',
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ГОР. УФА'}))
-    passport_seria = forms.CharField(
-        required=False, max_length=4, label='Серия паспорта',
-        widget=forms.TextInput(attrs={'class':'form-control','placeholder': '8000'}))
-    passport_nomer = forms.CharField(
-        required=False, max_length=6, label='Номер паспорта',
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '123456'}))
-    passport_kem_vydan = forms.CharField(
-        required=False, max_length=200, label='Кем выдан',
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ОТДЕЛОМ УФМС'}))
-    passport_kogda_vydan = forms.DateField(
-        required=False, input_formats=['%d.%m.%Y'], initial="", label='Дата выдачи',
-        widget=forms.TextInput(attrs={'class': 'form-control dogovora_dates', 'placeholder': '11.10.1990', 'data-inputmask-alias': 'dd.mm.yyyy'}))
-    passport_kp = forms.CharField(
-        required=False, max_length=7, label='Код подразделения',
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '000-111', 'data-inputmask-mask': '999-999'}))
+
+
+
+
     adres_propiski = forms.CharField(
         required=False, max_length=200, label='Почтовый идекс, Юр.адрес /Адрес прописки',
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Адрес прописки'}))
