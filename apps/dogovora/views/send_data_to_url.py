@@ -23,8 +23,8 @@ def send_data_to_url_b24(froze, dogovor):
     froze_param['data_podpisaniya'] = dogovor.data_podpisaniya.strftime('%Y-%m-%d')
     froze_param['srok_ispolneniya_rabot'] = dogovor.srok_ispolneniya_rabot
     froze_param['tip_dogovora'] = dogovor.tip_dogovora
-    url = f'https://re-forma-ru.bitrix24.ru/crm/deal/details/{froze.uuid}/'
-    # url = f'https://sell-us.pro/clients/re-forma-ru/{froze.uuid}/get_data.php'
+    # url = f'https://re-forma-ru.bitrix24.ru/crm/deal/details/{froze.uuid}/'
+    url = f'https://sell-us.pro/clients/re-forma-ru/{froze.uuid}/get_data.php'
 
     # Преобразуем словарь в формат JSON
     json_data = json.dumps(froze_param)
