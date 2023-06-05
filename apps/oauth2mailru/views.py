@@ -39,7 +39,7 @@ class MailruOAuthView(View):
             my_info = my_mail.users_get_info(uids=uid, session_key_or_uid=uid)
             my_info = json.loads(my_info)
         except ApiError:
-            return render(request, 'appmain/login.html', {'error': 'Что то пошло не так. Попробуйте еще раз'})
+            return render(request, 'froze/login.html', {'error': 'Что то пошло не так. Попробуйте еще раз'})
 
         email = my_info[0]["email"]
 
@@ -47,12 +47,12 @@ class MailruOAuthView(View):
             user = User.objects.get(email=email)
 
             if user.is_active:
-                login(request, user, backend='oauth2mailru.auth.backends.MailRuBackend')
+                login(request, user, backend='oauth2mailru.backends.MailRuBackend')
                 return HttpResponseRedirect("/")
 
             raise User.DoesNotExist
         except User.DoesNotExist:
-            return render(request, 'appmain/login.html',
+            return render(request, 'froze/login.html',
                           {'error': u'<h4>{0}</h4>Вы не можете зайти <br>У Вас должна быть почта на <i>@re-forma.ru</i>'.format(email)})
 
 
