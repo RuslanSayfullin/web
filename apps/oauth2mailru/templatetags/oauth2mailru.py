@@ -1,5 +1,6 @@
 from django import template
-from django.conf import settings
+
+from portal import settings
 
 register = template.Library()
 

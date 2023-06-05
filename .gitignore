@@ -130,6 +130,9 @@ dmypy.json
 
 # passwords
 portal/psw.py
+# SSL-key
+portal/portal-reforma.key
+portal/portal-reforma.crt
 
 # media
 media/

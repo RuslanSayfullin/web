@@ -80,7 +80,9 @@ JSON:
 ------------------------------------------------------------------------------------------------------------------------
 $ python3 -m pip freeze > requirements.txt
 $ python3 -m pip install -r requirements.txt
-$ scp /home/rusl4n/Documents/projects/web/portal/psw.py cryptolis@80.78.244.196:/home/cryptolis/web/portal
+$ scp /home/rusl4n/Documents/projects/web/portal/psw.py portal@95.163.243.230:/home/portal/web/portal
+$ scp /home/rusl4n/Documents/projects/web/portal/portal-reforma.key root@95.163.243.230:/etc/nginx/ssl
+$ scp /home/rusl4n/Documents/projects/web/portal/portal-reforma.crt root@95.163.243.230:/etc/nginx/ssl
 
 http://80.78.244.196:8000
 http://80.78.244.196:8000/admin/
@@ -96,3 +98,19 @@ pg_dump -U postgres contracts > /home/rusl4n/Documents/projects/web/150523.pg_du
 pg_dump -U postgres contracts > /home/rusl4n/Downloads/postgres-dump-directory/160523.pg_dump
 
 
+server {
+    listen 443 ssl;
+    server_name portal-reforma.ru;
+    ssl_certificate /etc/nginx/ssl/portal-reforma.crt;
+    ssl_certificate_key /etc/nginx/ssl/portal-reforma.key;
+    
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/portal/web;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+}
