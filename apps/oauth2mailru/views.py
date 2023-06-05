@@ -47,7 +47,7 @@ class MailruOAuthView(View):
             user = User.objects.get(email=email)
 
             if user.is_active:
-                login(request, user, backend='oauth2mailru.backends.MailRuBackend')
+                login(request, user, backend='apps.oauth2mailru.backends.MailRuBackend')
                 return HttpResponseRedirect("/")
 
             raise User.DoesNotExist
