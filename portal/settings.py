@@ -105,7 +105,7 @@ USE_TZ = True
 # "Поисковики" статики. Ищет статику в STATICFILES_DIRS.
 STATIC_URL = '/static/'    # URL для шаблонов
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-# STATIC_ROOT = "/home/cryptolis/web/static/"
+# STATIC_ROOT = "/home/portal/web/static/"
 
 # Абсолютный путь в файловой системе, с каталогом, где файлы, загруженные пользователями.
 MEDIA_URL = '/media/'
