@@ -13,9 +13,9 @@ SECRET_KEY = secret_key
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '80.78.244.196', 'chiffre.tech', 'localhost', '95.163.243.230', 'portal-reforma.ru']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '95.163.243.230', 'portal-reforma.ru']
 # кортеж с перечнем IP-адресов, с которых может вестись разработка.
-INTERNAL_IPS = ('127.0.0.1', '80.78.244.196', 'chiffre.tech', 'localhost', '95.163.243.230', 'portal-reforma.ru')
+INTERNAL_IPS = ('127.0.0.1', 'localhost', '95.163.243.230', 'portal-reforma.ru')
 
 
 INSTALLED_APPS = [
@@ -104,8 +104,8 @@ USE_TZ = True
 
 # "Поисковики" статики. Ищет статику в STATICFILES_DIRS.
 STATIC_URL = '/static/'    # URL для шаблонов
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-# STATIC_ROOT = "/home/portal/web/static/"
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = "/home/portal/web/static/"
 
 # Абсолютный путь в файловой системе, с каталогом, где файлы, загруженные пользователями.
 MEDIA_URL = '/media/'
@@ -122,7 +122,7 @@ AUTHENTICATION_BACKENDS = (
 
 OAUTH_MAIL_RU_CLIENT_ID = client_id
 OAUTH_MAIL_RU_CLIENT_SECRET = client_secret
-OAUTH_MAIL_RU_REDIRECT_URI = 'http://portal-reforma.ru/auth/mailru/'
+OAUTH_MAIL_RU_REDIRECT_URI = 'https://portal-reforma.ru/auth/mailru/'
 
 LOGO_NAME = "Ре-Форма"
 
