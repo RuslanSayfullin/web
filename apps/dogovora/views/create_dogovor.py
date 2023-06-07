@@ -11,6 +11,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from apps.dogovora import forms
 from apps.dogovora.models import DogovorIndi, DogovorEntry
 from apps.dogovora.views.send_data_to_url import send_data_to_url_b24
+from apps.dogovora.views.utils import update_froze_data
 from apps.froze.models import Froze
 
 
@@ -47,6 +48,10 @@ def nomer_dogovora(request):
         else:
             dogovor.nomer_dogovora = dogovor_s_nomerom.nomer_dogovora
         dogovor.save()
+
+    dogovor.froze.nomer_dogovora = dogovor.nomer_dogovora
+    dogovor.froze.save(update_fields=('nomer_dogovora',))
+
     nomer_dogovora = dogovor.nomer_dogovora[1:] if dogovor.nomer_dogovora[0] == '.' else dogovor.nomer_dogovora
     return HttpResponse(nomer_dogovora)
 
@@ -223,25 +228,7 @@ class CreateUpdateDogovorIndi(generic.FormView):
         if self.froze.status == 'pay':
             return super(CreateUpdateDogovorIndi, self).form_invalid(form)
 
-        if form.cleaned_data.get('sposob_oplaty'):
-            self.froze.type_pay = form.cleaned_data.get('sposob_oplaty')
-            self.froze.save(update_fields=('type_pay',))
-        if form.cleaned_data.get('sposob_oplaty'):
-            self.froze.type_pay = form.cleaned_data.get('sposob_oplaty')
-            self.froze.save(update_fields=('type_pay',))
-        if form.cleaned_data.get('tip_opisanie_izdeliya'):
-            self.froze.type_production = form.cleaned_data.get('tip_opisanie_izdeliya')
-            self.froze.save(update_fields=('type_production',))
-        if form.cleaned_data.get('passport_familiya') or form.cleaned_data.get('passport_imya') or form.cleaned_data.get('passport_otchestvo'):
-            froze_familiya = form.cleaned_data.get('passport_familiya') if form.cleaned_data.get('passport_familiya') else ''
-            froze_imya = form.cleaned_data.get('passport_imya') if form.cleaned_data.get('passport_imya') else ''
-            froze_otchestvo = form.cleaned_data.get('passport_otchestvo') if form.cleaned_data.get('passport_otchestvo') else ''
-            self.froze.name = froze_familiya + ' ' + froze_imya + ' ' + froze_otchestvo
-            self.froze.save()
-        if form.cleaned_data.get('adres_propiski'):
-            self.froze.address = form.cleaned_data.get('adres_propiski')
-            self.froze.save(update_fields=('address',))
-
+        update_froze_data(self, form)   # обновляем данные в заявке
 
         passport_familiya = form.cleaned_data.get('passport_familiya')
         passport_imya = form.cleaned_data.get('passport_imya')
@@ -502,21 +489,7 @@ class CreateUpdateDogovorEntry(generic.FormView):
         if self.froze.status == 'pay':
             return super(CreateUpdateDogovorEntry, self).form_invalid(form)
 
-        if form.cleaned_data.get('sposob_oplaty'):
-            self.froze.type_pay = form.cleaned_data.get('sposob_oplaty')
-            self.froze.save(update_fields=('type_pay',))
-        if form.cleaned_data.get('tip_opisanie_izdeliya'):
-            self.froze.type_production = form.cleaned_data.get('tip_opisanie_izdeliya')
-            self.froze.save(update_fields=('type_production',))
-        if form.cleaned_data.get('passport_familiya') or form.cleaned_data.get('passport_imya') or form.cleaned_data.get('passport_otchestvo'):
-            froze_familiya = form.cleaned_data.get('passport_familiya') if form.cleaned_data.get('passport_familiya') else ''
-            froze_imya = form.cleaned_data.get('passport_imya') if form.cleaned_data.get('passport_imya') else ''
-            froze_otchestvo = form.cleaned_data.get('passport_otchestvo') if form.cleaned_data.get('passport_otchestvo') else ''
-            self.froze.name = froze_familiya + ' ' + froze_imya + ' ' + froze_otchestvo
-            self.froze.save()
-        if form.cleaned_data.get('adres_propiski'):
-            self.froze.address = form.cleaned_data.get('adres_propiski')
-            self.froze.save(update_fields=('address',))
+        update_froze_data(self, form)   # обновляем данные в заявке
 
         passport_familiya = form.cleaned_data.get('passport_familiya')
         passport_imya = form.cleaned_data.get('passport_imya')

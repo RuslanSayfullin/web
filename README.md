@@ -64,6 +64,10 @@ $ python3 manage.py runserver
 
 
 Django-приложение будет доступно по адресу: http://127.0.0.1:8000/
+https://portal-reforma.ru/admin/  -админ панель
+https://portal-reforma.ru/api/v1/users/ - управление пользователем
+
+https://portal-reforma.ru/api/v1/froze-create/ -создать заявку
 
 JSON:
 
@@ -86,13 +90,6 @@ $ scp /home/rusl4n/Documents/projects/web/portal/portal-reforma.crt root@95.163.
 $ scp /home/rusl4n/Downloads/160523.pg_dump root@95.163.243.230:/etc/nginx/ssl
 $ scp /home/rusl4n/Downloads/160523.pg_dump portal@95.163.243.230:/home/portal/
 
-http://80.78.244.196:8000
-http://80.78.244.196:8000/admin/
-gunicorn --bind 0.0.0.0:8000 portal.wsgi
-https://chiffre.tech/
-
-80-78-244-196
-15052023reforma
 
 sudo su - postgres 
 pg_dump -U postgres contracts > /home/rusl4n/Documents/projects/web/050623.pg_dump

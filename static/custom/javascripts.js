@@ -220,7 +220,7 @@ $('.uslugi_po_podklyucheniyu_create_update').on('change', function() {
 	$('#usluga_tsena_'+usluga_key).val(usluga_price);
 })
 
-// Поиск
+// Поиск заявок по ФИО/Названию, телефону или адресу
 function the_new_search(csrf_token){
 	var po_telefonu = $('#po_telefonu').val();
 	var po_adresu = $('#po_adresu').val();

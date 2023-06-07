@@ -44,6 +44,10 @@ class Froze(models.Model):
     total_white_goods = models.DecimalField(decimal_places=2, max_digits=11, null=True, blank=True, verbose_name="Сумма за технику")
     status = models.CharField(max_length=50, choices=FROZE_STATUS_CHOICES, verbose_name="Статус", default='new')
 
+    # номер договора, обновляется при сохранении договора для ЮЛ или ФЗ
+    nomer_dogovora = models.CharField(max_length=20, default='', blank=True, null=True,
+                                      verbose_name="Номер договора")
+
     class Meta:
         verbose_name = 'Заявка'
         verbose_name_plural = 'Заявки'

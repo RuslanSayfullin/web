@@ -338,7 +338,7 @@ class DogovorFormEntry(forms.Form):
             )
         }
         js = (
-            'jquery/dist/jquery.min.js',
+            'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',
             'datetimepicker/jquery.datetimepicker.js',
 
             'froze/jquery.suggestions-4.10.min.js',

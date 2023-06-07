@@ -175,3 +175,31 @@ def uslugi_po_podklyucheniyu(request, froze_uuid):
 
     return render(request, 'dogovora/uslugi_po_podklyucheniyu_create_update.html',
                   {'froze_uuid': froze_uuid, 'froze': froze, 'uslugi': uslugi, 'uslugi_po_podklyucheniyu': True, 'dogovor': dogovor})
+
+
+def update_froze_data(self, form):
+    """Обновление данных в Модели Froze, при сохранении данных в договорах ЮЛ и ФЗ"""
+    if form.cleaned_data.get('sposob_oplaty'):
+        self.froze.type_pay = form.cleaned_data.get('sposob_oplaty')
+        self.froze.save(update_fields=('type_pay',))
+    if form.cleaned_data.get('sposob_oplaty'):
+        self.froze.type_pay = form.cleaned_data.get('sposob_oplaty')
+        self.froze.save(update_fields=('type_pay',))
+    if form.cleaned_data.get('tip_opisanie_izdeliya'):
+        self.froze.type_production = form.cleaned_data.get('tip_opisanie_izdeliya')
+        self.froze.save(update_fields=('type_production',))
+    if form.cleaned_data.get('passport_familiya') or form.cleaned_data.get('passport_imya') or form.cleaned_data.get(
+            'passport_otchestvo'):
+        froze_familiya = form.cleaned_data.get('passport_familiya') if form.cleaned_data.get(
+            'passport_familiya') else ''
+        froze_imya = form.cleaned_data.get('passport_imya') if form.cleaned_data.get('passport_imya') else ''
+        froze_otchestvo = form.cleaned_data.get('passport_otchestvo') if form.cleaned_data.get(
+            'passport_otchestvo') else ''
+        self.froze.name = froze_familiya + ' ' + froze_imya + ' ' + froze_otchestvo
+        self.froze.save()
+    if form.cleaned_data.get('adres_propiski'):
+        self.froze.address = form.cleaned_data.get('adres_propiski')
+        self.froze.save(update_fields=('address',))
+    if form.cleaned_data.get('nomer_dogovora'):
+        self.froze.nomer_dogovora = form.cleaned_data.get('nomer_dogovora')
+        self.froze.save(update_fields=('nomer_dogovora',))
