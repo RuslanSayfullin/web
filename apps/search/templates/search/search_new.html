@@ -19,6 +19,10 @@
 			<div class="form-group">
 				<input id="po_imeni" onkeyup="the_new_search();" placeholder="Ввести ФИО клиента для поиска..." type="text" class="form-control" size="40">
 			</div>
+			<br>
+			<div class="form-group">
+				<input id="po_nomery" onkeyup="the_new_search();" placeholder="Ввести номер договора для поиска..." type="text" class="form-control" size="20">
+			</div>
 		</div>
 	</div>
 	<br>
@@ -31,9 +35,9 @@
 		          	<div class="card-body">
 		            	<ul class="list-unstyled">
 							<li><strong>{{ froze.name }}</strong></li>
-							{% if froze.dogovor.nomer_dogovora %}<li class="text-info">Номер договора: {{ froze.dogovor.nomer_dogovora }}</li>{% endif %}
 							<li>{{ froze.phone|pretty_number_phone }}</li>
 							<li>{{ froze.address }}</li>
+							<li>Номер договора: {{ froze.nomer_dogovora }}</li>
 				            <li>Тип изделия: {{ froze.type_production }}</li>
 						</ul>
 					</div>

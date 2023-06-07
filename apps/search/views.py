@@ -13,8 +13,8 @@ class SearchNewView(generic.TemplateView):
 
     template_name = "search/search_new.html"
 
-    def get_queryset(self, po_telefonu, po_adresu, po_imeni):
-        if not po_telefonu and not po_adresu and not po_imeni:
+    def get_queryset(self, po_telefonu, po_adresu, po_imeni, po_nomery):
+        if not po_telefonu and not po_adresu and not po_imeni and not po_nomery:
             return Froze.objects.none()
 
         client_qs = Froze.objects.all()
@@ -43,6 +43,8 @@ class SearchNewView(generic.TemplateView):
                 client_qs = client_qs.filter(address__icontains=iskat_adres)
         if po_imeni:
             client_qs = client_qs.filter(name__icontains=po_imeni)
+        if po_nomery:
+            client_qs = client_qs.filter(nomer_dogovora__icontains=po_nomery)
 
         return client_qs.order_by("-id")[:50]
 
@@ -52,9 +54,10 @@ class SearchNewView(generic.TemplateView):
         po_telefonu = html.escape(self.request.GET.get("po_telefonu", ""))
         po_adresu = html.escape(self.request.GET.get("po_adresu", ""))
         po_imeni = html.escape(self.request.GET.get("po_imeni", ""))
+        po_nomery = html.escape(self.request.GET.get("po_nomery", ""))
 
         context.update({
-            'froze_items': self.get_queryset(po_telefonu, po_adresu, po_imeni),
+            'froze_items': self.get_queryset(po_telefonu, po_adresu, po_imeni, po_nomery),
         })
         return context
 
